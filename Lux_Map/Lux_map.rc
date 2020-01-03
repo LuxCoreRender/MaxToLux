@@ -1,0 +1,165 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CHECKER_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CHECKER_TEXTURE1_COLOR,"ColorSwatch",WS_TABSTOP,63,15,35,12
+    CONTROL         "",IDC_CHECKER_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_CHECKER_TEXTURE2_COLOR,"ColorSwatch",WS_TABSTOP,63,33,35,12
+    CONTROL         "",IDC_CHECKER_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+END
+
+IDD_CHECKER3D_PANEL DIALOGEX 0, 0, 217, 57
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CHECKER3D_TEXTURE1_COLOR,"ColorSwatch",WS_TABSTOP,63,15,35,12
+    CONTROL         "",IDC_CHECKER3D_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_CHECKER3D_TEXTURE2_COLOR,"ColorSwatch",WS_TABSTOP,63,33,35,12
+    CONTROL         "",IDC_CHECKER3D_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_CHECKER_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_CHECKER3D_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 206
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_CHECKER_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHECKER3D_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_LIBDESCRIPTION      " Procedural Textures 2"
+    IDS_CATEGORY            " Procedural Textures 2"
+    IDS_CLASS_CHECKER       "Lux Checker"
+    IDS_COORDS              "Coordinates"
+    IDS_CLASS_CHECKER3D     "Lux Checker 3d"
+    IDS_CHECKER_TEXTURE1_COLOR "Checker texture 1 color"
+    IDS_CHECKER_PARAMS      "Checker Parameters"
+    IDS_CHECKER_TEXTURE1_MAP "Checker texture 1 map"
+    IDS_CHECKER_TEXTURE2_COLOR "Checker texture 2 color"
+    IDS_CHECKER_TEXTURE2_MAP "Checker texture 2 map"
+    IDS_CHECKER3D_PARAMS    "Parameters"
+    IDS_CLASS_CHEKER3D      "Lux Checker 3d"
+    IDS_CHECKER3D_TEXTURE1_MAP2 "Checker3d texture 1 map"
+    IDS_CHECKER3D_TEXTURE2_COLOR2 "Checker3d texture 2 color"
+    IDS_CHECKER3D_TEXTURE2_MAP2 "Checker3d texture 2 map"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CHECKER_TEXTURE1_COLOR2 "Checker texture 1 color"
+    IDS_3DSMAX_SME_MATERIALS_CATLABEL "Materials"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
