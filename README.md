@@ -1,4 +1,4 @@
-# MaxtoLux
+# MaxToLux
 luxcore plugin for 3ds max
 
 c++
