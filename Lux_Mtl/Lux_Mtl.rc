@@ -1,0 +1,1081 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MIX_PANEL DIALOGEX 0, 0, 227, 70
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MIX_AMOUNT_EDIT,"CustEdit",WS_TABSTOP,81,49,21,10
+    CONTROL         "",IDC_MIX_AMOUNT_SPIN,"SpinnerControl",0x0,103,49,7,10
+    CONTROL         "",IDC_MIX_MTL1,"CustButton",WS_TABSTOP,119,9,90,13
+    LTEXT           "Material 1 :",IDC_STATIC,12,11,36,8
+    LTEXT           "Material 2 :",IDC_STATIC,12,30,36,8
+    LTEXT           "Amount :",IDC_STATIC,11,50,29,8
+    CONTROL         "",IDC_MIX_MTL2,"CustButton",WS_TABSTOP,119,28,90,13
+    CONTROL         "",IDC_MIX_AMOUNT_MAP,"CustButton",WS_TABSTOP,119,47,90,13
+END
+
+IDD_COMMON_PANEL DIALOGEX 0, 0, 212, 173
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_SAMPLE_EDIT,"CustEdit",WS_TABSTOP,168,87,21,10
+    CONTROL         "",IDC_SAMPLE_SPIN,"SpinnerControl",0x0,190,87,7,10
+    LTEXT           "Visiable in diffuse :",IDC_STATIC,12,137,59,8
+    CONTROL         "",IDC_BUMP_MAP,"CustButton",WS_TABSTOP,108,9,90,13
+    LTEXT           "Bump map :",IDC_STATIC,13,11,38,8
+    LTEXT           "Normal map :",IDC_STATIC,13,30,42,8
+    CONTROL         "",IDC_ENABLEEMISSION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,79,137,10,10
+    LTEXT           "Visiable in glossy :",IDC_STATIC,12,154,58,8
+    CONTROL         "",IDC_ENABLEEMISSION2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,79,154,10,10
+    LTEXT           "Visiable in specular :",IDC_STATIC,118,137,65,8
+    CONTROL         "",IDC_ENABLEEMISSION3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,189,137,10,10
+    LTEXT           "Bump/Normal sample :",IDC_STATIC,12,88,72,8
+    LTEXT           "Interior volumetric map :",IDC_STATIC,12,50,76,8
+    LTEXT           "Exterior volumetric map :",IDC_STATIC,12,69,78,8
+    LTEXT           "Material id :",IDC_STATIC,12,104,37,8
+    LTEXT           "Transparency :",IDC_STATIC,12,119,48,8
+    LTEXT           "Catch Shadow :",IDC_STATIC,118,155,52,8
+    CONTROL         "",IDC_ENABLEEMISSION4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,189,154,10,10
+    CONTROL         "",IDC_NORMAL_MAP,"CustButton",WS_TABSTOP,108,28,90,13
+    CONTROL         "",IDC_TRANSPARENCY_EDIT,"CustEdit",WS_TABSTOP,168,119,21,10
+    CONTROL         "",IDC_TRANSPARENCY_SPIN,"SpinnerControl",0x0,190,119,7,10
+    CONTROL         "",IDC_ID_EDIT,"CustEdit",WS_TABSTOP,168,103,21,10
+    CONTROL         "",IDC_ID_SPIN,"SpinnerControl",0x0,190,103,7,10
+    CONTROL         "",IDC_INTERIOR_MAP,"CustButton",WS_TABSTOP,108,47,90,13
+    CONTROL         "",IDC_EXTERIOR_MAP,"CustButton",WS_TABSTOP,108,66,90,13
+END
+
+IDD_LIGHT_PANEL DIALOGEX 0, 0, 218, 184
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Custom1",IDC_EMISSION_MAP,"CustButton",WS_TABSTOP,112,24,90,13
+    CONTROL         "",IDC_EMISSION_COLOR,"ColorSwatch",WS_TABSTOP,57,24,34,12
+    LTEXT           "Emission",IDC_STATIC,12,8,42,8
+    LTEXT           "Power",IDC_STATIC,12,43,30,8
+    CONTROL         "",IDC_EMISSION_POWER,"CustEdit",WS_TABSTOP,57,42,25,11
+    CONTROL         "",IDC_EMISSION_POWER_SPIN,"SpinnerControl",0x0,82,42,9,11
+    LTEXT           "Efficency",IDC_STATIC,121,43,41,8
+    CONTROL         "",IDC_EMISSION_EFFICENCY,"CustEdit",WS_TABSTOP,165,42,28,11
+    CONTROL         "",IDC_EMISSION_EFFICENCY_SPIN,"SpinnerControl",0x0,193,42,9,11
+    CONTROL         "Custom1",IDC_EMISSION_MAPFILE,"CustButton",WS_TABSTOP,113,126,89,13
+    LTEXT           "Emission Map",IDC_STATIC,12,126,60,8
+    LTEXT           "Gamma",IDC_STATIC,12,145,41,8
+    CONTROL         "",IDC_EMISSION_GAMMA,"CustEdit",WS_TABSTOP,57,145,25,11
+    CONTROL         "",IDC_EMISSION_GAMMA_SPIN,"SpinnerControl",0x0,82,145,9,11
+    CONTROL         "Custom1",IDC_EMISSION_IESFILE,"CustButton",WS_DISABLED | WS_TABSTOP,113,107,89,13
+    LTEXT           "IES Source",IDC_STATIC,12,107,59,8
+    LTEXT           "Flip Normals",IDC_STATIC,12,165,54,11
+    CONTROL         "",IDC_EMISSION_FLIPZ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,83,165,10,10
+    LTEXT           "Samples",IDC_STATIC,12,60,39,8
+    CONTROL         "",IDC_EMISSION_SAMPLES,"CustEdit",WS_TABSTOP,57,60,25,11
+    CONTROL         "",IDC_EMISSION_SAMPLES_SPIN,"SpinnerControl",0x0,82,60,9,11
+    LTEXT           "Map widht",IDC_STATIC,12,77,39,8
+    CONTROL         "",IDC_EMISSION_MAP_WIDTH,"CustEdit",WS_TABSTOP,57,77,25,11
+    CONTROL         "",IDC_EMISSION_MAP_WIDTH_SPIN,"SpinnerControl",0x0,82,77,9,11
+    LTEXT           "Map height",IDC_STATIC,122,77,41,8
+    CONTROL         "",IDC_EMISSION_MAP_HEIGHT,"CustEdit",WS_TABSTOP,165,77,28,11
+    CONTROL         "",IDC_EMISSION_MAP_HEIGHT_SPIN,"SpinnerControl",0x0,193,77,9,11
+    LTEXT           "Emission ID",IDC_STATIC,121,60,42,8
+    CONTROL         "",IDC_EMISSION_ID,"CustEdit",WS_TABSTOP,165,60,28,11
+    CONTROL         "",IDC_EMISSION_ID_SPIN,"SpinnerControl",0x0,193,60,9,11
+    CONTROL         "",IDC_ENABLEEMISSION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,82,8,10,10
+    LTEXT           "Color",IDC_STATIC,12,25,42,8
+    LTEXT           "Diffuse map/color will be ignored",IDC_STATIC,98,8,104,8
+    LTEXT           "Use this if you can't see any light",IDC_STATIC,98,165,105,8
+END
+
+IDD_MIRROR_PANEL DIALOGEX 0, 0, 227, 44
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MIRROR_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,74,15,35,12
+    CONTROL         "",IDC_MIRROR_REFLECTION_MAP,"CustButton",WS_TABSTOP,114,14,98,13
+    LTEXT           "Reflection Color :",IDC_STATIC,13,16,56,11
+END
+
+IDD_MATTE_PANEL DIALOGEX 0, 0, 217, 41
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MATTE_DIFFUSE_COLOR,"ColorSwatch",WS_TABSTOP,63,15,35,12
+    CONTROL         "",IDC_MATTE_DIFFUSE_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Diffuse Map",-1,13,16,42,11
+END
+
+IDD_CLOTH_PANEL DIALOGEX 0, 0, 215, 151
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CLOTH_DIFFUSE_COLOR1,"ColorSwatch",WS_TABSTOP,78,36,35,12
+    CONTROL         "",IDC_CLOTH_DIFFUSE_MAP1,"CustButton",WS_TABSTOP,117,36,84,13
+    LTEXT           "Diffuse reflection 1 :",IDC_STATIC,9,36,64,8
+    CONTROL         "",IDC_CLOTH_SPECULAR_COLOR1,"ColorSwatch",WS_TABSTOP,78,57,35,12
+    CONTROL         "",IDC_CLOTH_SPECULAR_MAP1,"CustButton",WS_TABSTOP,117,57,84,13
+    LTEXT           "Diffuse specular 1 :",IDC_STATIC,9,57,62,8
+    CONTROL         "",IDC_CLOTH_DIFFUSE_COLOR2,"ColorSwatch",WS_TABSTOP,78,78,35,12
+    CONTROL         "",IDC_CLOTH_DIFFUSE_MAP2,"CustButton",WS_TABSTOP,117,78,84,13
+    LTEXT           "Diffuse reflection 2 :",IDC_STATIC,9,78,64,8
+    CONTROL         "",IDC_CLOTH_SPECULAR_COLOR2,"ColorSwatch",WS_TABSTOP,78,99,35,12
+    CONTROL         "",IDC_CLOTH_SPECULAR_MAP2,"CustButton",WS_TABSTOP,117,99,84,13
+    LTEXT           "Diffuse specular 2 :",IDC_STATIC,9,99,62,8
+    LTEXT           "Tile U :",IDC_STATIC,9,120,24,8
+    CONTROL         "",IDC_CLOTH_TILE_U,"CustEdit",WS_TABSTOP,78,120,26,11
+    CONTROL         "",IDC_CLOTH_TILE_U_SPIN,"SpinnerControl",0x0,104,120,9,11
+    LTEXT           "Tile V :",IDC_STATIC,118,121,23,8
+    CONTROL         "",IDC_CLOTH_TILE_V,"CustEdit",WS_TABSTOP,164,120,28,11
+    CONTROL         "",IDC_CLOTH_TILE_V_SPIN,"SpinnerControl",0x0,192,120,9,11
+    COMBOBOX        IDC_COMBO_CLOTH_PRESETS,64,15,136,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Presets :",IDC_STATIC,9,17,29,8
+END
+
+IDD_GLASS_PANEL DIALOGEX 0, 0, 211, 95
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_GLASS_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,78,11,35,12
+    CONTROL         "",IDC_GLASS_REFLECTION_MAP,"CustButton",WS_TABSTOP,120,11,78,13
+    LTEXT           "Reflection Color :",IDC_STATIC,11,13,59,8
+    CONTROL         "",IDC_GLASS_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,78,29,35,12
+    CONTROL         "",IDC_GLASS_TRANSMIT_MAP,"CustButton",WS_TABSTOP,120,29,78,13
+    LTEXT           "Transmit Color :",IDC_STATIC,11,31,48,8
+    CONTROL         "",IDC_GLASS_INTERIORIOR,"CustEdit",WS_TABSTOP,78,47,24,11
+    CONTROL         "",IDC_GLASS_INTERIORIOR_SPIN,"SpinnerControl",0x0,102,47,9,11
+    CONTROL         "",IDC_GLASS_INTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,47,78,13
+    LTEXT           "Interior IOR :",IDC_STATIC,11,49,48,8
+    CONTROL         "",IDC_GLASS_EXTERIORIOR,"CustEdit",WS_TABSTOP,78,66,24,11
+    CONTROL         "",IDC_GLASS_EXTERIORIOR_SPIN,"SpinnerControl",0x0,102,66,9,11
+    CONTROL         "",IDC_GLASS_EXTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,65,78,13
+    LTEXT           "Exterior IOR :",IDC_STATIC,11,67,48,8
+END
+
+IDD_GLOSSY2_PANEL DIALOGEX 0, 0, 228, 169
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_GLOSSY_DIFFUSE_COLOR,"ColorSwatch",WS_TABSTOP,83,12,35,12
+    CONTROL         "",IDC_GLOSSY_DIFFUSE_MAP,"CustButton",WS_TABSTOP,125,12,78,13
+    CONTROL         "Custom1",IDC_GLOSSY_SPECULAR_MAP,"CustButton",WS_TABSTOP,125,33,78,13
+    CONTROL         "",IDC_GLOSSY_SPECULAR_COLOR,"ColorSwatch",WS_TABSTOP,83,33,35,12
+    LTEXT           "Specular",IDC_STATIC,11,35,48,8
+    LTEXT           "Diffuse",IDC_STATIC,11,14,23,8
+    CONTROL         "Custom1",IDC_GLOSSY_UROUGHNESS_MAP,"CustButton",WS_TABSTOP,125,53,78,13
+    LTEXT           "U roughness",IDC_STATIC,11,55,48,8
+    CONTROL         "Custom1",IDC_GLOSSY_VROUGHNESS_MAP,"CustButton",WS_TABSTOP,125,74,78,13
+    LTEXT           "V roughness",IDC_STATIC,11,76,48,8
+    CONTROL         "Custom1",IDC_GLOSSY_ABSORPTION_MAP,"CustButton",WS_TABSTOP,125,95,78,13
+    LTEXT           "Absorption :",IDC_STATIC,11,97,60,11
+    CONTROL         "Custom1",IDC_GLOSSY_THIKNESS_MAP,"CustButton",WS_TABSTOP,125,117,78,13
+    LTEXT           "Thikness",IDC_STATIC,11,120,41,8
+    CONTROL         "",IDC_GLOSSY_THIKNESS,"CustEdit",WS_TABSTOP,83,119,26,11
+    CONTROL         "",IDC_GLOSSY_THIKNESS_SPIN,"SpinnerControl",0x0,109,119,9,11
+    LTEXT           "IOR",IDC_STATIC,11,143,66,8
+    CONTROL         "",IDC_GLOSSY_INDEX,"CustEdit",WS_TABSTOP,83,141,26,11
+    CONTROL         "",IDC_GLOSSY_INDEX_SPIN,"SpinnerControl",0x0,109,141,9,11
+    LTEXT           "Multibounce",IDC_STATIC,128,143,55,8
+    CONTROL         "",IDC_GLOSSY_MULTIBOUNCE_ON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,194,143,10,10
+    CONTROL         "",IDC_GLOSSY_UROUGHNESS,"CustEdit",WS_TABSTOP,83,54,27,11
+    CONTROL         "",IDC_GLOSSY_UROUGHNESS_SPIN,"SpinnerControl",0x0,109,54,9,11
+    CONTROL         "",IDC_GLOSSY_VROUGHNESS,"CustEdit",WS_TABSTOP,83,75,26,11
+    CONTROL         "",IDC_GLOSSY_VROUGHNESS_SPIN,"SpinnerControl",0x0,109,75,9,11
+    CONTROL         "",IDC_GLOSSY_ABSORPTION,"CustEdit",WS_TABSTOP,83,96,27,11
+    CONTROL         "",IDC_GLOSSY_ABSORPTION_SPIN,"SpinnerControl",0x0,109,96,9,11
+END
+
+IDD_METAL_PANEL DIALOGEX 0, 0, 211, 95
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MERAL_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,78,11,35,12
+    CONTROL         "",IDC_METAL_REFLECTION_MAP,"CustButton",WS_TABSTOP,120,11,78,13
+    LTEXT           "Reflection :",IDC_STATIC,11,13,48,8
+    CONTROL         "",IDC_METAL_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,78,29,35,12
+    CONTROL         "",IDC_METAL_TRANSMIT_MAP,"CustButton",WS_TABSTOP,120,29,78,13
+    LTEXT           "Transmit :",IDC_STATIC,11,31,48,8
+    CONTROL         "",IDC_METAL_INTERIORIOR,"CustEdit",WS_TABSTOP,78,47,24,11
+    CONTROL         "",IDC_METAL_INTERIORIOR_SPIN,"SpinnerControl",0x0,102,47,9,11
+    CONTROL         "",IDC_METAL_INTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,47,78,13
+    LTEXT           "Interior IOR",IDC_STATIC,11,49,48,8
+    CONTROL         "",IDC_METAL_EXTERIORIOR,"CustEdit",WS_TABSTOP,78,66,24,11
+    CONTROL         "",IDC_METAL_EXTERIORIOR_SPIN,"SpinnerControl",0x0,102,66,9,11
+    CONTROL         "",IDC_METAL_EXTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,65,78,13
+    LTEXT           "Exterior IOR",IDC_STATIC,11,67,48,8
+END
+
+IDD_VELVET_PANEL DIALOGEX 0, 0, 212, 110
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_VELVET_DIFFUSE_COLOR,"ColorSwatch",WS_TABSTOP,72,12,33,12
+    CONTROL         "",IDC_VELVET_DIFFUSE_MAP,"CustButton",WS_TABSTOP,114,12,84,13
+    LTEXT           "Diffuse :",IDC_STATIC,13,12,27,8
+    CONTROL         "Custom1",IDC_VELVET_POLYNOMIAL1_MAP,"CustButton",WS_TABSTOP,114,30,84,13
+    LTEXT           "Polynomial 1 :",IDC_STATIC,13,30,46,8
+    CONTROL         "",IDC_VELVET_POLYNOMIAL1,"CustEdit",WS_TABSTOP,72,31,24,11
+    CONTROL         "",IDC_VELVET_POLYNOMIAL1_SPIN,"SpinnerControl",0x0,96,31,9,11
+    CONTROL         "Custom1",IDC_VELVET_POLYNOMIAL2_MAP,"CustButton",WS_TABSTOP,114,48,84,13
+    LTEXT           "Polynomial 2 :",IDC_STATIC,13,48,43,8
+    CONTROL         "",IDC_VELVET_POLYNOMIAL2,"CustEdit",WS_TABSTOP,72,49,24,11
+    CONTROL         "",IDC_VELVET_POLYNOMIAL2_SPIN,"SpinnerControl",0x0,96,49,9,11
+    CONTROL         "Custom1",IDC_VELVET_POLYNOMIAL3_MAP,"CustButton",WS_TABSTOP,114,66,84,13
+    LTEXT           "Polynomial 3 :",IDC_STATIC,13,66,45,8
+    CONTROL         "",IDC_VELVET_POLYNOMIAL3,"CustEdit",WS_TABSTOP,72,67,25,11
+    CONTROL         "",IDC_VELVET_POLYNOMIAL3_SPIN,"SpinnerControl",0x0,96,67,9,11
+    CONTROL         "Custom1",IDC_VELVET_THICKNESS_MAP,"CustButton",WS_TABSTOP,114,84,84,13
+    LTEXT           "Thickness",IDC_STATIC,13,84,42,8
+    CONTROL         "",IDC_VELVET_THICKNESS,"CustEdit",WS_TABSTOP,72,85,24,11
+    CONTROL         "",IDC_VELVET_THICKNESS_SPIN,"SpinnerControl",0x0,96,85,9,11
+END
+
+IDD_ARCHGLASS_PANEL DIALOGEX 0, 0, 211, 95
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_ARCHGLASS_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,78,11,35,12
+    CONTROL         "",IDC_ARCHGLASS_REFLECTION_MAP,"CustButton",WS_TABSTOP,120,11,78,13
+    LTEXT           "Reflection :",IDC_STATIC,11,13,48,8
+    CONTROL         "",IDC_ARCHGLASS_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,78,29,35,12
+    CONTROL         "",IDC_ARCHGLASS_TRANSMIT_MAP,"CustButton",WS_TABSTOP,120,29,78,13
+    LTEXT           "Transmit :",IDC_STATIC,11,31,48,8
+    CONTROL         "",IDC_ARCHGLASS_INTERIORIOR,"CustEdit",WS_TABSTOP,78,47,24,11
+    CONTROL         "",IDC_ARCHGLASS_INTERIORIOR_SPIN,"SpinnerControl",0x0,102,47,9,11
+    CONTROL         "",IDC_ARCHGLASS_INTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,47,78,13
+    LTEXT           "Interior IOR :",IDC_STATIC,11,49,48,8
+    CONTROL         "",IDC_ARCHGLASS_EXTERIORIOR,"CustEdit",WS_TABSTOP,78,66,24,11
+    CONTROL         "",IDC_ARCHGLASS_EXTERIORIOR_SPIN,"SpinnerControl",0x0,102,66,9,11
+    CONTROL         "",IDC_ARCHGLASS_EXTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,65,78,13
+    LTEXT           "Exterior IOR :",IDC_STATIC,11,67,48,8
+END
+
+IDD_ROUGH_MATTE_PANEL DIALOGEX 0, 0, 215, 56
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_ROUGH_MATTE_DIFFUSE_COLOR,"ColorSwatch",WS_TABSTOP,78,12,35,12
+    CONTROL         "",IDC_ROUGH_MATTE_DIFFUSE_MAP,"CustButton",WS_TABSTOP,118,12,80,13
+    CONTROL         "Custom1",IDC_ROUGH_MATTE_SIGMA_MAP,"CustButton",WS_TABSTOP,118,31,80,13
+    LTEXT           "Sigma :",IDC_STATIC,11,33,24,8
+    LTEXT           "Diffuse :",IDC_STATIC,11,14,27,8
+    CONTROL         "",IDC_ROUGH_MATTE_SIGMA,"CustEdit",WS_TABSTOP,78,32,25,11
+    CONTROL         "",IDC_ROUGH_MATTE_SIGMA_SPIN,"SpinnerControl",0x0,103,32,9,11
+END
+
+IDD_ROUGH_GLASS_PANEL DIALOGEX 0, 0, 215, 126
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_ROUGH_GLASS_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,72,12,35,12
+    CONTROL         "",IDC_ROUGH_GLASS_REFLECTION_MAP,"CustButton",WS_TABSTOP,114,12,84,13
+    LTEXT           "Reflection :",IDC_STATIC,12,14,37,8
+    CONTROL         "",IDC_ROUGH_GLASS_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,72,30,35,12
+    CONTROL         "",IDC_ROUGH_GLASS_TRANSMIT_MAP,"CustButton",WS_TABSTOP,114,30,84,13
+    LTEXT           "Transmit :",IDC_STATIC,12,32,32,8
+    CONTROL         "",IDC_ROUGH_GLASS_INTERIORIOR_MAP,"CustButton",WS_TABSTOP,114,48,84,13
+    LTEXT           "Interior IOR :",IDC_STATIC,12,49,41,8
+    CONTROL         "",IDC_ROUGH_GLASS_INTERIOR_SPIN,"SpinnerControl",0x0,98,48,9,11
+    CONTROL         "",IDC_ROUGH_GLASS_INTERIORIOR,"CustEdit",WS_TABSTOP,72,48,27,11
+    CONTROL         "",IDC_ROUGH_GLASS_EXTERIORIOR_MAP,"CustButton",WS_TABSTOP,114,66,84,13
+    LTEXT           "Exterior IOR :",IDC_STATIC,12,67,43,8
+    CONTROL         "",IDC_ROUGH_GLASS_EXTERIORIOR_SPIN,"SpinnerControl",0x0,98,66,9,11
+    CONTROL         "",IDC_ROUGH_GLASS_EXTERIORIOR,"CustEdit",WS_TABSTOP,72,66,26,11
+    CONTROL         "",IDC_ROUGH_GLASS_UROUGHNESS_MAP,"CustButton",WS_TABSTOP,114,84,84,13
+    LTEXT           "U Roughness :",IDC_STATIC,12,86,48,8
+    CONTROL         "",IDC_ROUGH_GLASS_UROUGHNESS_SPIN,"SpinnerControl",0x0,98,85,9,11
+    CONTROL         "",IDC_ROUGH_GLASS_UROUGHNESS,"CustEdit",WS_TABSTOP,72,85,26,11
+    CONTROL         "",IDC_ROUGH_GLASS_VROUGHNESS_MAP,"CustButton",WS_TABSTOP,114,102,84,13
+    LTEXT           "V Roughness :",IDC_STATIC,12,104,48,8
+    CONTROL         "",IDC_ROUGH_GLASS_VROUGHNESS_SPIN,"SpinnerControl",0x0,98,103,9,11
+    CONTROL         "",IDC_ROUGH_GLASS_VROUGHNESS,"CustEdit",WS_TABSTOP,72,103,26,11
+END
+
+IDD_MATTE_TRANSLUCENT_PANEL DIALOGEX 0, 0, 214, 52
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MATTE_TRANSLUCENT_REFLECT_COLOR,"ColorSwatch",WS_TABSTOP,69,11,35,12
+    CONTROL         "",IDC_MATTE_TRANSLUCENT_REFLECT_MAP,"CustButton",WS_TABSTOP,110,11,88,13
+    LTEXT           "Transmit :",IDC_STATIC,8,31,60,8
+    LTEXT           "Reflection :",IDC_STATIC,8,13,54,8
+    CONTROL         "",IDC_MATTE_TRANSLUCENT_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,69,29,35,12
+    CONTROL         "",IDC_MATTE_TRANSLUCENT_TRANSMIT_MAP,"CustButton",WS_TABSTOP,110,29,88,13
+END
+
+IDD_GLOSSY_COATING_PANEL DIALOGEX 0, 0, 219, 148
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_GLOSSY_COATING_BASE_MAT,"CustButton",WS_TABSTOP,83,10,120,13
+    CONTROL         "Custom1",IDC_GLOSSY_COATING_SPECULAR_MAP,"CustButton",WS_TABSTOP,125,29,78,13
+    CONTROL         "",IDC_GLOSSY_COATING_SPECULAR_COLOR,"ColorSwatch",WS_TABSTOP,83,29,35,12
+    LTEXT           "Specular :",IDC_STATIC,11,31,48,8
+    LTEXT           "Base material :",IDC_STATIC,11,12,47,8
+    CONTROL         "Custom1",IDC_GLOSSY_COATING_UROUGHNESS_MAP,"CustButton",WS_TABSTOP,125,49,78,13
+    LTEXT           "U roughness :",IDC_STATIC,11,52,48,8
+    CONTROL         "Custom1",IDC_GLOSSY_COATING_VROUGHNESS_MAP,"CustButton",WS_TABSTOP,125,69,78,13
+    LTEXT           "V roughness :",IDC_STATIC,11,71,48,8
+    CONTROL         "Custom1",IDC_GLOSSY_COATING_ABSORPTION_MAP,"CustButton",WS_TABSTOP,125,88,78,13
+    LTEXT           "Absorption :",IDC_STATIC,11,90,56,10
+    CONTROL         "Custom1",IDC_GLOSSY_COATING_THIKNESS_MAP,"CustButton",WS_TABSTOP,125,108,78,13
+    LTEXT           "Thikness :",IDC_STATIC,11,111,41,8
+    CONTROL         "",IDC_GLOSSY_COATING_THIKNESS,"CustEdit",WS_TABSTOP,83,109,26,11
+    CONTROL         "",IDC_GLOSSY_COATING_THIKNESS_SPIN,"SpinnerControl",0x0,109,109,9,11
+    LTEXT           "IOR :",IDC_STATIC,12,130,44,8
+    CONTROL         "",IDC_GLOSSY_COATING_INDEX,"CustEdit",WS_TABSTOP,83,128,26,11
+    CONTROL         "",IDC_GLOSSY_COATING_INDEX_SPIN,"SpinnerControl",0x0,109,128,9,11
+    LTEXT           "Multibounce",IDC_STATIC,125,130,55,8
+    CONTROL         "",IDC_GLOSSY_COATING_MULTIBOUNCE_ON,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,194,129,10,10
+    CONTROL         "",IDC_GLOSSY_COATING_UROUGHNESS,"CustEdit",WS_TABSTOP,83,50,27,11
+    CONTROL         "",IDC_GLOSSY_COATING_UROUGHNESS_SPIN,"SpinnerControl",0x0,109,50,9,11
+    CONTROL         "",IDC_GLOSSY_COATING_VROUGHNESS,"CustEdit",WS_TABSTOP,83,70,26,11
+    CONTROL         "",IDC_GLOSSY_COATING_VROUGHNESS_SPIN,"SpinnerControl",0x0,109,70,9,11
+    CONTROL         "",IDC_GLOSSY_COATING_ABSORPTION,"CustEdit",WS_TABSTOP,83,89,27,11
+    CONTROL         "",IDC_GLOSSY_COATING_ABSORPTION_SPIN,"SpinnerControl",0x0,109,89,9,11
+END
+
+IDD_GlOSSY_TRANSLUCENT_PANEL DIALOGEX 0, 0, 220, 281
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_GLOSSY_TRANS_DIFFUSE_COLOR,"ColorSwatch",WS_TABSTOP,71,10,35,12
+    CONTROL         "",IDC_GLOSSY_TRANS_DIFFUSE_MAP,"CustButton",WS_TABSTOP,113,10,90,13
+    CONTROL         "",IDC_GLOSSY_TRANS_MULTIBOUNCE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,97,262,10,10
+    LTEXT           "Mutlibounce :",IDC_STATIC,10,263,60,8
+    LTEXT           "Diffuse :",IDC_KD,10,12,54,8
+    CONTROL         "",IDC_GLOSSY_TRANS_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,71,28,35,12
+    CONTROL         "",IDC_GLOSSY_TRANS_TRANSMIT_MAP,"CustButton",WS_TABSTOP,113,28,90,13
+    LTEXT           "Transmition :",IDC_KT,10,31,54,8
+    CONTROL         "",IDC_GLOSSY_TRANS_SPECULAR_COLOR,"ColorSwatch",WS_TABSTOP,71,46,35,12
+    CONTROL         "",IDC_GLOSSY_TRANS_SPECULAR_MAP,"CustButton",WS_TABSTOP,113,46,89,13
+    LTEXT           "Specular :",IDC_KS,10,48,54,8
+    CONTROL         "",IDC_GLOSSY_TRANS_SPECULAR_BF_COLOR,"ColorSwatch",WS_TABSTOP,71,64,35,12
+    CONTROL         "",IDC_GLOSSY_TRANS_SPECULAR_BF_MAP,"CustButton",WS_TABSTOP,113,64,89,13
+    LTEXT           "Specular BF :",IDC_KS_BF,10,66,54,8
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS_MAP,"CustButton",WS_TABSTOP,113,82,89,13
+    LTEXT           "U Roughness :",IDC_STATIC,10,85,48,8
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS_SPIN,"SpinnerControl",0x0,97,83,9,11
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS,"CustEdit",WS_TABSTOP,71,83,26,11
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS_BF_MAP,"CustButton",WS_TABSTOP,113,100,89,13
+    LTEXT           "U Roughness BF :",IDC_STATIC,10,102,59,8
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS_BF_SPIN,"SpinnerControl",0x0,97,101,9,11
+    CONTROL         "",IDC_GLOSSY_TRANS_UROUGHNESS_BF,"CustEdit",WS_TABSTOP,71,101,26,11
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS_MAP,"CustButton",WS_TABSTOP,113,118,89,13
+    LTEXT           "V Roughness :",IDC_STATIC,10,120,48,8
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS_SPIN,"SpinnerControl",0x0,97,119,9,11
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS,"CustEdit",WS_TABSTOP,71,119,26,11
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS_BF_MAP,"CustButton",WS_TABSTOP,113,136,89,13
+    LTEXT           "V Roughness BF :",IDC_STATIC,10,139,58,8
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS_BF_SPIN,"SpinnerControl",0x0,97,137,9,11
+    CONTROL         "",IDC_GLOSSY_TRANS_VROUGHNESS_BF,"CustEdit",WS_TABSTOP,71,137,26,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_ABSORPTION_MAP,"CustButton",WS_TABSTOP,113,154,89,13
+    LTEXT           "Absorption :",IDC_STATIC,10,156,42,9
+    CONTROL         "",IDC_GLOSSY_TRANS_ABSORPTION,"CustEdit",WS_TABSTOP,71,155,25,11
+    CONTROL         "",IDC_GLOSSY_TRANS_ABSORPTION_SPIN,"SpinnerControl",0x0,96,155,9,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_ABSORPTION_BF_MAP,"CustButton",WS_TABSTOP,113,172,89,13
+    LTEXT           "Absorption BF :",IDC_STATIC,10,174,52,8
+    CONTROL         "",IDC_GLOSSY_TRANS_ABSORPTION_BF,"CustEdit",WS_TABSTOP,71,173,25,11
+    CONTROL         "",IDC_GLOSSY_TRANS_ABSORPTION_BF_SPIN,"SpinnerControl",0x0,96,173,9,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_THIKNESS_MAP,"CustButton",WS_TABSTOP,113,190,89,13
+    LTEXT           "Thikness :",IDC_STATIC,10,192,42,9
+    CONTROL         "",IDC_GLOSSY_TRANS_THIKNESS,"CustEdit",WS_TABSTOP,71,191,26,11
+    CONTROL         "",IDC_GLOSSY_TRANS_THIKNESS_SPIN,"SpinnerControl",0x0,96,191,9,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_THIKNESS_BF_MAP,"CustButton",WS_TABSTOP,113,208,89,13
+    LTEXT           "Thikness BF :",IDC_STATIC,10,210,50,10
+    CONTROL         "",IDC_GLOSSY_TRANS_THIKNESS_BF,"CustEdit",WS_TABSTOP,71,209,25,11
+    CONTROL         "",IDC_GLOSSY_TRANS_THIKNESS_BF_SPIN,"SpinnerControl",0x0,96,209,9,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_INDEX_MAP,"CustButton",WS_TABSTOP,113,226,89,13
+    LTEXT           "Index :",IDC_STATIC,10,228,42,10
+    CONTROL         "",IDC_GLOSSY_TRANS_INDEX,"CustEdit",WS_TABSTOP,71,227,25,11
+    CONTROL         "",IDC_GLOSSY_TRANS_INDEX_SPIN,"SpinnerControl",0x0,96,227,9,11
+    CONTROL         "Custom1",IDC_GLOSSY_TRANS_INDEX_BF_MAP,"CustButton",WS_TABSTOP,113,244,89,13
+    LTEXT           "Index BF :",IDC_STATIC,10,245,42,10
+    CONTROL         "",IDC_GLOSSY_TRANS_INDEX_BF,"CustEdit",WS_TABSTOP,71,245,25,11
+    CONTROL         "",IDC_GLOSSY_TRANS_INDEX_BF_SPIN,"SpinnerControl",0x0,96,245,9,11
+    CONTROL         "",IDC_GLOSSY_TRANS_MULTIBOUNCE_BF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,194,262,10,10
+    LTEXT           "Mutlibounce BF :",IDC_STATIC,113,263,60,8
+END
+
+IDD_CARPAINt_PANEL DIALOGEX 0, 0, 210, 249
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CARPAINT_ABSORPTION,"ColorSwatch",WS_TABSTOP,69,28,35,12
+    CONTROL         "",IDC_CARPAINT_ABSORPTION_MAP,"CustButton",WS_TABSTOP,110,28,87,13
+    LTEXT           "Absorption :",IDC_STATIC,11,30,38,8
+    CONTROL         "",IDC_CARPAINT_DEPTH_MAP,"CustButton",WS_TABSTOP,110,46,87,13
+    LTEXT           "Depth :",IDC_STATIC,11,48,28,8
+    CONTROL         "",IDC_CARPAINT_DIFFUSE,"ColorSwatch",WS_TABSTOP,69,64,35,12
+    CONTROL         "",IDC_CARPAINT_DEFFUSE_MAP,"CustButton",WS_TABSTOP,110,64,87,13
+    LTEXT           "Diffuse :",IDC_STATIC,11,66,36,8
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_1,"ColorSwatch",WS_TABSTOP,69,82,35,12
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_1_MAP,"CustButton",WS_TABSTOP,110,82,87,13
+    LTEXT           "Specular layer 1 :",IDC_STATIC,11,84,55,8
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_2,"ColorSwatch",WS_TABSTOP,69,100,35,12
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_2_MAP,"CustButton",WS_TABSTOP,110,100,87,13
+    LTEXT           "Specular layer 2 :",IDC_STATIC,11,102,56,8
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_3,"ColorSwatch",WS_TABSTOP,69,118,35,12
+    CONTROL         "",IDC_CARPAINT_SPECULAR_LAYER_3_MAP,"CustButton",WS_TABSTOP,110,118,87,13
+    LTEXT           "Specular layer 3 :",IDC_STATIC,11,120,55,8
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_1,"ColorSwatch",WS_TABSTOP,69,136,35,12
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_1_MAP,"CustButton",WS_TABSTOP,110,136,87,13
+    LTEXT           "Fresnel layer 1 :",IDC_STATIC,11,138,54,8
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_2,"ColorSwatch",WS_TABSTOP,69,154,35,12
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_2_MAP,"CustButton",WS_TABSTOP,110,154,87,13
+    LTEXT           "Fresnel layer 2 :",IDC_STATIC,11,156,54,8
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_3,"ColorSwatch",WS_TABSTOP,69,172,35,12
+    CONTROL         "",IDC_CARPAINT_FRESNEL_LAYER_3_MAP,"CustButton",WS_TABSTOP,110,172,87,13
+    LTEXT           "Fresnel layer 3 :",IDC_STATIC,11,174,55,8
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_1,"ColorSwatch",WS_TABSTOP,69,190,35,12
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_1_MAP,"CustButton",WS_TABSTOP,110,190,87,13
+    LTEXT           "Roughness L 1 :",IDC_STATIC,11,192,55,8
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_2,"ColorSwatch",WS_TABSTOP,69,208,35,12
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_2_MAP,"CustButton",WS_TABSTOP,110,208,87,13
+    LTEXT           "Roughness L 2 :",IDC_STATIC,11,210,53,8
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_3,"ColorSwatch",WS_TABSTOP,69,226,35,12
+    CONTROL         "",IDC_CARPAINT_ROUGHNESS_LAYER_3_MAP,"CustButton",WS_TABSTOP,110,226,87,13
+    LTEXT           "Roughness L 3 :",IDC_STATIC,11,228,56,8
+    CONTROL         "",IDC_CARPAINT_DEPTH,"CustEdit",WS_TABSTOP,69,47,26,11
+    CONTROL         "",IDC_CARPAINT_DEPTH_SPIN,"SpinnerControl",0x0,95,47,9,11
+    COMBOBOX        IDC_CARPAINT_COMBO_PRESETS,69,10,128,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Preset :",IDC_STATIC,11,12,25,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_MIX_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 219
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 63
+    END
+
+    IDD_COMMON_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 166
+    END
+
+    IDD_LIGHT_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 177
+    END
+
+    IDD_MIRROR_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 217
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 37
+    END
+
+    IDD_MATTE_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 207
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 34
+    END
+
+    IDD_CLOTH_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 144
+    END
+
+    IDD_GLASS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 201
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_GLOSSY2_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 218
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 159
+    END
+
+    IDD_METAL_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 201
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_VELVET_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 202
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 103
+    END
+
+    IDD_ARCHGLASS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 201
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 88
+    END
+
+    IDD_ROUGH_MATTE_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 49
+    END
+
+    IDD_ROUGH_GLASS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_MATTE_TRANSLUCENT_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 204
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 45
+    END
+
+    IDD_GLOSSY_COATING_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 209
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 143
+    END
+
+    IDD_GlOSSY_TRANSLUCENT_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 210
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 274
+    END
+
+    IDD_CARPAINt_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 5
+        RIGHTMARGIN, 203
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 245
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_MIX_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_COMMON_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MIRROR_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MATTE_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CLOTH_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_GLASS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_GLOSSY2_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_METAL_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_VELVET_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ARCHGLASS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ROUGH_MATTE_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ROUGH_GLASS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MATTE_TRANSLUCENT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_GLOSSY_COATING_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_GlOSSY_TRANSLUCENT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CARPAINt_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_CLOTH_PANEL DLGINIT
+BEGIN
+    IDC_COMBO_CLOTH_PRESETS, 0x403, 5, 0
+0x6953, 0x6b6c, "\000" 
+    0
+END
+
+IDD_CARPAINt_PANEL DLGINIT
+BEGIN
+    IDC_CARPAINT_COMBO_PRESETS, 0x403, 5, 0
+0x6953, 0x6b6c, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_LIBDESCRIPTION      "MaxLuxCore Shaders"
+    IDS_CATEGORY            "Materials\\Lux"
+    IDS_CLASS_MIX           "Lux Mix"
+    IDS_MAIN_PARAM          "Parameters"
+    IDS_SPIN                "Spin"
+    IDS_COLOR               "Color"
+    IDS_MTL1                "Material 1"
+    IDS_MTL1ON              "Material State 1"
+    IDS_MAP                 "TexturMap"
+    IDS_COLOR2              "Ambient Color"
+    IDS_COLOR3              "Specular Color"
+    IDS_SPIN2               "Opacity"
+    IDS_SPIN4               "Shine"
+    IDS_SPIN6               "Wire Size"
+    IDS_MTL2                "Material 2"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_BUMP_MAP_ON         "Bump map status"
+    IDS_EMISSION            "emission"
+    IDS_EMISSION_MAP        "emission_map"
+    IDS_EMISSION_POWER      "emission_power"
+    IDS_EMISSION_EFFICENCY  "emission_efficency"
+    IDS_EMISSION_MAPFILE    "emission_mapfile"
+    IDS_EMISSION_GAMMA      "emission_gamma"
+    IDS_EMISSION_IESFILE    "emission_iesfile"
+    IDS_EMISSION_FLIPZ      "emission_flipz"
+    IDS_EMISSION_SAMPLES    "emission_samples"
+    IDS_EMISSION_MAP_WIDTH  "emission_map_width"
+    IDS_EMISSION_MAP_HEIGHT "emission_map_height"
+    IDS_EMISSION_ID         "emission_id"
+    IDS_ENABLEEMISSION      "enableemission"
+    IDS_DIFFUSE_MAP         "Diffuse map"
+    IDS_MIX_MTL1            "Mix material 1"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MIX_MTL2            "Mix material 2"
+    IDS_DIFFUSE_MAP_ON      "Diffuse map on"
+    IDS_BUMP_MAP            "Bump map"
+    IDS_AMOUNT_MAP          "Amount map"
+    IDS_NORMAL_MAP          "Normal map"
+    IDS_INTERIOR_MAP        "Interior map"
+    IDS_EXTERIOR_MAP        "Exterior map"
+    IDS_BUMP_SAMPLE         "Bump sample"
+    IDS_MATERIAL_ID         "Material ID"
+    IDS_TRANSPARENCY        "Transparency"
+    IDS_CLASS_MIRROR        "Lux Mirror"
+    IDS_CLASS_MATTE         "Lux Matte"
+    IDS_MATTE_DIFFUSE_MAP   "Diffuse map"
+    IDS_MATTE_PANEL         "Matte panel"
+    IDS_CLASS_LIGHT         "Lux Light"
+    IDS_CLASS_CLOTH         "Lux Cloth"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_METAL_TRANSMIT      "Metal transmit"
+    IDS_METAL_TRANSMIT_MAP  "Metal trasnmit map"
+    IDS_METAL_INTERIORIOR   "Metal Interiorior"
+    IDS_Metal_INTERIORIOR_MAP "Metal Interiorior map"
+    IDS_METAL_EXTERIORIOR   "Metal Exteriorior"
+    IDS_GLOSSY_UROUGHNESS   "Glossy uroughness"
+    IDS_GLOSSY_UROUGHNESSMAP "Glossy uroughnessmap"
+    IDS_GLOSSY_SPECULAR_MAP "Glossy specular map"
+    IDS_GLOSSY_SPECULAR_COLOR "Glossy specular color"
+    IDS_GLOSSY_ABSORPTION_MAP "Absorption map"
+    IDS_GLOSSY_ABSORPTION_VALUE "Absorption value"
+    IDS_LIGHT_PARAMS        "Light Parameters"
+    IDS_COMMON_PARAMS       "Common Parameters"
+    IDS_METAL_EXTERIORIOR_MAP "Metal Exteriorior map"
+    IDS_MATTE_PARAMS        "Matte Parameters"
+    IDS_MIRROR_PARAMS       "Mirror Parameters"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CLOTH_PARAMS        "Cloth Parameters"
+    IDS_CLOTH_DIFFUSE_COLOR2 "Diffuse reflection opposite color"
+    IDS_CLOTH_DIFFUSE_MAP2  "Diffuse reflection opposite direction"
+    IDS_CLOTH_SPECULAR_COLOR2 "Specular reflection opposite color"
+    IDS_CLOTH_SPECULAR_MAP2 "Specular reflection opposite direction"
+    IDS_CLOTH_COMBOBOX_INT  "Cloth_Preset"
+    IDS_CLOTH_COMBOBOX_SILK_CHARM "Silk Charmeuse"
+    IDS_CLOTH_COMBOBOX_SILK_SHANG "Silk Shangtung"
+    IDS_CLOTH_COMBOBOX_CATTON "Catton"
+    IDS_CLOTH_COMBOBOX_WOOL "Wool"
+    IDS_CLOTH_COMBOBOX_POLY "Polyester"
+    IDS_CLOTH_COMBOBOX_DENIM "Denim"
+    IDS_CLOTH_PRESET        "Cloth Preset"
+    IDS_CLOTH_DIFFUSE_COLOR1 "Diffuse reflection color"
+    IDS_CLOTH_DIFFUSE_MAP1  "Diffuse map one direction"
+    IDS_CLOTH_SPECULAR_COLOR1 "Diffuse specular color"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CLOTH_SPECULAR_MAP1 "Specular map one direction"
+    IDS_CLOTH_TILE_U        "Tile u"
+    IDS_CLOTH_TILE_V        "Tile v"
+    IDS_CLOTH_TILE_U_SPIN   "Tile u spin"
+    IDS_CLOTH_TILE_V_SPIN   "Tile v spin"
+    IDS_CLASS_GLASS         "Lux Glass"
+    IDS_GlASS_PARAMS        "Glass Parameters"
+    IDS_GLASS_INTERIOR_SPIN "Glass interior spin"
+    IDS_GLASS_EXTERIOR_SPIN "Glass Exterior spin"
+    IDS_GlASS_REFLECTION_COLOR "Glass reflection color"
+    IDS_GlASS_REFLECTION_MAP "Glass reflection map"
+    IDS_GlASS_TRANSMIT_COLOR "Glass transmit color"
+    IDS_GlASS_TRANSMIT_MAP  "Glass transmit map"
+    IDS_GLASS_INTERIORIOR   "Glass Interiorior value"
+    IDS_GlASS_INTERIORIOR_MAP "Glass Interiorior map"
+    IDS_GlASS_EXTERIORIOR   "Glass Exteriorior value"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_GlASS_EXTERIORIOR_MAP "Glass Exteriorior map"
+    IDS_CLASS_GLOSSY        "Lux Glossy2"
+    IDS_GLOSSY_PARAMS       "Glossy Parameters"
+    IDS_GLOSSY_DIFFUSE_COLOR "Glossy diffuse color"
+    IDS_GLOSSY_DIFFUSE_MAP  "Glossy diffuse map"
+    IDS_GLOSSY_VROUGHNESS   "Glossy vroughness"
+    IDS_GLOSSY_VROUGHNESSMAP "Glossy vroughnessmap"
+    IDS_GLOSSY_THIKNESS     "Glossy Thikness"
+    IDS_GLOSSY_ABSORPTION_VALUE_SPIN "Absorption value spin"
+    IDS_GLOSSY_THIKNESS_MAP "Glossy Thikness map"
+    IDS_GLOSSY_MULTIBOUNCE  "Glossy multibounce"
+    IDS_GLOSSY_INDEX        "Glossy index"
+    IDS_CLASS_METAL         "Lux Metal"
+    IDS_METAL_PARAMS        "Metal Parameters"
+    IDS_METAL_REFLECTION    "Metal Reflection"
+    IDS_METAL_REFLECTION_MAP "Metal Reflection map"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CLASS_VELVET        "Lux Velvet"
+    IDS_VELVET_DIFFUSE_MAP  "Diffuse Map"
+    IDS_VELVET_DIFFUSE_COLOR "Diffuse color"
+    IDS_VELVET_THIKNESS_SPIN "Thikness spin"
+    IDS_VELVET_THIKNESS_MAP "Thikness map"
+    IDS_VELVET_POLYNORMAL1_MAP "polynomial 1 map"
+    IDS_VELVET_POLYNORMAL2_MAP "polynomial 2 map"
+    IDS_VELVET_POLYNORMAL3_MAP "polynomial 3 map"
+    IDS_VELVET_POLYNORMAL1_SPIN "polynomial 1 spin"
+    IDS_VELVET_POLYNORMAL2_SPIN "polynomial 2 spin"
+    IDS_VELVET_POLYNORMAL3_SPIN "polynomial 3 spin"
+    IDS_CLASS_ARCHGLASS     "Lux Archglass"
+    IDS_ARCHGLASS_PARAMS    "Archglass Parameters"
+    IDS_ARCHGLASS_INTERIOR_SPIN "Archglass Interiorior spin"
+    IDS_ARCHGLASS_EXTERIOR_SPIN "Archglass Interiorior spin"
+    IDS_ARCHGLASS_REFLECTION_COLOR "Archglass reflection"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ARCHGLASS_REFLECTION_MAP "Archglass reflection map"
+    IDS_ARCHGLASS_TRANSMIT_COLOR "Archglass trasnmit color"
+    IDS_ARCHGLASS_TRANSMIT_MAP "Archglass transmit map"
+    IDS_ARCHGLASS_INTERIORIOR "Archglass Interiorior"
+    IDS_ARCHGLASS_INTERIORIOR_MAP "Archglass Interiorior_map"
+    IDS_ARCHGLASS_EXTERIORIOR "Archglass Exteriorior"
+    IDS_ARCHGLASS_EXTERIORIOR_MAP "Archglass Exteriorior_map"
+    IDS_CLASS_ROUGH_MATTE   "Lux Rough Matte"
+    IDS_ROUGH_MATTE_PARAMS  "Rough matte Parameters"
+    IDS_ROUGH_MATTE_DIFFUSE_COLOR "Rough matte Color"
+    IDS_ROUGH_MATTE_DIFFUSE_MAP "Rough matte Diffuse Map"
+    IDS_ROUGH_MATTE_SIGMA_MAP "Rough matte sigma Map"
+    IDS_ROUGH_MATTE_SIGMA   "Rough matte sigma"
+    IDS_ROUGH_MATTE_SIGMA_SPIN "Rough matte sigma spin"
+    IDS_CLASS_ROUGH_GLASS   "Lux Rough Glass"
+    IDS_ROUGH_GLASS_PARAMS  "Rough Glass Parameters"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ROUGH_GLASS_REFLECT "Rough Glass reflected color"
+    IDS_ROUGH_GLASS_REFLECT_MAP "Rough Glass reflected map"
+    IDS_ROUGH_GLASS_TRANSMIT "Rough Glass transmited color"
+    IDS_ROUGH_GLASS_TRANSMIT_MAP "Rough Glass transmited map"
+    IDS_ROUGH_GLASS_INTERIOR "Rough Glass Interior IOR"
+    IDS_ROUGH_GLASS_INTERIOR_MAP "Rough Glass Interior IOR map"
+    IDS_ROUGH_GLASS_EXTERIOR "Rough Glass Exterior IOR"
+    IDS_ROUGH_GLASS_EXTERIOR_MAP "Rough Glass Exterior IOR map"
+    IDS_ROUGH_GLASS_UROUGHNESS "Rough Glass U Roughness"
+    IDS_ROUGH_GLASS_UROUGHNESS_MAP "Rough Glass U Roughness map"
+    IDS_ROUGH_GLASS_VROUGHNESS "Rough Glass V Roughness"
+    IDS_ROUGH_GLASS_VROUGHNESS_MAP "Rough Glass V Roughness map"
+    IDS_CLASS_MATTE_TRANSLUCENT "Lux Matte Translucent"
+    IDS_MATTE_TRANSLUCENT_PARAMS "Parameters"
+    IDS_MATTE_TRANSLUCENT_REFLECT_COLOR "Reflected color"
+    IDS_MATTE_TRANSLUCENT_REFLECT_MAP "Reflected map"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_MATTE_TRANSLUCENT_TRANSMIT_COLOR "Transmitted color"
+    IDS_MATTE_TRANSLUCENT_TRANSMIT_MAP "Transmitted map"
+    IDS_CLASS_GLOSSY_COATING "Lux Glossy Coating"
+    IDS_GLOSSY_COATING_PARAMS "Glossy coatiing Parameters"
+    IDS_GLOSSY_COATING_MAT  "Glossy Coating Base Material"
+    IDS_GLOSSY_COATING_SPECULAR "Glossy Coating specular"
+    IDS_GLOSSY_COATING_SPECULAR_MAP "Glossy Coating specular map"
+    IDS_GLOSSY_COATING_UROUGHNESS "Glossy Coating U Roughness"
+    IDS_GLOSSY_COATING_UROUGHNESS_MAP "Glossy Coating U Roughness map"
+    IDS_GLOSSY_COATING_VROUGHNESS "Glossy Coating V Roughness"
+    IDS_GLOSSY_COATING_VROUGHNESS_MAP "Glossy Coating V Roughness map"
+    IDS_GLOSSY_COATING_ABSORPTION "Glossy Coating Absorption"
+    IDS_GLOSSY_COATING_ABSORPTION_MAP "Glossy Coating Absorption map"
+    IDS_GLOSSY_COATING_THIKNESS "Glossy Coating Thikness"
+    IDS_GLOSSY_COATING_THIKNESS_MAP "Glossy Coating Thikness map"
+    IDS_GLOSSY_COATING_INDEX "Glossy Coating Index of reflection"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_GLOSSY_COATING_MULTIBOUNCE "Glossy Coating Multi bounce"
+    IDS_CLASS_GlOSSY_TRANSLUCENT "Lux Glossy Translucent"
+    IDS_GlOSSY_TRANSLUCENT_PARAMS "Glossy Translucent Parameters"
+    IDS_GlOSSY_TRANSLUCENT_DIFFUSE "Glossy Tranlucent diffuse color"
+    IDS_GlOSSY_TRANSLUCENT_DIFFUSE_MAP "Glossy Tranlucent diffuse map"
+    IDS_GlOSSY_TRANSLUCENT_TRANSMIT "Glossy Tranlucent transmit color"
+    IDS_GlOSSY_TRANSLUCENT_TRANSMIT_MAP "Glossy Tranlucent transmit map"
+    IDS_GlOSSY_TRANSLUCENT_SPECULAR "Glossy Tranlucent specular color"
+    IDS_GlOSSY_TRANSLUCENT_SPECULAR_MAP "Glossy Tranlucent specular map"
+    IDS_GlOSSY_TRANSLUCENT_SPECULAR_BF "Glossy Tranlucent specular color BF"
+    IDS_GlOSSY_TRANSLUCENT_SPECULAR_BF_MAP "Glossy Tranlucent specular BF map"
+    IDS_GlOSSY_TRANSLUCENT_UROGHNESS "Glossy Tranlucent u roughness"
+    IDS_GlOSSY_TRANSLUCENT_UROGHNESS_MAP "Glossy Tranlucent u roughness map"
+    IDS_GlOSSY_TRANSLUCENT_VROGHNESS "Glossy Tranlucent v roughness"
+    IDS_GlOSSY_TRANSLUCENT_VROGHNESS_MAP "Glossy Tranlucent v roughness map"
+    IDS_GlOSSY_TRANSLUCENT_UROGHNESS_BF "Glossy Tranlucent u roughness BF"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_GlOSSY_TRANSLUCENT_UROGHNESS_BF_MAP 
+                            "Glossy Tranlucent u roughness BF map"
+    IDS_GlOSSY_TRANSLUCENT_VROGHNESS_BF "Glossy Tranlucent v roughness BF"
+    IDS_GlOSSY_TRANSLUCENT_VROGHNESS_BF_MAP 
+                            "Glossy Tranlucent v roughness BF map"
+    IDS_GlOSSY_TRANSLUCENT_ABSORPTION "Glossy Tranlucent absorption"
+    IDS_GlOSSY_TRANSLUCENT_ABSORPTION_MAP "Glossy Tranlucent absorption map"
+    IDS_GlOSSY_TRANSLUCENT_ABSORPTION_BF "Glossy Tranlucent absorption BF"
+    IDS_GlOSSY_TRANSLUCENT_ABSORPTION_BF_MAP 
+                            "Glossy Tranlucent absorption BF map"
+    IDS_GlOSSY_TRANSLUCENT_THIKNESS "Glossy Tranlucent thikness"
+    IDS_GlOSSY_TRANSLUCENT_THIKNESS_MAP "Glossy Tranlucent thikness map"
+    IDS_GlOSSY_TRANSLUCENT_THIKNESS_BF "Glossy Tranlucent thikness BF"
+    IDS_GlOSSY_TRANSLUCENT_THIKNESS_BF_MAP "Glossy Tranlucent thikness BF map"
+    IDS_GlOSSY_TRANSLUCENT_INDEX "Glossy Tranlucent index"
+    IDS_GlOSSY_TRANSLUCENT_INDEX_MAP "Glossy Tranlucent index map"
+    IDS_GlOSSY_TRANSLUCENT_INDEX_BF "Glossy Tranlucent index BF"
+    IDS_GlOSSY_TRANSLUCENT_INDEX_BF_MAP "Glossy Tranlucent index BF map"
+    IDS_GlOSSY_TRANSLUCENT_MULTIBOUNCE "Glossy Tranlucent multibounce"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_GlOSSY_TRANSLUCENT_MULTIBOUNCE_BF "Glossy Tranlucent multibounce BF"
+    IDS_CLASS_CARPAINT      "Lux Carpaint"
+    IDS_CARPAINT_PARAMS     "Parameters"
+    IDS_CARPAINT_PRESET     "Carpaint Presets"
+    IDS_CARPAINT_ABSORPTION "Carpaint Absorption"
+    IDS_CARPAINT_ABSORPTION_MAP "Carpaint Absorption map"
+    IDS_CARPAINT_DEPTH      "Carpaint depth"
+    IDS_CARPAINT_DEPTH_MAP  "Carpaint depth map"
+    IDS_CARPAINT_DIFFUSE    "Carpaint diffuse"
+    IDS_CARPAINT_DIFFUSE_MAP "Carpaint diffuse map"
+    IDS_CARPAINT_SPECULAR_LAYER_1 "Carpaint specular layer 1"
+    IDS_CARPAINT_SPECULAR_LAYER_1_MAP "Carpaint specular layer 1 map"
+    IDS_CARPAINT_SPECULAR_LAYER_2 "Carpaint specular layer 2"
+    IDS_CARPAINT_SPECULAR_LAYER_2_MAP "Carpaint specular layer 2 map"
+    IDS_CARPAINT_SPECULAR_LAYER_3 "Carpaint specular layer 3"
+    IDS_CARPAINT_SPECULAR_LAYER_3_MAP "Carpaint specular layer 3 map"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CARPAINT_FRESNEL_LAYER_1 "Carpaint fresnel layer 1"
+    IDS_CARPAINT_FRESNEL_LAYER_1_MAP "Carpaint fresnel layer 1 map"
+    IDS_CARPAINT_FRESNEL_LAYER_2 "Carpaint fresnel layer 2"
+    IDS_CARPAINT_FRESNEL_LAYER_2_MAP "Carpaint fresnel layer 2 map"
+    IDS_CARPAINT_FRESNEL_LAYER_3 "Carpaint fresnel layer 3"
+    IDS_CARPAINT_FRESNEL_LAYER_3_MAP "Carpaint fresnel layer 3 map"
+    IDS_CARPAINT_ROUGHNESS_LAYER_1 "Carpaint roughness layer 1"
+    IDS_CARPAINT_ROUGHNESS_LAYER_1_MAP "Carpaint roughness layer 1 map"
+    IDS_CARPAINT_ROUGHNESS_LAYER_2 "Carpaint roughness layer 2"
+    IDS_CARPAINT_ROUGHNESS_LAYER_2_MAP "Carpaint roughness layer 2 map"
+    IDS_CARPAINT_ROUGHNESS_LAYER_3 "Carpaint roughness layer 3"
+    IDS_CARPAINT_ROUGHNESS_LAYER_3_MAP "Carpaint roughness layer 3 map"
+    IDS_CARPAINT_COMBOBOX_INT "Carpaint preset"
+    IDS_CARPAINT_COMBOBOX_FORD "ford f8"
+    IDS_CARPAINT_COMBOBOX_POLARIS "polaris silber"
+    IDS_CARPAINT_COMBOBOX_OPEL "opel titan"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CARPAINT_COMBOBOX_BMW "bmw339"
+    IDS_CARPAINT_COMBOBOX_ACRYLAK "2k acrylack"
+    IDS_CARPAINT_COMBOBOX_WHITE "white"
+    IDS_CARPAINT_COMBOBOX_BLUE "blue"
+    IDS_CARPAINT_COMBOBOX_BLUE_MATTE "blue matte"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
