@@ -130,7 +130,7 @@ public:
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_MIX); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return Lux_MIX_CLASS_ID; }
-	virtual const TCHAR* Category()					{ return _T("MaxLuxCore");/*GetString(IDS_CATEGORY);*/ }
+	virtual const TCHAR* Category()					{ return _T("MaxToLux");/*GetString(IDS_CATEGORY);*/ }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Mix"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle

@@ -20,15 +20,12 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_MATTE_CLASS_ID	Class_ID(0x31b54e60, 0x1de956e4)
+#define LUX_MATTE_CLASS_ID	Class_ID(0x31b54e60, 0x1de956e4)
 
-
-#define NUM_SUBMATERIALS 1 //was 16 TODO: number of sub-materials supported by this plug-in
-#define NUM_SUBTEXTURES 8
-#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS
-// Reference Indexes
-// 
-#define PBLOCK_REF NUM_REF
+#define PBLOCK_REF 1
+#define NUM_SUBMATERIALS 1 // number of sub-materials supported by this plug-in
+#define NUM_SUBTEXTURES 8 // number of sub-textures supported by this plug-in
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 3400 + 2400;
 
@@ -87,14 +84,14 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_MATTE_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_MATTE_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_MATTE);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
-	virtual int NumSubs() { return 1+ NUM_SUBTEXTURES; }
+	virtual int NumSubs() { return 1 + NUM_SUBTEXTURES; }
 	virtual Animatable* SubAnim(int i);
 	virtual TSTR SubAnimName(int i);
 
@@ -122,8 +119,6 @@ private:
 	//Interval	  mapValid;
 };
 
-
-
 class Lux_MatteClassDesc : public ClassDesc2 
 {
 public:
@@ -131,7 +126,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Matte(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_MATTE); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_MATTE_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_MATTE_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return _T("Materials\\lux");/*GetString(IDS_CATEGORY);*/ }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Matte"); }	// returns fixed parsable name (scripter-visible name)
@@ -139,17 +134,11 @@ public:
 	
 };
 
-/*const MCHAR* Lux_MatteClassDesc::GetEntryCategory() const
-{
-	return L"Materials\\appleseed";
-}*/
-
 
 ClassDesc2* GetLux_MatteDesc() { 
 	static Lux_MatteClassDesc Lux_MatteDesc;
 	return &Lux_MatteDesc; 
 }
-
 
 enum { Lux_Matte_params };
 
@@ -201,6 +190,7 @@ static ParamBlockDesc2 Lux_Matte_param_blk (
 	Matte_map,				IDD_MATTE_PANEL,		IDS_MATTE_PARAMS,	0,	0,	NULL,
 	Common_Param,			IDD_COMMON_PANEL,		IDS_COMMON_PARAMS,	0,	0,	NULL,
 	Light_emission,			IDD_LIGHT_PANEL,		IDS_LIGHT_PARAMS,	0,	0,	NULL,
+
 	// params
 	prm_color,			_T("mtl_matte_color"),			TYPE_RGBA,	P_ANIMATABLE,		IDS_COLOR,
 		p_default,		Color(0.5f, 0.5f, 0.5f),
@@ -208,32 +198,32 @@ static ParamBlockDesc2 Lux_Matte_param_blk (
 		p_end,
 
 	mtl_diffuse_map,	_T("mtl_matte_DiffuseMap"),	TYPE_TEXMAP,	P_OWNERS_REF,	IDS_MATTE_DIFFUSE_MAP,
-		p_refno,		0,
+		p_refno,		2,
 		p_subtexno,		0,
 		p_ui,			Matte_map,				TYPE_TEXMAPBUTTON,		IDC_MATTE_DIFFUSE_MAP,
 		p_end,
 
 	// Common param
 	bump_map, _T("Bump Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_BUMP_MAP,
-		p_refno, 1,
+		p_refno, 3,
 		p_subtexno, 1,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_BUMP_MAP,
 		p_end,
 
 	normal_map, _T("Normal Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_NORMAL_MAP,
-		p_refno, 2,
+		p_refno, 4,
 		p_subtexno, 2,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
 	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
-		p_refno, 3,
+		p_refno, 5,
 		p_subtexno, 3,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 4,
+		p_refno, 6,
 		p_subtexno, 4,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
@@ -263,7 +253,7 @@ static ParamBlockDesc2 Lux_Matte_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 5,
+		p_refno, 7,
 		p_subtexno, 5,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
@@ -281,7 +271,7 @@ static ParamBlockDesc2 Lux_Matte_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 6,
+		p_refno, 8,
 		p_subtexno, 6,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
@@ -293,7 +283,7 @@ static ParamBlockDesc2 Lux_Matte_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 7,
+		p_refno, 9,
 		p_subtexno, 7,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
@@ -385,7 +375,7 @@ void Lux_Matte::Reset()
 			DbgAssert(submtl[i] == nullptr);
 			submtl[i] = nullptr;
 		}
-		mapOn[i] = FALSE;
+		//mapOn[i] = FALSE;
 	}*/
 	for (int i = NUM_SUBTEXTURES - 1; i >= 0; i--)
 	{
@@ -401,7 +391,6 @@ void Lux_Matte::Reset()
 
 	GetLux_MatteDesc()->MakeAutoParamBlocks(this);
 }
-
 
 
 ParamDlg* Lux_Matte::CreateParamDlg(HWND hwMtlEdit, IMtlParams *imp)
@@ -431,7 +420,7 @@ Interval Lux_Matte::Validity(TimeValue t)
 			valid &= subtexture[i]->Validity(t);
 	}
 	float u;
-	pblock->GetValue(/*pb_spin*/0,t,u,valid);
+	//pblock->GetValue(/*pb_spin*/0,t,u,valid);
 	return valid;
 }
 
@@ -446,13 +435,15 @@ RefTargetHandle Lux_Matte::GetReference(int i)
 	OutputDebugStringA(a.c_str());
 	/*switch (i)
 	{
-		case 0: return subtexture[i]; break;
-		//case 1: return pblock; break;
+		//case 0: return pblock; break;
+		case PBLOCK_REF: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
-		default: return nullptr; break;
+		default: return subtexture[i - 2]; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else
 		return nullptr;
 }
@@ -465,15 +456,15 @@ void Lux_Matte::SetReference(int i, RefTargetHandle rtarg)
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
 	/*switch (i)
 	{
-		case 0: subtexture[i] = (Texmap *)rtarg; break;
-		//case 1: pblock = (IParamBlock2 *)rtarg; break;
+		//case 0: pblock = (IParamBlock2 *)rtarg; break;
+		case PBLOCK_REF: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
-		default: pblock = (IParamBlock2 *)rtarg; break;
+		default: subtexture[i - 2] = (Texmap *)rtarg; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		subtexture[i] = (Texmap *)rtarg;
-	else
+	if (i == PBLOCK_REF)
 		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Matte::SubAnimName(int i)
@@ -481,7 +472,7 @@ TSTR Lux_Matte::SubAnimName(int i)
 	if ((i >= 0) && (i < NUM_SUBTEXTURES))
 		return GetSubTexmapTVName(i);
 	else
-		return GetSubTexmapTVName(i); //TSTR(_T(""));
+		return GetSubTexmapTVName(i-2); //TSTR(_T(""));
 }
 
 Animatable* Lux_Matte::SubAnim(int i)
@@ -491,12 +482,14 @@ Animatable* Lux_Matte::SubAnim(int i)
 	OutputDebugStringA(a.c_str());
 	/*switch (i)
 	{
-		case 0: return subtexture[i];
-		//case 1: return pblock;
-		default: return nullptr;
+		//case 0: return pblock;
+		case PBLOCK_REF: return pblock;
+		default: return subtexture[i-2];
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else 
 		return nullptr;
 }
@@ -563,14 +556,14 @@ Mtl* Lux_Matte::GetSubMtl(int /*i*/)
 		nullptr;
 }
 
-void Lux_Matte::SetSubMtl(int /*i*/, Mtl* /*m*/)
+void Lux_Matte::SetSubMtl(int i, Mtl* m)
 {
 	/*std::string a = std::to_string(i);
 	a = "\Set sub mtl : " + a + "\n";
 	OutputDebugStringA(a.c_str());*/
 	//mprintf(_T("\n SetSubMtl Nubmer is : %i \n"), i);
 	
-	//ReplaceReference(i , m);
+	ReplaceReference(i , m);
 }
 
 TSTR Lux_Matte::GetSubMtlSlotName(int /*i*/)
@@ -607,7 +600,7 @@ void Lux_Matte::SetSubTexmap(int i, Texmap* tx)
 	a = "\Set sub tex : " + a + "\n";
 	OutputDebugStringA(a.c_str());*/
 	//mprintf(_T("\n SetSubTexmap Nubmer ============>>>  is : %i \n"), i);
-	ReplaceReference(i, tx);
+	ReplaceReference(i + 2, tx);
 	/*switch (i)
 	{
 		case 0:
@@ -665,7 +658,8 @@ TSTR Lux_Matte::GetSubTexmapSlotName(int i)
 			return _T("emission map");
 		case 7:
 			return _T("emission ies");
-		default: return _T("");
+		default:
+			return _T("");
 	}
 }
 
@@ -742,7 +736,7 @@ RefTargetHandle Lux_Matte::Clone(RemapDir &remap)
 	{
 		mnew->subtexture[i] = nullptr;
 		if (subtexture[i])
-			mnew->ReplaceReference(i, remap.CloneRef(subtexture[i]));
+			mnew->ReplaceReference(i + 2, remap.CloneRef(subtexture[i]));
 		//mnew->mapOn[i] = mapOn[i];
 	}
 	BaseClone(this, mnew, remap);

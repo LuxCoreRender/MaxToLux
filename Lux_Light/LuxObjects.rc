@@ -1,0 +1,348 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_LIGHT_COMMON_PANEL DIALOGEX 0, 0, 115, 101
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_SAMPLE,"CustEdit",WS_TABSTOP,69,48,26,10
+    CONTROL         "",IDC_LIGHT_SAMPLE_SPIN,"SpinnerControl",0x0,96,48,7,10
+    LTEXT           "Sample :",IDC_STATIC,9,49,50,8
+    CONTROL         "",IDC_LIGHT_ID,"CustEdit",WS_TABSTOP,69,63,26,10
+    CONTROL         "",IDC_LIGHT_ID_SPIN,"SpinnerControl",0x0,96,63,7,10
+    LTEXT           "Id :",IDC_STATIC,10,63,50,8
+    CONTROL         "",IDC_LIGHT_IMPORTANCE,"CustEdit",WS_TABSTOP,69,78,26,10
+    CONTROL         "",IDC_LIGHT_IMPORTANCE_SPIN,"SpinnerControl",0x0,96,78,7,10
+    LTEXT           "Importance :",IDC_STATIC,10,78,50,8
+    CONTROL         "v",IDC_LIGHT_GAIN,"ColorSwatch",WS_TABSTOP,69,16,34,12
+    LTEXT           "Gain :",IDC_STATIC,9,18,50,8
+    GROUPBOX        "Common Parameters",IDC_STATIC,2,3,109,91
+    CONTROL         "",IDC_LIGHT_MULTIPLAIER,"CustEdit",WS_TABSTOP,69,33,26,10
+    CONTROL         "",IDC_LIGHT_MULTIPLAIER_SPIN,"SpinnerControl",0x0,96,33,7,10
+    LTEXT           "Gain Multiplier :",IDC_STATIC,9,34,51,8
+END
+
+IDD_LIGHT_POINT DIALOGEX 0, 0, 112, 75
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_POINT_POWER,"CustEdit",WS_TABSTOP,66,34,26,10
+    CONTROL         "",IDC_LIGHT_POINT_POWER_SPIN,"SpinnerControl",0x0,93,34,7,10
+    LTEXT           "Power :",IDC_STATIC,9,35,50,8
+    CONTROL         "",IDC_LIGHT_POINT_EFFICENCY,"CustEdit",WS_TABSTOP,66,49,26,10
+    CONTROL         "",IDC_LIGHT_POINT_EFFICENCY_SPIN,"SpinnerControl",0x0,93,49,7,10
+    LTEXT           "Efficency :",IDC_STATIC,10,49,50,8
+    CONTROL         "v",IDC_LIGHT_POINT_COLOR,"ColorSwatch",WS_TABSTOP,66,17,34,12
+    LTEXT           "Color :",IDC_STATIC,9,19,50,8
+    GROUPBOX        "Point Light",IDC_STATIC,2,3,106,65
+END
+
+IDD_LIGHT_SPHERE DIALOGEX 0, 0, 112, 88
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_POINT_POWER,"CustEdit",WS_TABSTOP,66,47,26,10
+    CONTROL         "",IDC_LIGHT_POINT_POWER_SPIN,"SpinnerControl",0x0,93,47,7,10
+    LTEXT           "Power :",IDC_STATIC,9,48,50,8
+    CONTROL         "",IDC_LIGHT_POINT_EFFICENCY,"CustEdit",WS_TABSTOP,66,62,26,10
+    CONTROL         "",IDC_LIGHT_POINT_EFFICENCY_SPIN,"SpinnerControl",0x0,93,62,7,10
+    LTEXT           "Efficency :",IDC_STATIC,10,62,50,8
+    CONTROL         "v",IDC_LIGHT_POINT_COLOR,"ColorSwatch",WS_TABSTOP,66,30,34,12
+    LTEXT           "Color :",IDC_STATIC,9,32,50,8
+    GROUPBOX        "Sphere Light",IDC_STATIC,2,3,106,78
+    CONTROL         "",IDC_LIGHT_POINT_REDIUS,"CustEdit",WS_TABSTOP,66,16,26,10
+    CONTROL         "",IDC_LIGHT_POINT_REDIUS_SPIN,"SpinnerControl",0x0,93,16,7,10
+    LTEXT           "Redius :",IDC_STATIC,9,17,50,8
+END
+
+IDD_LIGHT_SPOT DIALOGEX 0, 0, 112, 103
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_SPOT_POWER,"CustEdit",WS_TABSTOP,66,34,26,10
+    CONTROL         "",IDC_LIGHT_SPOT_POWER_SPIN,"SpinnerControl",0x0,93,34,7,10
+    LTEXT           "Power :",IDC_STATIC,9,35,50,8
+    CONTROL         "",IDC_LIGHT_SPOT_EFFICENCY,"CustEdit",WS_TABSTOP,66,49,26,10
+    CONTROL         "",IDC_LIGHT_SPOT_EFFICENCY_SPIN,"SpinnerControl",0x0,93,49,7,10
+    LTEXT           "Efficency :",IDC_STATIC,10,49,50,8
+    CONTROL         "v",IDC_LIGHT_SPOT_COLOR,"ColorSwatch",WS_TABSTOP,66,17,34,12
+    LTEXT           "Color :",IDC_STATIC,9,19,50,8
+    GROUPBOX        "Spot Light",IDC_STATIC,2,3,106,93
+    CONTROL         "",IDC_LIGHT_SPOT_CONE,"CustEdit",WS_TABSTOP,66,64,26,10
+    CONTROL         "",IDC_LIGHT_SPOT_CONE_SPIN,"SpinnerControl",0x0,93,64,7,10
+    LTEXT           "Cone Angle :",IDC_STATIC,9,65,50,8
+    CONTROL         "",IDC_LIGHT_SPOT_CONE_DELTA,"CustEdit",WS_TABSTOP,66,79,26,10
+    CONTROL         "",IDC_LIGHT_SPOT_CONE_DELTA_SPIN,"SpinnerControl",0x0,94,79,7,10
+    LTEXT           "Cone Delta :",IDC_STATIC,10,80,50,8
+END
+
+IDD_LIGHT_SKY DIALOGEX 0, 0, 112, 136
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_SKY_TURBIDITY,"CustEdit",WS_TABSTOP,66,18,26,10
+    CONTROL         "",IDC_LIGHT_SKY_TURBIDITY_SPIN,"SpinnerControl",0x0,93,18,7,10
+    LTEXT           "Turbidity :",IDC_STATIC,9,19,50,8
+    LTEXT           "Visiable In Glossy :",IDC_STATIC,10,66,66,8
+    GROUPBOX        "Sky Light",IDC_STATIC,2,3,106,126
+    LTEXT           "Visiable In Specular :",IDC_STATIC,9,81,68,8
+    LTEXT           "Ground Color :",IDC_STATIC,10,111,50,8
+    CONTROL         "v",IDC_LIGHT_SKY_ALBEDO_COLOR,"ColorSwatch",WS_TABSTOP,66,32,34,12
+    LTEXT           "Ground Albego:",IDC_STATIC,10,34,50,8
+    CONTROL         "v",IDC_LIGHT_SKY_GROUND_COLOR,"ColorSwatch",WS_TABSTOP,66,109,34,12
+    LTEXT           "Visiable In Diffuse :",IDC_STATIC,10,51,71,8
+    CONTROL         "",IDC_LIGHT_SKY_DIFFUSE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,51,8,10
+    CONTROL         "",IDC_LIGHT_SKY_GLOSSY_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,66,8,10
+    CONTROL         "",IDC_LIGHT_SKY_SPECULAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,80,8,10
+    LTEXT           "Enable Ground :",IDC_STATIC,9,95,68,8
+    CONTROL         "",IDC_LIGHT_SKY_ENABLE_GROUND_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,95,8,10
+END
+
+IDD_LIGHT_SUN DIALOGEX 0, 0, 112, 106
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_SUN_RELSIZE,"CustEdit",WS_TABSTOP,66,33,26,10
+    CONTROL         "",IDC_LIGHT_SUN_RELSIZE_SPIN,"SpinnerControl",0x0,93,33,7,10
+    LTEXT           "Relative Size :",IDC_STATIC,9,34,50,8
+    GROUPBOX        "Sun Light",IDC_STATIC,2,3,106,96
+    CONTROL         "",IDC_LIGHT_SUN_TURBIDITY,"CustEdit",WS_TABSTOP,66,18,26,10
+    CONTROL         "",IDC_LIGHT_SUN_TURBIDITY_SPIN,"SpinnerControl",0x0,93,18,7,10
+    LTEXT           "Turbidity :",IDC_STATIC,9,19,50,8
+    LTEXT           "Visiable In Glossy :",IDC_STATIC,10,66,66,8
+    LTEXT           "Visiable In Specular :",IDC_STATIC,9,81,68,8
+    LTEXT           "Visiable In Diffuse :",IDC_STATIC,10,51,71,8
+    CONTROL         "",IDC_LIGHT_SUN_DIFFUSE_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,51,8,10
+    CONTROL         "",IDC_LIGHT_SUN_GLOSSY_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,66,8,10
+    CONTROL         "",IDC_LIGHT_SUN_SPECULAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,91,80,8,10
+END
+
+IDD_LIGHT_LASER DIALOGEX 0, 0, 112, 87
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LIGHT_LASER_EFFICENCY,"CustEdit",WS_TABSTOP,66,49,26,10
+    CONTROL         "",IDC_LIGHT_LASER_EFFICENCY_SPIN,"SpinnerControl",0x0,93,49,7,10
+    LTEXT           "Efficency :",-1,9,50,50,8
+    GROUPBOX        "Laser Light",-1,2,3,106,77
+    CONTROL         "",IDC_LIGHT_LASER_POWER,"CustEdit",WS_TABSTOP,66,34,26,10
+    CONTROL         "",IDC_LIGHT_LASER_POWER_SPIN,"SpinnerControl",0x0,93,34,7,10
+    LTEXT           "Power :",-1,9,35,50,8
+    LTEXT           "Color :",-1,10,19,35,8
+    LTEXT           "Radius :",-1,9,65,42,8
+    CONTROL         "v",IDC_LIGHT_LASER_COLOR,"ColorSwatch",WS_TABSTOP,66,17,34,12
+    CONTROL         "",IDC_LIGHT_LASER_RADIUS,"CustEdit",WS_TABSTOP,66,64,26,10
+    CONTROL         "",IDC_LIGHT_LASER_RADIUS_SPIN,"SpinnerControl",0x0,94,64,7,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_LIGHT_COMMON_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 111
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 94
+    END
+
+    IDD_LIGHT_POINT, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 68
+    END
+
+    IDD_LIGHT_SPHERE, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 81
+    END
+
+    IDD_LIGHT_SPOT, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 96
+    END
+
+    IDD_LIGHT_SKY, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 129
+    END
+
+    IDD_LIGHT_SUN, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    IDD_LIGHT_LASER, DIALOG
+    BEGIN
+        LEFTMARGIN, 2
+        RIGHTMARGIN, 108
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 80
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_LIGHT_COMMON_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_POINT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_SPHERE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_SPOT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_SKY AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_SUN AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_LASER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_LIBDESCRIPTION      "LuxCore Light"
+    IDS_CATEGORY            "Lux Lights"
+    IDS_LIGHT_POINT_CLASS_NAME "Lux Point"
+    IDS_LIGHT_POINT_PARAMS  "Point Light Parameters"
+    IDS_LIGHT_COLOR         "Color"
+    IDS_LIGHT_COMMON_PARAMS "Common Light Parameters"
+    IDS_LIGHT_POWER_SPIN    "Power"
+    IDS_LIGHT_GAIN_SPIN     "Gain"
+    IDS_LIGHT_SAMPLE_SPIN   "Sample"
+    IDS_LIGHT_IMPORTANCE_SPIN "Importance"
+    IDS_LIGHT_SPHERE_CLASS_NAME "Lux Sphere"
+    IDS_LIGHT_SPOT_CLASS_NAME "Lux Spot"
+    IDS_TARGET_CLASS        "Lux Target class"
+    IDS_TARGET              "Lux Target"
+    IDS_PRIMITIVES          "Lux Primitives"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_DOT_TARGET          "Target"
+    IDS_LIGHT_CREATE        "Create"
+    IDS_TARGET_SPOT_CLASS   "Lux Spot"
+    IDS_LIGHT_SKY_CLASS_NAME "Lux Sky"
+    IDS_LIGHT_SUN_CLASS_NAME "Lux Sun"
+    IDS_TARGET_SUN_CLASS    "Lux Sun"
+    IDS_TARGET_SKY_CLASS    "Lux Sky"
+    IDS_TARGET_LASER_CLASS  "Lux Laser"
+    IDS_LIGHT_LASER_CLASS_NAME "Lux Laser"
+    IDS_LIGHT_MULTIPLIER_SPIN "Gain Multiplier"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

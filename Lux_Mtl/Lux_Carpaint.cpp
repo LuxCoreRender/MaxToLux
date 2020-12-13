@@ -19,15 +19,13 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_CARPAINT_CLASS_ID	Class_ID(0x12b48e28, 0x5de432e3)
+#define LUX_CARPAINT_CLASS_ID	Class_ID(0x12b48e28, 0x5de432e3)
 
 
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
 #define NUM_SUBTEXTURES 19
-#define NUM_REF NUM_SUBTEXTURES
-// Reference Indexes
-// 
-#define PBLOCK_REF NUM_REF
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 16400 + 15400;
 
@@ -86,14 +84,14 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_CARPAINT_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_CARPAINT_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_CARPAINT);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
-	virtual int NumSubs() { return 1+ NUM_SUBTEXTURES; }
+	virtual int NumSubs() { return 1 + NUM_SUBMATERIALS; }
 	virtual Animatable* SubAnim(int i);
 	virtual TSTR SubAnimName(int i);
 
@@ -118,7 +116,7 @@ private:
 	BOOL          mapOn[NUM_SUBMATERIALS];
 	float         spin;
 	Interval      ivalid;
-	//Interval	  mapValid;
+	Interval	  mapValid;
 };
 
 
@@ -130,7 +128,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Carpaint(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_CARPAINT); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_CARPAINT_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_CARPAINT_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Carpaint"); }	// returns fixed parsable name (scripter-visible name)
@@ -153,7 +151,7 @@ enum { Carpaint_map, Common_Param, Light_emission };
 //TODO: Add enums for various parameters
 enum 
 {
-	preset2,
+	preset,
 	absorption,
 	absorption_map,
 	depth,
@@ -215,11 +213,11 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 	Lux_Carpaint_params, _T("params"),  0, GetLux_CarpaintDesc(),	P_AUTO_CONSTRUCT + P_AUTO_UI + P_MULTIMAP, PBLOCK_REF, 
 	3,
 	//rollout
-	Carpaint_map, IDD_CARPAINt_PANEL, IDS_PARAMS, 0, 0, NULL,
+	Carpaint_map, IDD_CARPAINT2_PANEL, IDS_PARAMS, 0, 0, NULL,
 	Common_Param, IDD_COMMON_PANEL, IDS_COMMON_PARAMS, 0, 0, NULL,
 	Light_emission, IDD_LIGHT_PANEL, IDS_LIGHT_PARAMS, 0, 0, NULL,
 	// params
-	preset2, _T("preset"), TYPE_INT, P_RESET_DEFAULT + P_ANIMATABLE, IDS_CARPAINT_PRESET,
+	preset, _T("preset"), TYPE_INT, P_RESET_DEFAULT + P_ANIMATABLE, IDS_CARPAINT_PRESET,
 		p_ui, Carpaint_map, TYPE_INT_COMBOBOX, IDC_CARPAINT_COMBO_PRESETS,
 		8, IDS_CARPAINT_COMBOBOX_FORD, IDS_CARPAINT_COMBOBOX_POLARIS, IDS_CARPAINT_COMBOBOX_OPEL, IDS_CARPAINT_COMBOBOX_BMW,
 		IDS_CARPAINT_COMBOBOX_ACRYLAK, IDS_CARPAINT_COMBOBOX_WHITE, IDS_CARPAINT_COMBOBOX_BLUE, IDS_CARPAINT_COMBOBOX_BLUE_MATTE,
@@ -234,7 +232,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 	
 	absorption_map, _T("absorption map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_ABSORPTION_MAP,
-		p_refno, 0,
+		p_refno, 2,
 		p_subtexno, 0,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_ABSORPTION_MAP,
 		p_end,
@@ -246,7 +244,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	depth_map, _T("depth map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_DEPTH_MAP,
-		p_refno, 1,
+		p_refno, 3,
 		p_subtexno, 1,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_DEPTH_MAP,
 		p_end,
@@ -257,7 +255,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	diffuse_map, _T("diffuse map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_DIFFUSE_MAP,
-		p_refno, 2,
+		p_refno, 4,
 		p_subtexno, 2,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_DEFFUSE_MAP,
 		p_end,
@@ -268,7 +266,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	specular_layer1_map, _T("specular layer 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_SPECULAR_LAYER_1_MAP,
-		p_refno, 3,
+		p_refno, 5,
 		p_subtexno, 3,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_SPECULAR_LAYER_1_MAP,
 		p_end,
@@ -279,7 +277,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	specular_layer2_map, _T("specular layer 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_SPECULAR_LAYER_2_MAP,
-		p_refno, 4,
+		p_refno, 6,
 		p_subtexno, 4,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_SPECULAR_LAYER_2_MAP,
 		p_end,
@@ -290,7 +288,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	specular_layer3_map, _T("specular layer 3 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_SPECULAR_LAYER_3_MAP,
-		p_refno, 5,
+		p_refno, 7,
 		p_subtexno, 5,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_SPECULAR_LAYER_3_MAP,
 		p_end,
@@ -301,7 +299,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	fresnel_layer1_map, _T("fresnel layer 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_FRESNEL_LAYER_1_MAP,
-		p_refno, 6,
+		p_refno, 8,
 		p_subtexno, 6,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_ROUGHNESS_LAYER_1_MAP,
 		p_end,
@@ -312,7 +310,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	fresnel_layer2_map, _T("fresnel layer 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_FRESNEL_LAYER_2_MAP,
-		p_refno, 7,
+		p_refno, 9,
 		p_subtexno, 7,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_ROUGHNESS_LAYER_2_MAP,
 		p_end,
@@ -323,7 +321,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	fresnel_layer3_map, _T("fresnel layer 3 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_FRESNEL_LAYER_3_MAP,
-		p_refno, 8,
+		p_refno, 10,
 		p_subtexno, 8,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_ROUGHNESS_LAYER_3_MAP,
 		p_end,
@@ -334,7 +332,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	roughness_layer1_map, _T("roughness layer 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_ROUGHNESS_LAYER_1_MAP,
-		p_refno, 9,
+		p_refno, 11,
 		p_subtexno, 9,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_FRESNEL_LAYER_1_MAP,
 		p_end,
@@ -345,7 +343,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	roughness_layer2_map, _T("roughness layer 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_ROUGHNESS_LAYER_2_MAP,
-		p_refno, 10,
+		p_refno, 12,
 		p_subtexno, 10,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_FRESNEL_LAYER_2_MAP,
 		p_end,
@@ -356,32 +354,32 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	roughness_layer3_map, _T("roughness layer 3 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CARPAINT_ROUGHNESS_LAYER_3_MAP,
-		p_refno, 11,
+		p_refno, 13,
 		p_subtexno, 11,
 		p_ui, Carpaint_map, TYPE_TEXMAPBUTTON, IDC_CARPAINT_FRESNEL_LAYER_3_MAP,
 		p_end,
 
 		// Common param
 	bump_map, _T("Bump Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_BUMP_MAP,
-		p_refno, 12,
+		p_refno, 14,
 		p_subtexno, 12,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_BUMP_MAP,
 		p_end,
 
 	normal_map, _T("Normal Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_NORMAL_MAP,
-		p_refno, 13,
+		p_refno, 15,
 		p_subtexno, 13,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
 	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
-		p_refno, 14,
+		p_refno, 16,
 		p_subtexno, 14,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 15,
+		p_refno, 17,
 		p_subtexno, 15,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
@@ -411,7 +409,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 16,
+		p_refno, 18,
 		p_subtexno, 16,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
@@ -429,7 +427,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 17,
+		p_refno, 19,
 		p_subtexno, 17,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
@@ -441,7 +439,7 @@ static ParamBlockDesc2 Lux_Carpaint_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 18,
+		p_refno, 20,
 		p_subtexno, 18,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
@@ -593,12 +591,16 @@ RefTargetHandle Lux_Carpaint::GetReference(int i)
 	/*switch (i)
 	{
 		//case 0: return subtexture[i]; break;
-	case 1: return pblock; break;
+		case 0: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
-	default: return subtexture[i - 2]; break;
+		default: return subtexture[i - 2]; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else
 		return nullptr;
 
@@ -610,14 +612,16 @@ void Lux_Carpaint::SetReference(int i, RefTargetHandle rtarg)
 	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
-		case 1: pblock = (IParamBlock2 *)rtarg; break;
+		case 0: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
-		default: subtexture[i-2] = (Texmap *)rtarg; break;
+		default: subtexture[i - 2] = (Texmap *)rtarg; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		subtexture[i] = (Texmap *)rtarg;
-	else
+	if (i == PBLOCK_REF)
 		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Carpaint::SubAnimName(int i)
@@ -625,19 +629,23 @@ TSTR Lux_Carpaint::SubAnimName(int i)
 	if ((i >= 0) && (i < NUM_SUBTEXTURES))
 		return GetSubTexmapTVName(i);
 	else
-		return GetSubTexmapTVName(i);
+		return GetSubTexmapTVName(i - 2);
 }
 
 Animatable* Lux_Carpaint::SubAnim(int i)
 {
 	/*switch (i)
 	{
-		case 0: return subtexture[i];
-		case 1: return pblock;
-		default: return subtexture[i-2];
+		//case 0: return subtexture[i];
+		case 0: return pblock;
+		default: return subtexture[i - 2];
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else
 		return nullptr;
 }
@@ -703,12 +711,86 @@ Mtl* Lux_Carpaint::GetSubMtl(int i)
 void Lux_Carpaint::SetSubMtl(int i, Mtl* m)
 {
 	//mprintf(_T("\n SetSubMtl Nubmer is : %i \n"), i);
-	ReplaceReference(i , m);
-	/*if (i == 0)
+	ReplaceReference(i, m);
+	switch (i)
 	{
-		Lux_Carpaint_param_blk.InvalidateUI(absorption);
-		mapValid.SetEmpty();
-	}*/
+		case 0:
+			Lux_Carpaint_param_blk.InvalidateUI(absorption_map);
+			mapValid.SetEmpty();
+			break;
+		case 1:
+			Lux_Carpaint_param_blk.InvalidateUI(depth_map);
+			mapValid.SetEmpty();
+			break;
+		case 2:
+			Lux_Carpaint_param_blk.InvalidateUI(diffuse_map);
+			mapValid.SetEmpty();
+			break;
+		case 3:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 4:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 5:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 6:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 7:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 8:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 9:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 10:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 11:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 12:
+			Lux_Carpaint_param_blk.InvalidateUI(bump_map);
+			mapValid.SetEmpty();
+			break;
+		case 13:
+			Lux_Carpaint_param_blk.InvalidateUI(normal_map);
+			mapValid.SetEmpty();
+			break;
+		case 14:
+			Lux_Carpaint_param_blk.InvalidateUI(interior_map);
+			mapValid.SetEmpty();
+			break;
+		case 15:
+			Lux_Carpaint_param_blk.InvalidateUI(exterior_map);
+			mapValid.SetEmpty();
+			break;
+		case 16:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_map);
+			mapValid.SetEmpty();
+			break;
+		case 17:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_mapfile);
+			mapValid.SetEmpty();
+			break;
+		case 18:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_iesfile);
+			mapValid.SetEmpty();
+			break;
+	}
 }
 
 TSTR Lux_Carpaint::GetSubMtlSlotName(int i)
@@ -739,67 +821,86 @@ Texmap* Lux_Carpaint::GetSubTexmap(int i)
 void Lux_Carpaint::SetSubTexmap(int i, Texmap* tx)
 {
 	//mprintf(_T("\n SetSubTexmap Nubmer ============>>>  is : %i \n"), i);
-	ReplaceReference(i, tx);
-	/*if (i == 0)
+	ReplaceReference(i + 2, tx);
+	switch (i)
 	{
-		Lux_Carpaint_param_blk.InvalidateUI(ka_map);
-		mapValid.SetEmpty();
+		case 0:
+			Lux_Carpaint_param_blk.InvalidateUI(absorption_map);
+			mapValid.SetEmpty();
+			break;
+		case 1:
+			Lux_Carpaint_param_blk.InvalidateUI(depth_map);
+			mapValid.SetEmpty();
+			break;
+		case 2:
+			Lux_Carpaint_param_blk.InvalidateUI(diffuse_map);
+			mapValid.SetEmpty();
+			break;
+		case 3:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 4:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 5:
+			Lux_Carpaint_param_blk.InvalidateUI(specular_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 6:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 7:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 8:
+			Lux_Carpaint_param_blk.InvalidateUI(fresnel_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 9:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer1_map);
+			mapValid.SetEmpty();
+			break;
+		case 10:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer2_map);
+			mapValid.SetEmpty();
+			break;
+		case 11:
+			Lux_Carpaint_param_blk.InvalidateUI(roughness_layer3_map);
+			mapValid.SetEmpty();
+			break;
+		case 12:
+			Lux_Carpaint_param_blk.InvalidateUI(bump_map);
+			mapValid.SetEmpty();
+			break;
+		case 13:
+			Lux_Carpaint_param_blk.InvalidateUI(normal_map);
+			mapValid.SetEmpty();
+			break;
+		case 14:
+			Lux_Carpaint_param_blk.InvalidateUI(interior_map);
+			mapValid.SetEmpty();
+			break;
+		case 15:
+			Lux_Carpaint_param_blk.InvalidateUI(exterior_map);
+			mapValid.SetEmpty();
+			break;
+		case 16:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_map);
+			mapValid.SetEmpty();
+			break;
+		case 17:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_mapfile);
+			mapValid.SetEmpty();
+			break;
+		case 18:
+			Lux_Carpaint_param_blk.InvalidateUI(emission_iesfile);
+			mapValid.SetEmpty();
+			break;
 	}
-	if (i == 1)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(d_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 2)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(kd_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 3)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(ks1_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 4)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(ks2_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 5)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(ks3_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 6)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(r1_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 7)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(r2_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 8)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(r3_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 9)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(m1_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 10)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(m2_map);
-		mapValid.SetEmpty();
-	}
-	if (i == 11)
-	{
-		Lux_Carpaint_param_blk.InvalidateUI(m3_map);
-		mapValid.SetEmpty();
-	}*/
 }
 
 TSTR Lux_Carpaint::GetSubTexmapSlotName(int i)
@@ -921,7 +1022,7 @@ RefTargetHandle Lux_Carpaint::Clone(RemapDir &remap)
 	{
 		mnew->subtexture[i] = nullptr;
 		if (subtexture[i])
-			mnew->ReplaceReference(i, remap.CloneRef(subtexture[i]));
+			mnew->ReplaceReference(i + 2, remap.CloneRef(subtexture[i]));
 		//mnew->mapOn[i] = mapOn[i];
 	}
 	BaseClone(this, mnew, remap);

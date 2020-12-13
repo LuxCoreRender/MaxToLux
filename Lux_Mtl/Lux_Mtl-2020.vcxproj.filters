@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Lux_Archglass.cpp" />
+    <ClCompile Include="Lux_Carpaint.cpp" />
+    <ClCompile Include="Lux_Cloth.cpp" />
+    <ClCompile Include="Lux_Glass.cpp" />
+    <ClCompile Include="Lux_Glossy2.cpp" />
+    <ClCompile Include="Lux_Glossy_Coating.cpp" />
+    <ClCompile Include="Lux_Glossy_Translucent.cpp" />
+    <ClCompile Include="Lux_Light.cpp" />
+    <ClCompile Include="Lux_Matte.cpp" />
+    <ClCompile Include="Lux_Matte_Translucent.cpp" />
+    <ClCompile Include="Lux_Metal.cpp" />
+    <ClCompile Include="Lux_Mirror.cpp" />
+    <ClCompile Include="Lux_Mix.cpp" />
+    <ClCompile Include="DllEntry.cpp" />
+    <ClCompile Include="Lux_Rough_Glass.cpp" />
+    <ClCompile Include="Lux_Rough_Matte.cpp" />
+    <ClCompile Include="Lux_Velvet.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3dsmaxsdk_preinclude.h" />
+    <ClInclude Include="Lux_Mtl.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Lux_Mtl.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lux_Mtl.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{40C4845A-BBA5-462C-A965-6A618D1790E2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

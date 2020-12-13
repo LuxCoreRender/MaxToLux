@@ -20,15 +20,14 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_GlOSSY2_CLASS_ID	Class_ID(0x67b86e70, 0x7de456e1)
+#define LUX_GlOSSY2_CLASS_ID	Class_ID(0x67b86e70, 0x7de456e1)
 
-
-#define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
-#define NUM_SUBTEXTURES 13 //was 7 before emission
-#define Num_REF 15 //Has to be the same as number of 'texture' slots in the scene (if not it will not save the params).
 // Reference Indexes
 // 
 #define PBLOCK_REF 1
+#define NUM_SUBMATERIALS 1 // number of sub-materials supported by this plug-in
+#define NUM_SUBTEXTURES 13 // number of sub-textures supported by this plug-in
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 4400 + 3400;
 
@@ -87,19 +86,19 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_GlOSSY2_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_GlOSSY2_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_GLOSSY);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
-	virtual int NumSubs() { return 1+NUM_SUBMATERIALS; }
+	virtual int NumSubs() { return 1 + NUM_SUBTEXTURES; }
 	virtual Animatable* SubAnim(int i);
 	virtual TSTR SubAnimName(int i);
 
 	// TODO: Maintain the number or references here
-	virtual int NumRefs() { return 1 + Num_REF; }
+	virtual int NumRefs() { return 1 + NUM_REF; }
 	virtual RefTargetHandle GetReference(int i);
 
 	virtual int NumParamBlocks() { return 1; }					  // return number of ParamBlocks in this instance
@@ -130,12 +129,11 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Glossy2(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_GLOSSY); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_GlOSSY2_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_GlOSSY2_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Glossy2"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle
-	
 
 };
 
@@ -200,24 +198,22 @@ enum
 };
 
 
-
-
 static ParamBlockDesc2 Lux_Glossy2_param_blk (
 	Lux_Glossy2_params, _T("params"),  0, GetLux_Glossy2Desc(),	P_AUTO_CONSTRUCT + P_AUTO_UI + P_MULTIMAP, PBLOCK_REF,
 	3,
 	//rollout
-	Glossy_map,	IDD_GLOSSY2_PANEL, IDS_MATTE_PARAMS, 0, 0, NULL,
-	Common_Param, IDD_COMMON_PANEL, IDS_COMMON_PARAMS, 0, 0, NULL,
-	Light_emission, IDD_LIGHT_PANEL, IDS_LIGHT_PARAMS, 0, 0, NULL,
-	// params
+	Glossy_map,			IDD_GLOSSY2_PANEL,		IDS_MATTE_PARAMS,	0,	0,	NULL,
+	Common_Param,		IDD_COMMON_PANEL,		IDS_COMMON_PARAMS,	0,	0,	NULL,
+	Light_emission,		IDD_LIGHT_PANEL,		IDS_LIGHT_PARAMS,	0,	0,	NULL,
 
+	// params
 	diffuse,			_T("diffuse color"),			TYPE_RGBA,	P_ANIMATABLE,		IDS_GLOSSY_DIFFUSE_COLOR,
 		p_default,		Color(0.5f, 0.5f, 0.5f),
 		p_ui, Glossy_map, TYPE_COLORSWATCH,		IDC_GLOSSY_DIFFUSE_COLOR,
 		p_end,
 	
 	diffuseMap, _T("diffuse Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GLOSSY_DIFFUSE_MAP,
-		p_refno, 2, /*Figure out why it crashes if you start on lower number.*/
+		p_refno, 2,
 		p_subtexno, 0,
 		p_ui, Glossy_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_DIFFUSE_MAP,
 		p_end,
@@ -417,8 +413,6 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 	);
 
 
-
-
 Lux_Glossy2::Lux_Glossy2()
 	: pblock(nullptr)
 {
@@ -525,26 +519,40 @@ Interval Lux_Glossy2::Validity(TimeValue t)
 
 RefTargetHandle Lux_Glossy2::GetReference(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i]; break;
 		case 0: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
 		default: return subtexture[i - 2]; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 
 }
 
 void Lux_Glossy2::SetReference(int i, RefTargetHandle rtarg)
 {
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
 		case 0: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Glossy2::SubAnimName(int i)
@@ -557,12 +565,20 @@ TSTR Lux_Glossy2::SubAnimName(int i)
 
 Animatable* Lux_Glossy2::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i];
 		case 0: return pblock;
 		default: return subtexture[i-2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_Glossy2::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 
@@ -712,8 +728,8 @@ Texmap* Lux_Glossy2::GetSubTexmap(int i)
 void Lux_Glossy2::SetSubTexmap(int i, Texmap* tx)
 {
 	//mprintf(_T("\n SetSubTexmap Nubmer ============>>>  is : %i \n"), i);
-	ReplaceReference(i +2, tx);
-	switch (i)
+	ReplaceReference(i + 2, tx);
+	/*switch (i)
 	{
 		case 0:
 			Lux_Glossy2_param_blk.InvalidateUI(diffuseMap);
@@ -767,7 +783,7 @@ void Lux_Glossy2::SetSubTexmap(int i, Texmap* tx)
 			Lux_Glossy2_param_blk.InvalidateUI(emission_iesfile);
 			mapValid.SetEmpty();
 			break;
-	}
+	}*/
 }
 
 TSTR Lux_Glossy2::GetSubTexmapSlotName(int i)

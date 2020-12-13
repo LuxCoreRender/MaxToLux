@@ -19,15 +19,12 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_ROUGH_MATTE_CLASS_ID	Class_ID(0x34b56e70, 0x7de894e5)
+#define LUX_ROUGH_MATTE_CLASS_ID	Class_ID(0x34b56e70, 0x7de894e5)
 
-
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
 #define NUM_SUBTEXTURES 9
-#define Num_REF 11
-// Reference Indexes
-// 
-#define PBLOCK_REF 1
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 12400 + 11400;
 
@@ -86,19 +83,19 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_ROUGH_MATTE_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_ROUGH_MATTE_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_ROUGH_MATTE);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
-	virtual int NumSubs() { return 1+NUM_SUBMATERIALS; }
+	virtual int NumSubs() { return 1  +NUM_SUBMATERIALS; }
 	virtual Animatable* SubAnim(int i);
 	virtual TSTR SubAnimName(int i);
 
 	// TODO: Maintain the number or references here
-	virtual int NumRefs() { return 1 + Num_REF; }
+	virtual int NumRefs() { return 1 + NUM_REF; }
 	virtual RefTargetHandle GetReference(int i);
 
 	virtual int NumParamBlocks() { return 1; }					  // return number of ParamBlocks in this instance
@@ -130,7 +127,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Rough_Matte(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_ROUGH_MATTE); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_ROUGH_MATTE_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_ROUGH_MATTE_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Rough_Matte"); }	// returns fixed parsable name (scripter-visible name)
@@ -195,9 +192,9 @@ static ParamBlockDesc2 Lux_Rough_Matte_param_blk (
 	Lux_Rough_Matte_params, _T("params"),  0, GetLux_Rough_MatteDesc(),	P_AUTO_CONSTRUCT + P_AUTO_UI + P_MULTIMAP, PBLOCK_REF, 
 	3,
 	//rollout
-	Rough_matte_map, IDD_ROUGH_MATTE_PANEL, IDS_PARAMS, 0, 0, NULL,
-	Common_Param, IDD_COMMON_PANEL, IDS_COMMON_PARAMS, 0, 0, NULL,
-	Light_emission, IDD_LIGHT_PANEL, IDS_LIGHT_PARAMS, 0, 0, NULL,
+	Rough_matte_map,		IDD_ROUGH_MATTE_PANEL,		IDS_PARAMS,			0,	0,	NULL,
+	Common_Param,			IDD_COMMON_PANEL,			IDS_COMMON_PARAMS,	0,	0,	NULL,
+	Light_emission,			IDD_LIGHT_PANEL,			IDS_LIGHT_PARAMS,	0,	0,	NULL,
 	// params
 	diffuse_color,			_T("diffuse color"),			TYPE_RGBA,	P_ANIMATABLE,		IDS_ROUGH_MATTE_DIFFUSE_COLOR,
 		p_default,		Color(0.5f, 0.5f, 0.5f),
@@ -450,26 +447,39 @@ Interval Lux_Rough_Matte::Validity(TimeValue t)
 
 RefTargetHandle Lux_Rough_Matte::GetReference(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i]; break;
 		case 0: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
 		default: return subtexture[i - 2]; break;
-	}
-
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 void Lux_Rough_Matte::SetReference(int i, RefTargetHandle rtarg)
 {
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
 		case 0: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Rough_Matte::SubAnimName(int i)
@@ -482,12 +492,20 @@ TSTR Lux_Rough_Matte::SubAnimName(int i)
 
 Animatable* Lux_Rough_Matte::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i];
 		case 0: return pblock;
 		default: return subtexture[i-2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_Rough_Matte::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 

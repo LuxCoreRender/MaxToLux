@@ -19,15 +19,13 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_METAL_CLASS_ID	Class_ID(0x2d8e1f90, 0x78850769)
+#define LUX_METAL_CLASS_ID	Class_ID(0x2d8e1f90, 0x78850769)
 
 
-#define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
-#define NUM_SUBTEXTURES 11
-#define Num_REF 13
-// Reference Indexes
-// 
 #define PBLOCK_REF 1
+#define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
+#define NUM_SUBTEXTURES 10
+#define Num_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 9400 + 8400;
 
@@ -86,14 +84,14 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_METAL_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_METAL_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_METAL);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
-	virtual int NumSubs() { return 1+NUM_SUBMATERIALS; }
+	virtual int NumSubs() { return 1 + NUM_SUBMATERIALS; }
 	virtual Animatable* SubAnim(int i);
 	virtual TSTR SubAnimName(int i);
 
@@ -130,7 +128,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Metal(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_METAL); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_METAL_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_METAL_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Metal"); }	// returns fixed parsable name (scripter-visible name)
@@ -154,14 +152,13 @@ enum { Metal_map, Common_Param, Light_emission };
 //TODO: Add enums for various parameters
 enum 
 {
-	reflection,
-	reflection_map,
-	transmit,
-	transmit_map,
-	metal_interior,
-	metal_interior_map,
-	metal_exterior,
-	metal_exterior_map,
+	preset2,
+	frencel_color,
+	frencel_map,
+	uroughness_value,
+	uroughness_map,
+	vroughness_value,
+	vroughness_map,
 
 	/*Common material parameter begin*/
 	bump_map,
@@ -204,74 +201,72 @@ static ParamBlockDesc2 Lux_Metal_param_blk (
 	Light_emission, IDD_LIGHT_PANEL, IDS_LIGHT_PARAMS, 0, 0, NULL,
 
 	// params
-	reflection, _T("reflection color"), TYPE_RGBA, P_ANIMATABLE, IDS_METAL_REFLECTION,
-		p_default, Color(1.0f, 1.0f, 1.0f),
-		p_ui, Metal_map, TYPE_COLORSWATCH, IDC_MERAL_REFLECTION_COLOR,
+	preset2, _T("preset"), TYPE_INT, P_RESET_DEFAULT + P_ANIMATABLE, IDS_METAL_PRESET,
+		p_ui, Metal_map, TYPE_INT_COMBOBOX, IDC_METAL_COMBO_PRESETS,
+		5, IDS_METAL_COMBOBOX_ALUMINIUM, IDS_METAL_COMBOBOX_SILVER, IDS_METAL_COMBOBOX_COPPER, IDS_METAL_COMBOBOX_GOLD,
+		IDS_METAL_COMBOBOX_AMORPHOUS_CARBON,
+		p_vals, 1, 2, 3, 4, 5,
+		p_default, 1,
+		p_tooltip, IDS_METAL_COMBOBOX_INT,
 		p_end,
 
-	reflection_map, _T("reflection map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_METAL_REFLECTION_MAP,
+	frencel_color, _T("frencel color"), TYPE_RGBA, P_ANIMATABLE, IDS_METAL_FRENCEL,
+		p_default, Color(0.5f, 0.0f, 0.0f),
+		p_ui, Metal_map, TYPE_COLORSWATCH, IDC_MERAL_FRENCEL_COLOR,
+		p_end,
+
+	frencel_map, _T("frencel map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_METAL_FRENCEL_MAP,
 		p_refno, 2,
 		p_subtexno, 0,
-		p_ui, Metal_map, TYPE_TEXMAPBUTTON, IDC_METAL_REFLECTION_MAP,
+		p_ui, Metal_map, TYPE_TEXMAPBUTTON, IDC_METAL_FRENCEL_MAP,
 		p_end,
 
-	transmit, _T("transmit"), TYPE_RGBA, P_ANIMATABLE, IDS_METAL_TRANSMIT,
-		p_default, Color(1.0f, 1.0f, 1.0f),
-		p_ui, Metal_map, TYPE_COLORSWATCH, IDC_METAL_TRANSMIT_COLOR,
+	uroughness_value, _T("uroughness"), TYPE_FLOAT, P_ANIMATABLE, IDS_METAL_UROUGHNESS,
+		p_default, 0.1f,
+		p_range, 0.0f, 999.0f,
+		p_ui, Metal_map, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_METAL_UROUGHNESS, IDC_METAL_UROUGHNESS_SPIN, 0.1f,
 		p_end,
 
-	transmit_map, _T("transmit map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_METAL_TRANSMIT_MAP,
+	uroughness_map, _T("uroughness map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_METAL_TRANSMIT_MAP,
 		p_refno, 3,
 		p_subtexno, 1,
 		p_ui, Metal_map, TYPE_TEXMAPBUTTON, IDC_METAL_TRANSMIT_MAP,
 		p_end,
 
-	metal_interior, _T("interior"), TYPE_FLOAT, P_ANIMATABLE, IDS_METAL_INTERIORIOR,
-		p_default, 1.5f,
+	vroughness_value, _T("vroughness"), TYPE_FLOAT, P_ANIMATABLE, IDS_METAL_VROUGHNESS,
+		p_default, 0.1f,
 		p_range, 0.0f, 999.0f,
-		p_ui, Metal_map, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_METAL_INTERIORIOR, IDC_METAL_INTERIORIOR_SPIN, 0.1f,
+		p_ui, Metal_map, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_METAL_VROUGHNESS, IDC_METAL_VROUGHNESS_SPIN, 0.1f,
 		p_end,
 
-	metal_interior_map, _T("interior_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_Metal_INTERIORIOR_MAP,
+	vroughness_map, _T("vroughness_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_Metal_INTERIORIOR_MAP,
 		p_refno, 4,
 		p_subtexno, 2,
 		p_ui, Metal_map, TYPE_TEXMAPBUTTON, IDC_METAL_INTERIORIOR_MAP,
 		p_end,
-	
-	metal_exterior, _T("exterior"), TYPE_FLOAT, P_ANIMATABLE, IDS_METAL_EXTERIORIOR,
-		p_default, 1.0f,
-		p_range, 0.0f, 999.0f,
-		p_ui, Metal_map, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_METAL_EXTERIORIOR, IDC_METAL_EXTERIORIOR_SPIN, 0.1f,
-		p_end,
-
-	metal_exterior_map, _T("exterior_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_METAL_EXTERIORIOR_MAP,
-		p_refno, 5,
-		p_subtexno, 3,
-		p_ui, Metal_map, TYPE_TEXMAPBUTTON, IDC_METAL_EXTERIORIOR_MAP,
-		p_end,
 
 	// Common param
 	bump_map, _T("Bump Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_BUMP_MAP,
-		p_refno, 6,
-		p_subtexno, 4,
+		p_refno, 5,
+		p_subtexno, 3,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_BUMP_MAP,
 		p_end,
 
 	normal_map, _T("Normal Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_NORMAL_MAP,
-		p_refno, 7,
-		p_subtexno, 5,
+		p_refno, 6,
+		p_subtexno, 4,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
 	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
-		p_refno, 8,
-		p_subtexno, 6,
+		p_refno, 7,
+		p_subtexno, 5,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 9,
-		p_subtexno, 7,
+		p_refno, 8,
+		p_subtexno, 6,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
 
@@ -300,8 +295,8 @@ static ParamBlockDesc2 Lux_Metal_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 10,
-		p_subtexno, 8,
+		p_refno, 9,
+		p_subtexno, 7,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
 
@@ -318,8 +313,8 @@ static ParamBlockDesc2 Lux_Metal_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 11,
-		p_subtexno, 9,
+		p_refno, 10,
+		p_subtexno, 8,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
 
@@ -330,8 +325,8 @@ static ParamBlockDesc2 Lux_Metal_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 12,
-		p_subtexno, 10,
+		p_refno, 11,
+		p_subtexno, 9,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
 
@@ -376,10 +371,10 @@ static ParamBlockDesc2 Lux_Metal_param_blk (
 Lux_Metal::Lux_Metal()
 	: pblock(nullptr)
 {
-	for (int i = 0; i < NUM_SUBMATERIALS; i++)
+	/*for (int i = 0; i < NUM_SUBMATERIALS; i++)
 	{
 		submtl[i] = nullptr;
-	}
+	}*/
 	for (int i = 0; i < NUM_SUBTEXTURES; i++)
 	{
 		subtexture[i] = nullptr;
@@ -390,10 +385,10 @@ Lux_Metal::Lux_Metal()
 Lux_Metal::Lux_Metal(BOOL loading)
 	: pblock(nullptr)
 {
-	for (int i = 0; i < NUM_SUBMATERIALS; i++)
+	/*for (int i = 0; i < NUM_SUBMATERIALS; i++)
 	{
 		submtl[i] = nullptr;
-	}
+	}*/
 	for (int i = 0; i < NUM_SUBTEXTURES; i++)
 	{
 		subtexture[i] = nullptr;
@@ -414,7 +409,7 @@ void Lux_Metal::Reset()
 	ivalid.SetEmpty();
 	mapValid.SetEmpty();
 	// Always have to iterate backwards when deleting references.
-	for (int i = NUM_SUBMATERIALS - 1; i >= 0; i--)
+	/*for (int i = NUM_SUBMATERIALS - 1; i >= 0; i--)
 	{
 		if( submtl[i] )
 		{
@@ -423,7 +418,7 @@ void Lux_Metal::Reset()
 			submtl[i] = nullptr;
 		}
 		mapOn[i] = FALSE;
-	}
+	}*/
 	for (int i = NUM_SUBTEXTURES - 1; i >= 0; i--)
 	{
 		if (subtexture[i])
@@ -458,11 +453,11 @@ Interval Lux_Metal::Validity(TimeValue t)
 {
 	Interval valid = FOREVER;
 
-	for (int i = 0; i < NUM_SUBMATERIALS; i++)
+	/*for (int i = 0; i < NUM_SUBMATERIALS; i++)
 	{
 		if (submtl[i])
 			valid &= submtl[i]->Validity(t);
-	}
+	}*/
 	for (int i = 0; i < NUM_SUBTEXTURES; i++)
 	{
 		if (subtexture[i])
@@ -479,26 +474,40 @@ Interval Lux_Metal::Validity(TimeValue t)
 
 RefTargetHandle Lux_Metal::GetReference(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i]; break;
 		case 0: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
 		default: return subtexture[i - 2]; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 
 }
 
 void Lux_Metal::SetReference(int i, RefTargetHandle rtarg)
 {
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
 		case 0: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Metal::SubAnimName(int i)
@@ -511,12 +520,20 @@ TSTR Lux_Metal::SubAnimName(int i)
 
 Animatable* Lux_Metal::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i];
 		case 0: return pblock;
 		default: return subtexture[i-2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_Metal::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 
@@ -542,14 +559,14 @@ RefResult Lux_Metal::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHa
 			} 
 			else
 			{
-				for (int i = 0; i < NUM_SUBMATERIALS; i++)
+				/*for (int i = 0; i < NUM_SUBMATERIALS; i++)
 				{
 					if (hTarget == submtl[i])
 					{
 						submtl[i] = nullptr;
 						break;
 					}
-				}
+				}*/
 				for (int i = 0; i < NUM_SUBTEXTURES; i++)
 				{
 					if (hTarget == subtexture[i])
@@ -571,8 +588,8 @@ RefResult Lux_Metal::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHa
 
 Mtl* Lux_Metal::GetSubMtl(int i)
 {
-	if ((i >= 0) && (i < NUM_SUBMATERIALS))
-		return submtl[i];
+	/*if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];*/
 	return 
 		nullptr;
 }
@@ -581,60 +598,57 @@ void Lux_Metal::SetSubMtl(int i, Mtl* m)
 {
 	//mprintf(_T("\n SetSubMtl Nubmer is : %i \n"), i);
 	ReplaceReference(i , m);
-	switch (i)
+	/*switch (i)
 	{
 		case 0:
-			Lux_Metal_param_blk.InvalidateUI(reflection_map);
+			Lux_Metal_param_blk.InvalidateUI(frencel_map);
 			mapValid.SetEmpty();
 			break;
 		case 1:
-			Lux_Metal_param_blk.InvalidateUI(transmit_map);
+			Lux_Metal_param_blk.InvalidateUI(uroughness_map);
 			mapValid.SetEmpty();
 			break;
 		case 2:
-			Lux_Metal_param_blk.InvalidateUI(metal_interior_map);
+			Lux_Metal_param_blk.InvalidateUI(vroughness_map);
 			mapValid.SetEmpty();
 			break;
 		case 3:
-			Lux_Metal_param_blk.InvalidateUI(metal_exterior_map);
-			mapValid.SetEmpty();
-			break;
-		case 4:
 			Lux_Metal_param_blk.InvalidateUI(bump_map);
 			mapValid.SetEmpty();
 			break;
-		case 5:
+		case 4:
 			Lux_Metal_param_blk.InvalidateUI(normal_map);
 			mapValid.SetEmpty();
 			break;
-		case 6:
+		case 5:
 			Lux_Metal_param_blk.InvalidateUI(interior_map);
 			mapValid.SetEmpty();
 			break;
-		case 7:
+		case 6:
 			Lux_Metal_param_blk.InvalidateUI(exterior_map);
 			mapValid.SetEmpty();
 			break;
-		case 8:
+		case 7:
 			Lux_Metal_param_blk.InvalidateUI(emission_map);
 			mapValid.SetEmpty();
 			break;
-		case 9:
+		case 8:
 			Lux_Metal_param_blk.InvalidateUI(emission_mapfile);
 			mapValid.SetEmpty();
 			break;
-		case 10:
+		case 9:
 			Lux_Metal_param_blk.InvalidateUI(emission_iesfile);
 			mapValid.SetEmpty();
 			break;
-	}
+	}*/
+
 }
 
 TSTR Lux_Metal::GetSubMtlSlotName(int i)
 {
 	// Return i'th sub-material name
-	return submtl[i]->GetName();
-	//return _T("");
+	//return submtl[i]->GetName();
+	return _T("");
 }
 
 TSTR Lux_Metal::GetSubMtlTVName(int i)
@@ -658,54 +672,50 @@ Texmap* Lux_Metal::GetSubTexmap(int i)
 void Lux_Metal::SetSubTexmap(int i, Texmap* tx)
 {
 	//mprintf(_T("\n SetSubTexmap Nubmer ============>>>  is : %i \n"), i);
-	ReplaceReference(i +2, tx);
-	switch (i)
+	ReplaceReference(i + 2, tx);
+	/*switch (i)
 	{
 		case 0:
-			Lux_Metal_param_blk.InvalidateUI(reflection_map);
+			Lux_Metal_param_blk.InvalidateUI(frencel_map);
 			mapValid.SetEmpty();
 			break;
 		case 1:
-			Lux_Metal_param_blk.InvalidateUI(transmit_map);
+			Lux_Metal_param_blk.InvalidateUI(uroughness_map);
 			mapValid.SetEmpty();
 			break;
 		case 2:
-			Lux_Metal_param_blk.InvalidateUI(metal_interior_map);
+			Lux_Metal_param_blk.InvalidateUI(vroughness_map);
 			mapValid.SetEmpty();
 			break;
 		case 3:
-			Lux_Metal_param_blk.InvalidateUI(metal_exterior_map);
-			mapValid.SetEmpty();
-			break;
-		case 4:
 			Lux_Metal_param_blk.InvalidateUI(bump_map);
 			mapValid.SetEmpty();
 			break;
-		case 5:
+		case 4:
 			Lux_Metal_param_blk.InvalidateUI(normal_map);
 			mapValid.SetEmpty();
 			break;
-		case 6:
+		case 5:
 			Lux_Metal_param_blk.InvalidateUI(interior_map);
 			mapValid.SetEmpty();
 			break;
-		case 7:
+		case 6:
 			Lux_Metal_param_blk.InvalidateUI(exterior_map);
 			mapValid.SetEmpty();
 			break;
-		case 8:
+		case 7:
 			Lux_Metal_param_blk.InvalidateUI(emission_map);
 			mapValid.SetEmpty();
 			break;
-		case 9:
+		case 8:
 			Lux_Metal_param_blk.InvalidateUI(emission_mapfile);
 			mapValid.SetEmpty();
 			break;
-		case 10:
+		case 9:
 			Lux_Metal_param_blk.InvalidateUI(emission_iesfile);
 			mapValid.SetEmpty();
 			break;
-	}
+	}*/
 }
 
 TSTR Lux_Metal::GetSubTexmapSlotName(int i)
@@ -713,26 +723,24 @@ TSTR Lux_Metal::GetSubTexmapSlotName(int i)
 	switch (i)
 	{
 		case 0:
-			return _T("reflection map");
+			return _T("frencel map");
 		case 1:
-			return _T("transmit map");
+			return _T("uroughness map");
 		case 2:
-			return _T("interior map");
+			return _T("vroughness map");
 		case 3:
-			return _T("exterior map");
-		case 4:
 			return _T("Bump map");
-		case 5:
+		case 4:
 			return _T("Normal map");
-		case 6:
+		case 5:
 			return _T("Interior map");
-		case 7:
+		case 6:
 			return _T("Exterior map");
-		case 8:
+		case 7:
 			return _T("Emission color map");
-		case 9:
+		case 8:
 			return _T("emission map");
-		case 10:
+		case 9:
 			return _T("emission ies");
 		default:
 			return _T("");
@@ -801,13 +809,13 @@ RefTargetHandle Lux_Metal::Clone(RemapDir &remap)
 	// Next clone the sub-materials
 	mnew->ivalid.SetEmpty();
 	mnew->mapValid.SetEmpty();
-	for (int i = 0; i < NUM_SUBMATERIALS; i++) 
+	/*for (int i = 0; i < NUM_SUBMATERIALS; i++) 
 	{
 		mnew->submtl[i] = nullptr;
 		if (submtl[i])
 			mnew->ReplaceReference(i,remap.CloneRef(submtl[i]));
 		mnew->mapOn[i] = mapOn[i];
-	}
+	}*/
 	for (int i = 0; i < NUM_SUBTEXTURES; i++)
 	{
 		mnew->subtexture[i] = nullptr;
@@ -833,11 +841,11 @@ void Lux_Metal::Update(TimeValue t, Interval& valid)
 		//pblock->GetValue( mtl_mat1_on, t, mapOn[0], ivalid);
 		//pblock->GetValue( pb_spin, t, spin, ivalid);
 
-		for (int i=0; i < NUM_SUBMATERIALS; i++)
+		/*for (int i=0; i < NUM_SUBMATERIALS; i++)
 		{
 			if (submtl[i])
 				submtl[i]->Update(t,ivalid);
-		}
+		}*/
 	}
 
 	if (!mapValid.InInterval(t))
@@ -866,7 +874,7 @@ Color Lux_Metal::GetAmbient(int mtlNum, BOOL backFace)
 {
 	Point3 p;
 	//TimeValue t; //Zero for first frame //GetCOREInterface()->GetTime() for every frame
-	pblock->GetValue(reflection, GetCOREInterface()->GetTime(), p, ivalid);
+	pblock->GetValue(frencel_color, GetCOREInterface()->GetTime(), p, ivalid);
 	return submtl[0] ? submtl[0]->GetAmbient(mtlNum, backFace) : Color(p.x, p.y, p.z);//Bound(Color(p.x, p.y, p.z));
 }
 
@@ -874,14 +882,14 @@ Color Lux_Metal::GetDiffuse(int mtlNum, BOOL backFace)
 {
 	Point3 p;
 	//TimeValue t; //Zero for first frame //GetCOREInterface()->GetTime() for every frame
-	pblock->GetValue(reflection, 0, p, ivalid);
+	pblock->GetValue(frencel_color, 0, p, ivalid);
 	return submtl[0] ? submtl[0]->GetDiffuse(mtlNum, backFace) : Color(p.x, p.y, p.z);
 }
 
 Color Lux_Metal::GetSpecular(int mtlNum, BOOL backFace)
 {
 	Point3 p;
-	pblock->GetValue(reflection, 0, p, ivalid);
+	pblock->GetValue(frencel_color, 0, p, ivalid);
 	return submtl[0] ? submtl[0]->GetSpecular(mtlNum,backFace): Color(p.x, p.y, p.z);
 }
 

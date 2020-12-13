@@ -19,15 +19,12 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_Mirror_CLASS_ID	Class_ID(0xcca41e8, 0x381d207f)
+#define LUX_MIRROR_CLASS_ID	Class_ID(0xcca41e8, 0x381d207f)
 
-
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 //was 16 TODO: number of sub-materials supported by this plug-in
 #define NUM_SUBTEXTURES 8
-#define Num_REF 10
-// Reference Indexes
-// 
-#define PBLOCK_REF 1
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 5400 + 6400;
 
@@ -86,7 +83,7 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_Mirror_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_MIRROR_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_MIRROR);}
 
@@ -98,7 +95,7 @@ public:
 	virtual TSTR SubAnimName(int i);
 
 	// TODO: Maintain the number or references here
-	virtual int NumRefs() { return 1 + Num_REF; }
+	virtual int NumRefs() { return 1 + NUM_REF; }
 	virtual RefTargetHandle GetReference(int i);
 
 	virtual int NumParamBlocks() { return 1; }					  // return number of ParamBlocks in this instance
@@ -130,7 +127,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Mirror(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_MIRROR); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_Mirror_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_MIRROR_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Mirror"); }	// returns fixed parsable name (scripter-visible name)
@@ -434,26 +431,40 @@ Interval Lux_Mirror::Validity(TimeValue t)
 
 RefTargetHandle Lux_Mirror::GetReference(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i]; break;
 		case 0: return pblock; break;
 		//case 2: return subtexture[i-2]; break;
 		default: return subtexture[i - 2]; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 
 }
 
 void Lux_Mirror::SetReference(int i, RefTargetHandle rtarg)
 {
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
 		case 0: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Mirror::SubAnimName(int i)
@@ -466,12 +477,20 @@ TSTR Lux_Mirror::SubAnimName(int i)
 
 Animatable* Lux_Mirror::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: return subtexture[i];
 		case 0: return pblock;
 		default: return subtexture[i-2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_Mirror::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 
@@ -614,7 +633,7 @@ TSTR Lux_Mirror::GetSubTexmapSlotName(int i)
 	switch (i)
 	{
 		case 0:
-			return _T("Diffuse Map");
+			return _T("Reflection Map");
 		case 1:
 			return _T("Bump map");
 		case 2:

@@ -20,15 +20,13 @@
 #include "Lux_Mtl.h"
 #include "maxscript\maxscript.h"
 
-#define Lux_Light_CLASS_ID	Class_ID(0x5d2f7ac1, 0x7dd93354)
+#define LUX_LIGHT_CLASS_ID	Class_ID(0x5d2f7ac1, 0x7dd93354)
 
-
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1
 #define NUM_SUBTEXTURES 3
-#define NUM_REF 5
-// Reference Indexes
-// 
-#define PBLOCK_REF 1
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
+
 
 class Lux_Light : public Mtl {
 public:
@@ -83,7 +81,7 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_Light_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_LIGHT_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_LIGHT);}
 
@@ -126,7 +124,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Light(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_LIGHT); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_Light_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_LIGHT_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Light"); }	// returns fixed parsable name (scripter-visible name)
@@ -147,9 +145,7 @@ enum { Lux_Light_params };
 
 //TODO: Add enums for various parameters
 enum { 
-	prm_color,
-	/*Light emission params begin*/
-	emission,
+	emission_color,
 	emission_map,
 	emission_power,
 	emission_efficency,
@@ -162,7 +158,6 @@ enum {
 	emission_map_height,
 	emission_id,
 	enableemission,
-	/*light emission params end*/
 };
 
 
@@ -170,11 +165,10 @@ static ParamBlockDesc2 Lux_Light_param_blk ( Lux_Light_params, _T("params"),  0,
 	P_AUTO_CONSTRUCT + P_AUTO_UI, PBLOCK_REF, 
 	//rollout
 	IDD_LIGHT_PANEL,		IDS_LIGHT_PARAMS,	0, 0, NULL,
-	// params
 
-	// Light param
-	emission, _T("emission_color"), TYPE_RGBA, P_ANIMATABLE, IDS_EMISSION,
-	p_default, Color(0.5f, 0.5f, 0.5f),
+	// params
+	emission_color, _T("emission_color"), TYPE_RGBA, P_ANIMATABLE, IDS_EMISSION,
+	p_default, Color(1.0f, 1.0f, 1.0f),
 	p_ui, TYPE_COLORSWATCH, IDC_EMISSION_COLOR,
 	p_end,
 
@@ -348,7 +342,7 @@ Interval Lux_Light::Validity(TimeValue t)
 
 RefTargetHandle Lux_Light::GetReference(int i)
 {
-	if (i > 0)
+	/*if (i > 0)
 	{
 		switch (i)
 		{
@@ -359,18 +353,32 @@ RefTargetHandle Lux_Light::GetReference(int i)
 		}
 	}
 	else
+		return pblock;*/
+	if (i == PBLOCK_REF)
 		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 void Lux_Light::SetReference(int i, RefTargetHandle rtarg)
 {
-	switch (i)
+	/*switch (i)
 	{
 		//case 0: subtexture[i] = (Texmap *)rtarg; break;
 		case 1: pblock = (IParamBlock2 *)rtarg; break;
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i - 2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_Light::SubAnimName(int i)
@@ -383,12 +391,20 @@ TSTR Lux_Light::SubAnimName(int i)
 
 Animatable* Lux_Light::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		case 0: return subtexture[i];
 		case 1: return pblock;
 		default: return subtexture[i - 2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_Light::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 
@@ -654,7 +670,7 @@ Color Lux_Light::GetAmbient(int mtlNum, BOOL backFace)
 {
 	Point3 p;
 	//TimeValue t; //Zero for first frame //GetCOREInterface()->GetTime() for every frame
-	pblock->GetValue(prm_color, GetCOREInterface()->GetTime(), p, ivalid);
+	pblock->GetValue(emission_color, GetCOREInterface()->GetTime(), p, ivalid);
 	return submtl[0] ? submtl[0]->GetAmbient(mtlNum, backFace) : Color(p.x, p.y, p.z);//Bound(Color(p.x, p.y, p.z));
 }
 
@@ -662,7 +678,7 @@ Color Lux_Light::GetDiffuse(int mtlNum, BOOL backFace)
 {
 	Point3 p;
 	//TimeValue t; //Zero for first frame //GetCOREInterface()->GetTime() for every frame
-	pblock->GetValue(prm_color, 0, p, ivalid);
+	pblock->GetValue(emission_color, 0, p, ivalid);
 	return submtl[0] ? submtl[0]->GetDiffuse(mtlNum, backFace) : Color(p.x, p.y, p.z);
 }
 

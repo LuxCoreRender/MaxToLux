@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lux_Map", "Lux_Map.vcxproj", "{6671F0BA-6FB8-4F35-8392-0676D05113A8}"
+Project("{9ABC72CE-236C-45A1-BE60-7F228081A334}") = "Lux_Map", "Lux_Map.vcxproj", "{6671F0BA-6FB8-4F35-8392-0676D05113A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

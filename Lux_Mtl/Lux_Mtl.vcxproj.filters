@@ -66,13 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{92f20462-242f-4a0c-883e-b3c33819b84b}</UniqueIdentifier>
+      <UniqueIdentifier>{2C5A5752-C4BE-4727-B2E8-A1EB1F9CD567}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{ad6e765e-4300-41dc-b185-05b019286785}</UniqueIdentifier>
+      <UniqueIdentifier>{D1D44B55-6E7A-4305-A360-95187ECE2C59}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{e390d358-54f6-4cbb-9566-5e9a8a84bef2}</UniqueIdentifier>
+      <UniqueIdentifier>{A5715466-02FA-43AA-A507-0E3261852C14}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

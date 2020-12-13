@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Lux_Checker2d.cpp" />
+    <ClCompile Include="DllEntry.cpp" />
+    <ClCompile Include="Lux_Checker3d.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3dsmaxsdk_preinclude.h" />
+    <ClInclude Include="resource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Lux_Map.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Lux_map.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lux_Map.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{9858411f-013a-4f99-bed1-edee5a1c2980}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

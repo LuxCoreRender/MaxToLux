@@ -19,15 +19,12 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_GlOSSY_TRANSLUCENT_CLASS_ID	Class_ID(0x24b19e11, 0x1de467e3)
+#define LUX_GlOSSY_TRANSLUCENT_CLASS_ID	Class_ID(0x24b19e11, 0x1de467e3)
 
-
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 // TODO: number of sub-materials supported by this plug-in
 #define NUM_SUBTEXTURES 21
-#define NUM_REF NUM_SUBTEXTURES
-// Reference Indexes
-// 
-#define PBLOCK_REF NUM_REF
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 15400 + 14400;
 
@@ -86,7 +83,7 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_GlOSSY_TRANSLUCENT_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_GlOSSY_TRANSLUCENT_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_GlOSSY_TRANSLUCENT);}
 
@@ -130,7 +127,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_GlossyTranslucent(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_GlOSSY_TRANSLUCENT); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_GlOSSY_TRANSLUCENT_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_GlOSSY_TRANSLUCENT_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_GlossyTranslucent"); }	// returns fixed parsable name (scripter-visible name)
@@ -222,6 +219,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 	Glass_trans_map, IDD_GlOSSY_TRANSLUCENT_PANEL, IDS_PARAMS, 0, 0, NULL,
 	Common_Param, IDD_COMMON_PANEL, IDS_COMMON_PARAMS, 0, 0, NULL,
 	Light_emission, IDD_LIGHT_PANEL, IDS_LIGHT_PARAMS, 0, 0, NULL,
+
 	// params
 	diffuse, _T("Diffuse"), TYPE_RGBA, P_ANIMATABLE, IDS_GlOSSY_TRANSLUCENT_DIFFUSE,
 		p_default, Color(0.5f, 0.5f, 0.5f),
@@ -229,7 +227,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	diffuse_map, _T("Diffuse map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_DIFFUSE_MAP,
-		p_refno, 0,
+		p_refno, 2,
 		p_subtexno, 0,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_DIFFUSE_MAP,
 		p_end,
@@ -240,7 +238,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	transmit_map, _T("Transmit map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_TRANSMIT_MAP,
-		p_refno, 1,
+		p_refno, 3,
 		p_subtexno, 1,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_TRANSMIT_MAP,
 		p_end,
@@ -251,7 +249,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	specular_map, _T("Specular map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_SPECULAR_MAP,
-		p_refno, 2,
+		p_refno, 4,
 		p_subtexno, 2,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_SPECULAR_MAP,
 		p_end,
@@ -262,7 +260,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	specular_bf_map, _T("Specular bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_SPECULAR_BF_MAP,
-		p_refno, 3,
+		p_refno, 5,
 		p_subtexno, 3,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_SPECULAR_BF_MAP,
 		p_end,
@@ -274,7 +272,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	uroughness_map, _T("uroughness map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_UROGHNESS_MAP,
-		p_refno, 4,
+		p_refno, 6,
 		p_subtexno, 4,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_UROUGHNESS_MAP,
 		p_end,
@@ -286,7 +284,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	uroughness_bf_map, _T("uroughness bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_UROGHNESS_BF_MAP,
-		p_refno, 5,
+		p_refno, 7,
 		p_subtexno, 5,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_UROUGHNESS_BF_MAP,
 		p_end,
@@ -298,7 +296,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	vroughness_map, _T("vroughness map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_VROGHNESS_MAP,
-		p_refno, 6,
+		p_refno, 8,
 		p_subtexno, 6,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_VROUGHNESS_MAP,
 		p_end,
@@ -310,7 +308,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	vroughness_bf_map, _T("vroughness bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_VROGHNESS_BF_MAP,
-		p_refno, 7,
+		p_refno, 9,
 		p_subtexno, 7,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_VROUGHNESS_BF_MAP,
 		p_end,
@@ -322,7 +320,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	absorption_map, _T("absorption map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_ABSORPTION_MAP,
-		p_refno, 8,
+		p_refno, 10,
 		p_subtexno, 8,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_ABSORPTION_MAP,
 		p_end,
@@ -334,7 +332,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	absorption_bf_map, _T("absorption bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_ABSORPTION_BF_MAP,
-		p_refno, 9,
+		p_refno, 11,
 		p_subtexno, 9,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_ABSORPTION_BF_MAP,
 		p_end,
@@ -346,7 +344,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	thikness_map, _T("thikness map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_THIKNESS_MAP,
-		p_refno, 10,
+		p_refno, 12,
 		p_subtexno, 10,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_THIKNESS_MAP,
 		p_end,
@@ -358,7 +356,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	thikness_bf_map, _T("thikness bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_THIKNESS_BF_MAP,
-		p_refno, 11,
+		p_refno, 13,
 		p_subtexno, 11,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_THIKNESS_BF_MAP,
 		p_end,
@@ -370,7 +368,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	index_map, _T("index_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_INDEX_MAP,
-		p_refno, 12,
+		p_refno, 14,
 		p_subtexno, 12,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_INDEX_MAP,
 		p_end,
@@ -382,7 +380,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	index_bf_map, _T("index bf map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GlOSSY_TRANSLUCENT_INDEX_BF_MAP,
-		p_refno, 13,
+		p_refno, 15,
 		p_subtexno, 13,
 		p_ui, Glass_trans_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_TRANS_INDEX_BF_MAP,
 		p_end,
@@ -399,25 +397,25 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 
 		// Common param
 	bump_map, _T("Bump Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_BUMP_MAP,
-		p_refno, 14,
+		p_refno, 16,
 		p_subtexno, 14,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_BUMP_MAP,
 		p_end,
 
 	normal_map, _T("Normal Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_NORMAL_MAP,
-		p_refno, 15,
+		p_refno, 17,
 		p_subtexno, 15,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
 	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
-		p_refno, 16,
+		p_refno, 18,
 		p_subtexno, 16,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 17,
+		p_refno, 19,
 		p_subtexno, 17,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
@@ -447,7 +445,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 18,
+		p_refno, 20,
 		p_subtexno, 18,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
@@ -465,7 +463,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 19,
+		p_refno, 21,
 		p_subtexno, 19,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
@@ -477,7 +475,7 @@ static ParamBlockDesc2 Lux_GlossyTranslucent_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 20,
+		p_refno, 22,
 		p_subtexno, 20,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
@@ -633,8 +631,12 @@ RefTargetHandle Lux_GlossyTranslucent::GetReference(int i)
 		//case 2: return subtexture[i-2]; break;
 		default: return subtexture[i - 2]; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else
 		return nullptr;
 }
@@ -649,10 +651,12 @@ void Lux_GlossyTranslucent::SetReference(int i, RefTargetHandle rtarg)
 		//case 2: subtexture[i-2] = (Texmap *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		subtexture[i] = (Texmap *)rtarg;
-	else
+	if (i == PBLOCK_REF)
 		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_GlossyTranslucent::SubAnimName(int i)
@@ -660,7 +664,7 @@ TSTR Lux_GlossyTranslucent::SubAnimName(int i)
 	if ((i >= 0) && (i < NUM_SUBTEXTURES))
 		return GetSubTexmapTVName(i);
 	else
-		return GetSubTexmapTVName(i);
+		return GetSubTexmapTVName(i-2);
 }
 
 Animatable* Lux_GlossyTranslucent::SubAnim(int i)
@@ -671,8 +675,12 @@ Animatable* Lux_GlossyTranslucent::SubAnim(int i)
 		case 0: return pblock;
 		default: return subtexture[i-2];
 	}*/
-	if ((i >= 0) && (i < NUM_SUBTEXTURES))
-		return subtexture[i];
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
 	else
 		return nullptr;
 }
@@ -729,8 +737,8 @@ RefResult Lux_GlossyTranslucent::NotifyRefChanged(const Interval& /*changeInt*/,
 
 Mtl* Lux_GlossyTranslucent::GetSubMtl(int i)
 {
-	if ((i >= 0) && (i < NUM_SUBMATERIALS))
-		return submtl[i];
+	/*if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];*/
 	return 
 		nullptr;
 }
@@ -738,19 +746,19 @@ Mtl* Lux_GlossyTranslucent::GetSubMtl(int i)
 void Lux_GlossyTranslucent::SetSubMtl(int i, Mtl* m)
 {
 	//mprintf(_T("\n SetSubMtl Nubmer is : %i \n"), i);
-	/*ReplaceReference(i , m);
-	if (i == 0)
+	ReplaceReference(i , m);
+	/*if (i == 0)
 	{
 		Lux_GlossyTranslucent_param_blk.InvalidateUI(base_mat);
 		mapValid.SetEmpty();
 	}*/
 }
 
-TSTR Lux_GlossyTranslucent::GetSubMtlSlotName(int i)
+TSTR Lux_GlossyTranslucent::GetSubMtlSlotName(int /*i*/)
 {
 	// Return i'th sub-material name
-	return submtl[i]->GetName();
-	//return _T("");
+	//return submtl[i]->GetName();
+	return _T("");
 }
 
 TSTR Lux_GlossyTranslucent::GetSubMtlTVName(int i)
@@ -774,7 +782,7 @@ Texmap* Lux_GlossyTranslucent::GetSubTexmap(int i)
 void Lux_GlossyTranslucent::SetSubTexmap(int i, Texmap* tx)
 {
 	//mprintf(_T("\n SetSubTexmap Nubmer ============>>>  is : %i \n"), i);
-	ReplaceReference(i, tx);
+	ReplaceReference(i + 2, tx);
 	/*switch (i)
 	{
 		case 0:
@@ -949,7 +957,7 @@ RefTargetHandle Lux_GlossyTranslucent::Clone(RemapDir &remap)
 	{
 		mnew->subtexture[i] = nullptr;
 		if (subtexture[i])
-			mnew->ReplaceReference(i, remap.CloneRef(subtexture[i]));
+			mnew->ReplaceReference(i + 2, remap.CloneRef(subtexture[i]));
 		//mnew->mapOn[i] = mapOn[i];
 	}
 	BaseClone(this, mnew, remap);

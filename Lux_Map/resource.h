@@ -22,6 +22,9 @@
 #define IDS_3DSMAX_SME_MATERIALS_CATLABEL 17
 #define IDD_CHECKER_PANEL               101
 #define IDD_CHECKER3D_PANEL             102
+#define IDD_ADD_PANEL                   103
+#define IDD_CHECKER_PANEL2              104
+#define IDD_SUBTRACT_PANEL              104
 #define IDC_CLOSEBUTTON                 1000
 #define IDC_CHECKER3D_TEXTURE1_COLOR    1001
 #define IDC_CHECKER3D_TEXTURE1_MAP      1002

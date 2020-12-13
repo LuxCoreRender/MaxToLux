@@ -20,15 +20,12 @@
 #include "Lux_Mtl.h"
 //#include <maxscript\maxscript.h>
 
-#define Lux_GLOSSY_COATIN_CLASS_ID	Class_ID(0x24a95711, 0x752c3b14)
+#define LUX_GLOSSY_COATIN_CLASS_ID	Class_ID(0x24a95711, 0x752c3b14)
 
-
+#define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1
 #define NUM_SUBTEXTURES 5
-#define Num_REF 7
-// Reference Indexes
-// 
-#define PBLOCK_REF 1
+#define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 15400 + 14400;
 
@@ -87,7 +84,7 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	// From Animatable
-	virtual Class_ID ClassID() {return Lux_GLOSSY_COATIN_CLASS_ID;}
+	virtual Class_ID ClassID() {return LUX_GLOSSY_COATIN_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
 	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_GLOSSY_COATING);}
 
@@ -99,7 +96,7 @@ public:
 	virtual TSTR SubAnimName(int i);
 
 	// TODO: Maintain the number or references here
-	virtual int NumRefs() { return 1 + Num_REF; }
+	virtual int NumRefs() { return 1 + NUM_REF; }
 	virtual RefTargetHandle GetReference(int i);
 
 	virtual int NumParamBlocks() { return 1; }					  // return number of ParamBlocks in this instance
@@ -130,7 +127,7 @@ public:
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_GlossyCoating(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_GLOSSY_COATING); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return Lux_GLOSSY_COATIN_CLASS_ID; }
+	virtual Class_ID ClassID() 						{ return LUX_GLOSSY_COATIN_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_GlossyCoating"); }	// returns fixed parsable name (scripter-visible name)
@@ -388,24 +385,38 @@ Interval Lux_GlossyCoating::Validity(TimeValue t)
 
 RefTargetHandle Lux_GlossyCoating::GetReference(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		case 0: return submtl[i]; break;
 		case 1: return pblock; break;
 		default: return subtexture[i - 2]; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 
 }
 
 void Lux_GlossyCoating::SetReference(int i, RefTargetHandle rtarg)
 {
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
-	switch (i)
+	/*switch (i)
 	{
 		case 0: submtl[i] = (Mtl *)rtarg; break;
 		case 1: pblock = (IParamBlock2 *)rtarg; break;
 		default: subtexture[i-2] = (Texmap *)rtarg; break;
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		pblock = (IParamBlock2 *)rtarg;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		submtl[i] = (Mtl *)rtarg;
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
 TSTR Lux_GlossyCoating::SubAnimName(int i)
@@ -418,12 +429,20 @@ TSTR Lux_GlossyCoating::SubAnimName(int i)
 
 Animatable* Lux_GlossyCoating::SubAnim(int i)
 {
-	switch (i)
+	/*switch (i)
 	{
 		case 0: return submtl[i];
 		case 1: return pblock;
 		default: return subtexture[i-2];
-	}
+	}*/
+	if (i == PBLOCK_REF)
+		return pblock;
+	else if ((i >= 0) && (i < NUM_SUBMATERIALS))
+		return submtl[i];
+	else if ((i >= NUM_SUBMATERIALS) && (i < NUM_SUBTEXTURES))
+		return subtexture[i - 2];
+	else
+		return nullptr;
 }
 
 RefResult Lux_GlossyCoating::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, 
