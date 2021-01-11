@@ -52,24 +52,195 @@ IDD_ADD_PANEL DIALOGEX 0, 0, 217, 58
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    CONTROL         "",IDC_CHECKER_TEXTURE1_COLOR,"ColorSwatch",WS_TABSTOP,63,15,35,12
-    CONTROL         "",IDC_CHECKER_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    CONTROL         "",IDC_ADD_TEXTURE_1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
     LTEXT           "Texture 1 :",-1,13,16,42,11
-    CONTROL         "",IDC_CHECKER_TEXTURE2_COLOR,"ColorSwatch",WS_TABSTOP,63,33,35,12
-    CONTROL         "",IDC_CHECKER_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    CONTROL         "",IDC_ADD_TEXTURE_2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
     LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_ADD_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_ADD_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_ADD_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_ADD_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
 END
 
 IDD_SUBTRACT_PANEL DIALOGEX 0, 0, 217, 58
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    CONTROL         "",IDC_CHECKER_TEXTURE1_COLOR,"ColorSwatch",WS_TABSTOP,63,15,35,12
-    CONTROL         "",IDC_CHECKER_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    CONTROL         "",IDC_SUBTRACT_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
     LTEXT           "Texture 1 :",-1,13,16,42,11
-    CONTROL         "",IDC_CHECKER_TEXTURE2_COLOR,"ColorSwatch",WS_TABSTOP,63,33,35,12
-    CONTROL         "",IDC_CHECKER_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    CONTROL         "",IDC_SUBTRACT_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
     LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_SUBTRACT_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_SUBTRACT_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_SUBTRACT_VALUE_2,"CustEdit",WS_TABSTOP,63,34,25,11
+    CONTROL         "",IDC_SUBTRACT_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_SCALE_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_SCALE_TEXTURE_1,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_SCALE_TEXTURE_2,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_SCALE_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_SCALE_VALUE_1_SPIN,"SpinnerControl",0x0,86,15,10,11
+    CONTROL         "",IDC_SCALE_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_SCALE_VALUE_2_SPIN,"SpinnerControl",0x0,86,34,10,11
+END
+
+IDD_MIX_PANEL DIALOGEX 0, 0, 217, 76
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MIX_TEXTURE_1,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_MIX_TEXTURE_2,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_MIX_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_MIX_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_MIX_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_MIX_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+    LTEXT           "Amount :",-1,19,54,37,11
+    CONTROL         "",IDC_MIX_AMOUNT,"CustEdit",WS_TABSTOP,63,52,24,11
+    CONTROL         "",IDC_MIX_AMOUNT_SPIN,"SpinnerControl",0x0,87,52,9,11
+    CONTROL         "",IDC_MIX_AMOUNT_TEXTURE,"CustButton",WS_TABSTOP,103,51,98,13
+END
+
+IDD_POWER_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_POWER_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_POWER_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_POWER_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_POWER_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_POWER_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_POWER_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_DIVIDE_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_DIVIDE_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_DIVIDE_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_DIVIDE_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_DIVIDE_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_DIVIDE_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_DIVIDE_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_DOTPRODUCT_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_DOTPRODUCT_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_DOTPRODUCT_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_DOTPRODUCT_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_DOTPRODUCT_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_DOTPRODUCT_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_DOTPRODUCT_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_LESSTHAN_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_LESSTHAN_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_LESSTHAN_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_LESSTHAN_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_LESSTHAN_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_LESSTHAN_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_LESSTHAN_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_GREATERTHAN_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_GREATERTHAN_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_GREATERTHAN_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_GREATERTHAN_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_GREATERTHAN_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_GREATERTHAN_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_GREATERTHAN_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_ABS_PANEL DIALOGEX 0, 0, 217, 38
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_ABS_TEXTURE_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture :",-1,13,16,42,11
+    CONTROL         "",IDC_ABS_VALUE,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_ABS_VALUE_SPIN,"SpinnerControl",0x0,87,15,9,11
+END
+
+IDD_CLAMP_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_CLAMP_TEXTURE,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture :",-1,19,16,39,11
+    LTEXT           "Min :",-1,32,35,22,11
+    CONTROL         "",IDC_CLAMP_VALUE,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_CLAMP_VALUE_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_CLAMP_MIN,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_CLAMP_MIN_SPIN,"SpinnerControl",0x0,87,34,9,11
+    LTEXT           "Max :",-1,145,35,19,11
+    CONTROL         "",IDC_CLAMP_MAX,"CustEdit",WS_TABSTOP,168,34,24,11
+    CONTROL         "",IDC_CLAMP_MAX_SPIN,"SpinnerControl",0x0,192,34,9,11
+END
+
+IDD_ROUND_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_ROUND_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture :",-1,19,16,37,11
+    CONTROL         "",IDC_ROUND_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Increment :",-1,12,35,42,11
+    CONTROL         "",IDC_ROUND_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_ROUND_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_ROUND_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_ROUND_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_MODULO_PANEL DIALOGEX 0, 0, 217, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MODULO_TEXTURE1_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture 1 :",-1,13,16,42,11
+    CONTROL         "",IDC_MODULO_TEXTURE2_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Texture 2 :",-1,13,35,42,11
+    CONTROL         "",IDC_MODULO_VALUE_1,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_MODULO_VALUE_1_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_MODULO_VALUE_2,"CustEdit",WS_TABSTOP,63,34,24,11
+    CONTROL         "",IDC_MODULO_VALUE_2_SPIN,"SpinnerControl",0x0,87,34,9,11
+END
+
+IDD_NORMAL_PANEL DIALOGEX 0, 0, 217, 55
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_NORMAL_TEXTURE_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "Texture :",-1,13,16,42,11
+    CONTROL         "",IDC_NORMAL_VALUE,"CustEdit",WS_TABSTOP,103,33,24,11
+    CONTROL         "",IDC_NORMAL_VALUE_SPIN,"SpinnerControl",0x0,127,33,9,11
+    LTEXT           "Scale :",-1,13,33,42,11
 END
 
 
@@ -111,6 +282,102 @@ BEGIN
         RIGHTMARGIN, 208
         TOPMARGIN, 7
         BOTTOMMARGIN, 51
+    END
+
+    IDD_SCALE_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_MIX_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 69
+    END
+
+    IDD_POWER_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_DIVIDE_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_DOTPRODUCT_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_LESSTHAN_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_GREATERTHAN_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_ABS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 31
+    END
+
+    IDD_CLAMP_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_ROUND_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_MODULO_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 51
+    END
+
+    IDD_NORMAL_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -167,6 +434,66 @@ BEGIN
     0
 END
 
+IDD_SCALE_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MIX_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_POWER_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DIVIDE_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DOTPRODUCT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LESSTHAN_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_GREATERTHAN_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CLAMP_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ROUND_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_MODULO_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_NORMAL_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -195,7 +522,68 @@ END
 STRINGTABLE
 BEGIN
     IDS_CHECKER_TEXTURE1_COLOR2 "Checker texture 1 color"
-    IDS_3DSMAX_SME_MATERIALS_CATLABEL "Materials"
+    IDS_CLASS_ADD           "Lux Add"
+    IDS_CLASS_SUBTRACT      "Lux Subtract"
+    IDS_ADD_PARAMS          "Add Parameters"
+    IDS_SUBTRACT_PARAMS     "Subtract Parameters"
+    IDS_SCALE_PARAMS        "Scale Parameters"
+    IDS_CLASS_SCALE         "Lux Scale/Multiply"
+    IDS_CLASS_MIX           "Lux Mix"
+    IDS_MIX_PARAMS          "Mix Parameters"
+    IDS_POWER_PARAMS        "Power Parameters"
+    IDS_CLASS_POWER         "Lux Power"
+    IDS_DIVIDE_PARAMS       "Divide Parameters"
+    IDS_CLASS_DIVIDE        "Lux Divide"
+    IDS_DOTPRODUCT_PARAMS   "DotProduct Parameters"
+    IDS_CLASS_DOTPRODUCT    "Lux DotProduct"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LESSTHAN_PARAMS     "LessThan Parameters"
+    IDS_CLASS_LESSTHAN      "Lux LessThan"
+    IDS_GREATERTHAN_PARAMS  "GreaterThan Parameters"
+    IDS_CLASS_GREATERTHAN   "Lux GreaterThan"
+    IDS_ABS_PARAMS          "Abs Parameters"
+    IDS_CLASS_ABS           "Lux Abs"
+    IDS_CLAMP_PARAMS        "Clamp Parameters"
+    IDS_CLASS_CLAMP         "Lux Clamp"
+    IDS_ROUND_PARAMS        "Round Parameters"
+    IDS_CLASS_ROUND         "Lux Round"
+    IDS_MODULO_PARAMS       "Modulo Parameters"
+    IDS_CLASS_MODULO        "Lux Modulo"
+    IDS_ADD_VALUE_1         "Add Value 1"
+    IDS_ADD_TEXTURE_1       "Add Texture 1"
+    IDS_ADD_VALUE_2         "Add Value 2"
+    IDS_ADD_TEXTURE_2       "Add Texture 2"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CLAMP_VALUE         "Clamp Value"
+    IDS_CLAMP_TEXTURE       "Clamp Texture"
+    IDS_CLAMP_MIN           "Clamp Min"
+    IDS_CLAMP_MAX           "Clamp Max"
+    IDS_MIX_VALUE_1         "Mix Value 1"
+    IDS_MIX_TEXTURE_1       "Mix texture 1"
+    IDS_MIX_VALUE_2         "Mix Value 2"
+    IDS_MIX_TEXTURE_2       "Mix texture 2"
+    IDS_MIX_AMOUNT          "Mix Amount"
+    IDS_SCALE_VALUE_1       "Scale Value 1"
+    IDS_SCALE_TEXTURE_1     "Scale texture 1"
+    IDS_SCALE_VALUE_2       "Scale Value 1"
+    IDS_SCALE_TEXTURE_2     "Scale texture 1"
+    IDS_MIX_AMOUNT_TEXTURE  "Mix Amount Texture"
+    IDS_ABS_VALUE           "Abs Value"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ABS_TEXTURE_MAP     "Abs Texture Map"
+    IDS_NORMAL_VALUE        "Normal Value"
+    IDS_NORMAL_TEXTURE_MAP  "Normal Texture Map"
+    IDS_CLASS_NORMAL        "Lux Normal"
+    IDS_NORMAL_PARAMS       "Normal Parameters"
 END
 
 #endif    // English (United States) resources

@@ -49,21 +49,25 @@
       <PreprocessorDefinitions>_USRDLL;_ADESK_3DSMAX_WINDOWS_;WINVER=0x0502;_WIN32_WINNT=0x0502;_WIN32_WINDOWS=0x0502;_WIN32_IE=0x0800;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;ISOLATION_AWARE_ENABLED=1;MODULE_NAME=$(TargetFileName);NDEBUG;SECURE_SCL=0;WIN32;WIN64;_WINDLL;_UNICODE;UNICODE</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ADSK_3DSMAX_SDK_2020)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
-	  <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BrowseInformation>
+      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BrowseInformation>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2020)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>bmm.lib; core.lib; geom.lib; gfx.lib; mesh.lib; maxutil.lib; maxscrpt.lib; manipsys.lib; paramblk2.lib;;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Lux_Map.def</ModuleDefinitionFile>
     </Link>
-	<Bscmake>
+    <Bscmake>
       <PreserveSbr Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</PreserveSbr>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Lux_Add.cpp" />
     <ClCompile Include="Lux_Checker2d.cpp" />
     <ClCompile Include="DllEntry.cpp" />
     <ClCompile Include="Lux_Checker3d.cpp" />
+    <ClCompile Include="Lux_Mix.cpp" />
+    <ClCompile Include="Lux_Scale.cpp" />
+    <ClCompile Include="Lux_Subtract.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lux_Map.def" />

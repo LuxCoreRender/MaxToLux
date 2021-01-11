@@ -17,11 +17,9 @@
  ***************************************************************************/
 
 #include "Lux_Map.h"
-#include "max.h"
+ //#include "dllutilities.h"
 
-//#include "dllutilities.h"
-
-#define LUX_CHECKER2D_CLASS_ID	Class_ID(0x7d03463, 0xd5454f5)
+#define LUX_SUBTRACT_CLASS_ID	Class_ID(0x7d03463, 0x4f3875d1)
 
 #define NSUBTEX   2 // TODO: number of sub-textures supported by this plugin
 // Reference Indexes
@@ -30,30 +28,30 @@
 #define TEXTURE1_REF 2
 #define TEXTURE2_REF 3
 
-class Lux_Checker;
+class Lux_Subtract;
 
-class Lux_CheckerSampler: public MapSampler
+class Lux_SubtractSampler : public MapSampler
 {
 private:
-	Lux_Checker* mTexture;
+	Lux_Subtract* mTexture;
 public:
-	Lux_CheckerSampler() : mTexture(nullptr) { }
-	Lux_CheckerSampler(Lux_Checker *c) { mTexture= c; }
-	~Lux_CheckerSampler() { }
+	Lux_SubtractSampler() : mTexture(nullptr) { }
+	Lux_SubtractSampler(Lux_Subtract *c) { mTexture = c; }
+	~Lux_SubtractSampler() { }
 
-	void   Set(Lux_Checker *c) { mTexture = c; }
-	AColor Sample(ShadeContext& sc, float u,float v);
-	AColor SampleFilter(ShadeContext& sc, float u,float v, float du, float dv);
-	float  SampleMono(ShadeContext& sc, float u,float v);
-	float  SampleMonoFilter(ShadeContext& sc, float u,float v, float du, float dv);
-} ;
+	void   Set(Lux_Subtract *c) { mTexture = c; }
+	AColor Sample(ShadeContext& sc, float u, float v);
+	AColor SampleFilter(ShadeContext& sc, float u, float v, float du, float dv);
+	float  SampleMono(ShadeContext& sc, float u, float v);
+	float  SampleMonoFilter(ShadeContext& sc, float u, float v, float du, float dv);
+};
 
 
-class Lux_Checker : public Texmap {
+class Lux_Subtract : public Texmap {
 public:
 	//Constructor/Destructor
-	Lux_Checker();
-	virtual ~Lux_Checker();
+	Lux_Subtract();
+	virtual ~Lux_Subtract();
 
 	//From MtlBase
 	virtual ParamDlg* CreateParamDlg(HWND hwMtlEdit, IMtlParams* imp);
@@ -94,11 +92,11 @@ public:
 	virtual IOResult Save(ISave *isave);
 
 	//From Animatable
-	virtual Class_ID  ClassID() {return LUX_CHECKER2D_CLASS_ID;}
+	virtual Class_ID  ClassID() { return LUX_SUBTRACT_CLASS_ID; }
 	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_CHECKER);}
+	virtual void GetClassName(TSTR& s) { s = GetString(IDS_CLASS_SUBTRACT); }
 
-	virtual RefTargetHandle Clone( RemapDir &remap );
+	virtual RefTargetHandle Clone(RemapDir &remap);
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
 
@@ -131,18 +129,18 @@ private:
 
 
 
-class Lux_CheckerClassDesc : public ClassDesc2 
+class Lux_SubtractClassDesc : public ClassDesc2
 #if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
 	, public IMaterialBrowserEntryInfo
 #endif
 {
 public:
-	virtual int IsPublic() 							{ return TRUE; }
-	virtual void* Create(BOOL /*loading = FALSE*/) 		{ return new Lux_Checker(); }
-	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_CHECKER); }
-	virtual SClass_ID SuperClassID() 				{ return TEXMAP_CLASS_ID; }
-	virtual Class_ID ClassID() 						{ return LUX_CHECKER2D_CLASS_ID; }
-	virtual const TCHAR* Category()					{ return GetString(IDS_CATEGORY); }
+	virtual int IsPublic() { return TRUE; }
+	virtual void* Create(BOOL /*loading = FALSE*/) { return new Lux_Subtract(); }
+	virtual const TCHAR *	ClassName() { return GetString(IDS_CLASS_SUBTRACT); }
+	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
+	virtual Class_ID ClassID() { return LUX_SUBTRACT_CLASS_ID; }
+	virtual const TCHAR* Category() { return GetString(IDS_CATEGORY); }
 
 #if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
 	FPInterface* GetInterface(Interface_ID id) {
@@ -153,118 +151,120 @@ public:
 	}
 
 	const MCHAR* GetEntryName() const { return NULL; }
-	const MCHAR* GetEntryCategory() const { return _T("Maps\\lux"); }
+	const MCHAR* GetEntryCategory() const { return _T("Maps\\lux\\Math"); }
 	Bitmap* GetEntryThumbnail() const { return NULL; }
 #endif
 
-	virtual const TCHAR* InternalName() 			{ return _T("Lux_Checker"); }	// returns fixed parsable name (scripter-visible name)
-	virtual HINSTANCE HInstance() 					{ return hInstance; }			// returns owning module handle
+	virtual const TCHAR* InternalName() { return _T("Lux_Subtract"); }	// returns fixed parsable name (scripter-visible name)
+	virtual HINSTANCE HInstance() { return hInstance; }					// returns owning module handle
 
 };
 
 
-ClassDesc2* GetLux_CheckerDesc() { 
-	static Lux_CheckerClassDesc Lux_CheckerDesc;
-	return &Lux_CheckerDesc; 
+ClassDesc2* GetLux_SubtractDesc() {
+	static Lux_SubtractClassDesc Lux_SubtractDesc;
+	return &Lux_SubtractDesc;
 }
 
 
-enum { Lux_Checker_params };
+enum { Lux_Subtract_params };
 
 
 //TODO: Add enums for various parameters
 enum {
-	texture1,	texture1_map,
-	texture2,	texture2_map,
+	value1,
+	texture1_map,
+	value2,
+	texture2_map,
 	pb_coords,
 };
 
 
-static ParamBlockDesc2 Lux_Checker_param_blk ( Lux_Checker_params, _T("params"),  0, GetLux_CheckerDesc(), 
-	P_AUTO_CONSTRUCT + P_AUTO_UI, PBLOCK_REF, 
+static ParamBlockDesc2 Lux_Subtract_param_blk(Lux_Subtract_params, _T("params"), 0, GetLux_SubtractDesc(),
+	P_AUTO_CONSTRUCT + P_AUTO_UI, PBLOCK_REF,
 	//rollout
-	IDD_CHECKER_PANEL, IDS_CHECKER_PARAMS, 0, 0, NULL,
+	IDD_SUBTRACT_PANEL, IDS_SUBTRACT_PARAMS, 0, 0, NULL,
 	// params
-	texture1, _T("checker texture 1"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE1_COLOR,
-		p_default, Color(0.5f, 0.5f, 0.5f),
-		p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE1_COLOR,
-		p_end,
+	value1, _T("subtract value 1"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE1_COLOR,
+	p_default, Color(0.5f, 0.5f, 0.5f),
+	p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE1_COLOR,
+	p_end,
 
-	texture1_map, _T("checker texture 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE1_MAP,
-		p_refno, TEXTURE1_REF,
-		p_subtexno, 0,
-		p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE1_MAP,
-		p_end,
+	texture1_map, _T("subtract texture 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE1_MAP,
+	p_refno, TEXTURE1_REF,
+	p_subtexno, 0,
+	p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE1_MAP,
+	p_end,
 
-	texture2, _T("checker texture 2"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE2_COLOR,
-		p_default, Color(0.5f, 0.5f, 0.5f),
-		p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE2_COLOR,
-		p_end,
+	value2, _T("subtract value 2"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE2_COLOR,
+	p_default, Color(0.5f, 0.5f, 0.5f),
+	p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE2_COLOR,
+	p_end,
 
-	texture2_map, _T("checker texture 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE2_MAP,
-		p_refno, TEXTURE2_REF,
-		p_subtexno, 1,
-		p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE2_MAP,
-		p_end,
+	texture2_map, _T("subtract texture 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE2_MAP,
+	p_refno, TEXTURE2_REF,
+	p_subtexno, 1,
+	p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE2_MAP,
+	p_end,
 
 	pb_coords, _T("coords"), TYPE_REFTARG, P_OWNERS_REF, IDS_COORDS,
-		p_refno, COORD_REF,
-		p_end,
+	p_refno, COORD_REF,
+	p_end,
 
 	p_end
-	);
+);
 
 
-ParamDlg* Lux_Checker::uvGenDlg;
+ParamDlg* Lux_Subtract::uvGenDlg;
 
-//--- Lux_Checker -------------------------------------------------------
-Lux_Checker::Lux_Checker()
+//--- Lux_Subtract -------------------------------------------------------
+Lux_Subtract::Lux_Subtract()
 	: pblock(nullptr)
 {
 	for (int i = 0; i < NSUBTEX; i++)
 		subtex[i] = nullptr;
 	//TODO: Add all the initializing stuff
-	GetLux_CheckerDesc()->MakeAutoParamBlocks(this);
+	GetLux_SubtractDesc()->MakeAutoParamBlocks(this);
 	Reset();
 }
 
-Lux_Checker::~Lux_Checker()
+Lux_Subtract::~Lux_Subtract()
 {
 
 }
 
 //From MtlBase
-void Lux_Checker::Reset()
+void Lux_Subtract::Reset()
 {
-	if (uvGen) 
+	if (uvGen)
 		uvGen->Reset();
 	else
-		ReplaceReference( 0, GetNewDefaultUVGen());
+		ReplaceReference(0, GetNewDefaultUVGen());
 	//TODO: Reset texmap back to its default values
 	ivalid.SetEmpty();
 }
 
-void Lux_Checker::Update(TimeValue /*t*/, Interval& /*valid*/)
+void Lux_Subtract::Update(TimeValue /*t*/, Interval& /*valid*/)
 {
 	//TODO: Add code to evaluate anything prior to rendering
 }
 
-Interval Lux_Checker::Validity(TimeValue /*t*/)
+Interval Lux_Subtract::Validity(TimeValue /*t*/)
 {
 	//TODO: Update ivalid here
 	return ivalid;
 }
 
-ParamDlg* Lux_Checker::CreateParamDlg(HWND hwMtlEdit, IMtlParams* imp)
+ParamDlg* Lux_Subtract::CreateParamDlg(HWND hwMtlEdit, IMtlParams* imp)
 {
-	IAutoMParamDlg* masterDlg = GetLux_CheckerDesc()->CreateParamDlgs(hwMtlEdit, imp, this);
+	IAutoMParamDlg* masterDlg = GetLux_SubtractDesc()->CreateParamDlgs(hwMtlEdit, imp, this);
 	uvGenDlg = uvGen->CreateParamDlg(hwMtlEdit, imp);
 	masterDlg->AddDlg(uvGenDlg);
 	//TODO: Set the user dialog proc of the param block, and do other initialization
 	return masterDlg;
 }
 
-BOOL Lux_Checker::SetDlgThing(ParamDlg* dlg)
+BOOL Lux_Subtract::SetDlgThing(ParamDlg* dlg)
 {
 	if (dlg == uvGenDlg)
 		uvGenDlg->SetThing(uvGen);
@@ -273,85 +273,85 @@ BOOL Lux_Checker::SetDlgThing(ParamDlg* dlg)
 	return TRUE;
 }
 
-void Lux_Checker::SetSubTexmap(int i, Texmap* m)
+void Lux_Subtract::SetSubTexmap(int i, Texmap* m)
 {
-	ReplaceReference(i+2,m);
+	ReplaceReference(i + 2, m);
 	//TODO Store the 'i-th' sub-texmap managed by the texture
 }
 
-TSTR Lux_Checker::GetSubTexmapSlotName(int i)
+TSTR Lux_Subtract::GetSubTexmapSlotName(int i)
 {
 	//TODO: Return the slot name of the 'i-th' sub-texmap
 	switch (i)
 	{
-		case 0:
-			return TSTR(_T("Texure 1"));
-		case 1:
-			return TSTR(_T("Texure 2"));
-		default:
-			return TSTR(_T(""));
+	case 0:
+		return TSTR(_T("Texure 1"));
+	case 1:
+		return TSTR(_T("Texure 2"));
+	default:
+		return TSTR(_T(""));
 	}
 }
 
 
 //From ReferenceMaker
-RefTargetHandle Lux_Checker::GetReference(int i)
+RefTargetHandle Lux_Subtract::GetReference(int i)
 {
 	//TODO: Return the references based on the index
-	switch (i) 
+	switch (i)
 	{
-		case 0: return uvGen;
-		case 1: return pblock;
-		default: return subtex[i-2];
+	case 0: return uvGen;
+	case 1: return pblock;
+	default: return subtex[i - 2];
 		//case 1: return subtex[i];
 		//case 2: return subtex[i];
 		//default: return nullptr;
 	}
 }
 
-void Lux_Checker::SetReference(int i, RefTargetHandle rtarg)
+void Lux_Subtract::SetReference(int i, RefTargetHandle rtarg)
 {
 	//TODO: Store the reference handle passed into its 'i-th' reference
-	switch(i)
+	switch (i)
 	{
-		case 0: uvGen = (UVGen *)rtarg; break;
-		case 1:	pblock = (IParamBlock2 *)rtarg; break;
-		default: subtex[i-2] = (Texmap *)rtarg; break;
+	case 0: uvGen = (UVGen *)rtarg; break;
+	case 1:	pblock = (IParamBlock2 *)rtarg; break;
+	default: subtex[i - 2] = (Texmap *)rtarg; break;
 		//case 1: subtex[i-1] = (Texmap *)rtarg; break;
 		//case 2:	subtex[i-1] = (Texmap *)rtarg; break;
 		//default: nullptr;
 	}
 }
 
-RefResult Lux_Checker::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, PartID& /*partID*/, RefMessage message, BOOL /*propagate*/ )
+RefResult Lux_Subtract::NotifyRefChanged(const Interval& /*changeInt*/, RefTargetHandle hTarget, PartID& /*partID*/, RefMessage message, BOOL /*propagate*/)
 {
 	switch (message)
 	{
 	case REFMSG_TARGET_DELETED:
+	{
+		if (hTarget == uvGen) { uvGen = nullptr; }
+		else if (hTarget == pblock) { pblock = nullptr; }
+		else
 		{
-			if      (hTarget == uvGen) { uvGen = nullptr; }
-			else if (hTarget == pblock) { pblock = nullptr; }
-			else
+			for (int i = 0; i < NSUBTEX; i++)
 			{
-				for (int i = 0; i < NSUBTEX; i++)
+				if (subtex[i] == hTarget)
 				{
-					if (subtex[i] == hTarget)
-					{
-						subtex[i] = nullptr;
-						break;
-					}
+					subtex[i] = nullptr;
+					break;
 				}
 			}
 		}
-		break;
+	}
+	break;
 	}
 	return(REF_SUCCEED);
 }
 
 //From ReferenceTarget
-RefTargetHandle Lux_Checker::Clone(RemapDir &remap)
+RefTargetHandle Lux_Subtract::Clone(RemapDir &remap)
 {
-	Lux_Checker *mnew = new Lux_Checker();
+	Lux_Subtract *mnew = new Lux_Subtract();
 	*((MtlBase*)mnew) = *((MtlBase*)this); // copy superclass stuff
 	//TODO: Add other cloning stuff
 	BaseClone(this, mnew, remap);
@@ -359,79 +359,79 @@ RefTargetHandle Lux_Checker::Clone(RemapDir &remap)
 }
 
 
-Animatable* Lux_Checker::SubAnim(int i)
+Animatable* Lux_Subtract::SubAnim(int i)
 {
 	//TODO: Return 'i-th' sub-anim
-	switch (i) 
+	switch (i)
 	{
-		case 0: return uvGen;
-		case 1: return pblock;
-		default: return subtex[i-2];
+	case 0: return uvGen;
+	case 1: return pblock;
+	default: return subtex[i - 2];
 		//case 1: return subtex[i-2];
 		//case 2: return subtex[i-2];
 		//default: return nullptr;
 	}
 }
 
-TSTR Lux_Checker::SubAnimName(int i)
+TSTR Lux_Subtract::SubAnimName(int i)
 {
 	//TODO: Return the sub-anim names
-	switch (i) 
+	switch (i)
 	{
-		case 0: return GetString(IDS_COORDS);
-		case 1: return GetString(IDS_CHECKER_PARAMS);
-		default: return GetSubTexmapTVName(i - 1);
+	case 0: return GetString(IDS_COORDS);
+	case 1: return GetString(IDS_CHECKER_PARAMS);
+	default: return GetSubTexmapTVName(i - 1);
 		//case 1: return GetSubTexmapTVName(i);
 		//case 2: return GetSubTexmapTVName(i);
 		//default: return nullptr;
 	}
 }
 
-IOResult Lux_Checker::Save(ISave* /*isave*/)
+IOResult Lux_Subtract::Save(ISave* /*isave*/)
 {
 	//TODO: Add code to allow plug-in to save its data
 	return IO_OK;
 }
 
-IOResult Lux_Checker::Load(ILoad* /*iload*/)
+IOResult Lux_Subtract::Load(ILoad* /*iload*/)
 {
 	//TODO: Add code to allow plug-in to load its data
 	return IO_OK;
 }
 
-AColor Lux_Checker::EvalColor(ShadeContext& /*sc*/)
+AColor Lux_Subtract::EvalColor(ShadeContext& /*sc*/)
 {
 	//TODO: Evaluate the color of texture map for the context.
 	Point3 p;
-	pblock->GetValue(texture1, 0, p, ivalid);//ivalid);
+	pblock->GetValue(value1, 0, p, ivalid);//ivalid);
 	return AColor(p.x, p.y, p.z);
 	//return AColor (0.0f,0.0f,0.0f,0.0f);
 }
 
-float Lux_Checker::EvalMono(ShadeContext& sc)
+float Lux_Subtract::EvalMono(ShadeContext& sc)
 {
 	//TODO: Evaluate the map for a "mono" channel
 	return Intens(EvalColor(sc));
 }
 
-Point3 Lux_Checker::EvalNormalPerturb(ShadeContext& /*sc*/)
+Point3 Lux_Subtract::EvalNormalPerturb(ShadeContext& /*sc*/)
 {
 	//TODO: Return the perturbation to apply to a normal for bump mapping
 	return Point3(0, 0, 0);
 }
 
-ULONG Lux_Checker::LocalRequirements(int subMtlNum)
+ULONG Lux_Subtract::LocalRequirements(int subMtlNum)
 {
 	//TODO: Specify various requirements for the material
 	return uvGen->Requirements(subMtlNum);
 }
 
-void Lux_Checker::ActivateTexDisplay(BOOL /*onoff*/)
+void Lux_Subtract::ActivateTexDisplay(BOOL /*onoff*/)
 {
 	//TODO: Implement this only if SupportTexDisplay() returns TRUE
 }
 
-DWORD_PTR Lux_Checker::GetActiveTexHandle(TimeValue /*t*/, TexHandleMaker& /*maker*/)
+DWORD_PTR Lux_Subtract::GetActiveTexHandle(TimeValue /*t*/, TexHandleMaker& /*maker*/)
 {
 	//TODO: Return the texture handle to this texture map
 	return 0;

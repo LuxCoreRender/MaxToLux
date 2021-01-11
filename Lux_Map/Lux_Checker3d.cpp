@@ -104,6 +104,9 @@ private:
 
 
 class Lux_Checker3dClassDesc : public ClassDesc2 
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	, public IMaterialBrowserEntryInfo
+#endif
 {
 public:
 	virtual int IsPublic() 							{ return TRUE; }
@@ -111,7 +114,20 @@ public:
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_CHECKER3D); }
 	virtual SClass_ID SuperClassID() 				{ return TEXMAP_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_CHECKER3D_CLASS_ID; }
-	virtual const TCHAR* Category() 				{ return _T("Maps\\lux"); }//GetString(IDS_CATEGORY); }
+	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
+
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	FPInterface* GetInterface(Interface_ID id) {
+		if (IMATERIAL_BROWSER_ENTRY_INFO_INTERFACE == id) {
+			return static_cast<IMaterialBrowserEntryInfo*>(this);
+		}
+		return ClassDesc2::GetInterface(id);
+	}
+
+	const MCHAR* GetEntryName() const { return NULL; }
+	const MCHAR* GetEntryCategory() const { return _T("Maps\\lux"); }
+	Bitmap* GetEntryThumbnail() const { return NULL; }
+#endif
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Checker3d"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle

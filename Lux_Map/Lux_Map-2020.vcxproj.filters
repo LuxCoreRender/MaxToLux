@@ -4,6 +4,10 @@
     <ClCompile Include="Lux_Checker2d.cpp" />
     <ClCompile Include="DllEntry.cpp" />
     <ClCompile Include="Lux_Checker3d.cpp" />
+    <ClCompile Include="Lux_Add.cpp" />
+    <ClCompile Include="Lux_Mix.cpp" />
+    <ClCompile Include="Lux_Scale.cpp" />
+    <ClCompile Include="Lux_Subtract.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h" />

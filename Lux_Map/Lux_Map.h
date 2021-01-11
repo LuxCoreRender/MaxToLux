@@ -25,6 +25,8 @@
 #include <iparamm2.h>
 #include <maxtypes.h>
 //SIMPLE TYPE
+#include <IMaterialBrowserEntryInfo.h>
+#include <IMtlRender_Compatibility.h>
 
 
 #include <stdmat.h>
@@ -35,3 +37,11 @@
 extern TCHAR *GetString(int id);
 
 extern HINSTANCE hInstance;
+
+/*class LuxMixMapBrowserEntryInfo
+	: public IMaterialBrowserEntryInfo
+{
+public:
+	const MCHAR* GetEntryName() const override;
+	const MCHAR* GetEntryCategory() const override;
+};*/

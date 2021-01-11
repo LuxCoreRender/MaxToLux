@@ -20,11 +20,25 @@
 
 extern ClassDesc2* GetLux_CheckerDesc();
 extern ClassDesc2* GetLux_Checker3dDesc();
+extern ClassDesc2* GetLux_AddDesc();
+extern ClassDesc2* GetLux_SubtractDesc();
+extern ClassDesc2* GetLux_ScaleDesc();
+extern ClassDesc2* GetLux_MixDesc();
+extern ClassDesc2* GetLux_PowerDesc();
+extern ClassDesc2* GetLux_DivideDesc();
+extern ClassDesc2* GetLux_DotProductDesc();
+extern ClassDesc2* GetLux_LessThanDesc();
+extern ClassDesc2* GetLux_GreaterThanDesc();
+extern ClassDesc2* GetLux_AbsDesc();
+extern ClassDesc2* GetLux_ClampDesc();
+extern ClassDesc2* GetLux_RoundDesc();
+extern ClassDesc2* GetLux_ModuloDesc();
+extern ClassDesc2* GetLux_NormalDesc();
 
 HINSTANCE hInstance;
 int controlsInit = FALSE;
 
-#define MAX_MAP   3
+#define MAX_MAP   16
 ClassDesc *classDescArray[MAX_MAP];
 int classDescCount = 0;
 
@@ -34,6 +48,20 @@ static BOOL InitMtlDLL(void)
 	{
 		classDescArray[classDescCount++] = GetLux_CheckerDesc();
 		classDescArray[classDescCount++] = GetLux_Checker3dDesc();
+		classDescArray[classDescCount++] = GetLux_AddDesc();
+		classDescArray[classDescCount++] = GetLux_SubtractDesc();
+		classDescArray[classDescCount++] = GetLux_ScaleDesc();
+		classDescArray[classDescCount++] = GetLux_MixDesc();
+		classDescArray[classDescCount++] = GetLux_PowerDesc();
+		classDescArray[classDescCount++] = GetLux_DivideDesc();
+		classDescArray[classDescCount++] = GetLux_DotProductDesc();
+		classDescArray[classDescCount++] = GetLux_LessThanDesc();
+		classDescArray[classDescCount++] = GetLux_GreaterThanDesc();
+		classDescArray[classDescCount++] = GetLux_AbsDesc();
+		classDescArray[classDescCount++] = GetLux_ClampDesc();
+		classDescArray[classDescCount++] = GetLux_RoundDesc();
+		classDescArray[classDescCount++] = GetLux_ModuloDesc();
+		classDescArray[classDescCount++] = GetLux_NormalDesc();
 		//RegisterObjectAppDataReader(&patchReader);
 		//RegisterObjectAppDataReader(&splineReader);
 	}
