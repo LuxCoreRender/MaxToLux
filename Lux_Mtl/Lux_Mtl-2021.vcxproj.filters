@@ -21,10 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h" />
-    <ClInclude Include="Lux_Mtl.h">
+    <ClInclude Include="resource.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="Lux_Materal.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

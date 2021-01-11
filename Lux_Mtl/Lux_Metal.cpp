@@ -16,7 +16,7 @@
  * limitations under the License.                                          *
  ***************************************************************************/
 
-#include "Lux_Mtl.h"
+#include "Lux_Materal.h"
 //#include <maxscript\maxscript.h>
 
 #define LUX_METAL_CLASS_ID	Class_ID(0x2d8e1f90, 0x78850769)
@@ -122,6 +122,9 @@ private:
 
 
 class Lux_MetalClassDesc : public ClassDesc2 
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	, public IMaterialBrowserEntryInfo
+#endif
 {
 public:
 	virtual int IsPublic() 							{ return TRUE; }
@@ -130,6 +133,19 @@ public:
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_METAL_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
+
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	FPInterface* GetInterface(Interface_ID id) {
+		if (IMATERIAL_BROWSER_ENTRY_INFO_INTERFACE == id) {
+			return static_cast<IMaterialBrowserEntryInfo*>(this);
+		}
+		return ClassDesc2::GetInterface(id);
+	}
+
+	const MCHAR* GetEntryName() const { return NULL; }
+	const MCHAR* GetEntryCategory() const { return _T("Materials\\lux"); }
+	Bitmap* GetEntryThumbnail() const { return NULL; }
+#endif
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Metal"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle

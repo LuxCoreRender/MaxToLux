@@ -17,7 +17,7 @@
  ***************************************************************************/
 
 #include <string>
-#include "Lux_Mtl.h"
+#include "Lux_Materal.h"
 //#include <maxscript\maxscript.h>
 
 #define LUX_GlOSSY2_CLASS_ID	Class_ID(0x67b86e70, 0x7de456e1)
@@ -123,6 +123,9 @@ private:
 
 
 class Lux_Glossy2ClassDesc : public ClassDesc2 
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	, public IMaterialBrowserEntryInfo
+#endif
 {
 public:
 	virtual int IsPublic() 							{ return TRUE; }
@@ -131,6 +134,19 @@ public:
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_GlOSSY2_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
+
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	FPInterface* GetInterface(Interface_ID id) {
+		if (IMATERIAL_BROWSER_ENTRY_INFO_INTERFACE == id) {
+			return static_cast<IMaterialBrowserEntryInfo*>(this);
+		}
+		return ClassDesc2::GetInterface(id);
+	}
+
+	const MCHAR* GetEntryName() const { return NULL; }
+	const MCHAR* GetEntryCategory() const { return _T("Materials\\lux"); }
+	Bitmap* GetEntryThumbnail() const { return NULL; }
+#endif
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Glossy2"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle
@@ -224,7 +240,7 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_end,
 
 	specularMap, _T("specular Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_GLOSSY_SPECULAR_MAP,
-		p_refno, 3, /*Figure out why it crashes if you start on lower number.*/
+		p_refno, 3,
 		p_subtexno, 1,
 		p_ui, Glossy_map, TYPE_TEXMAPBUTTON, IDC_GLOSSY_SPECULAR_MAP,
 		p_end,

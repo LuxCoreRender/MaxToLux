@@ -50,6 +50,7 @@
       <AdditionalIncludeDirectories>$(ADSK_3DSMAX_SDK_2019)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BrowseInformation>
+      <RuntimeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2019)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

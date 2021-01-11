@@ -19,7 +19,7 @@
     <ProjectGuid>{65275FB9-9C9D-4F78-B309-89AEA5887ACD}</ProjectGuid>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <MaxSDK>$(ADSK_3DSMAX_SDK_2021)</MaxSDK>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
@@ -52,7 +52,7 @@
       <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</BrowseInformation>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2021)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2021)\lib\x64\Debug;$(ADSK_3DSMAX_SDK_2021)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>bmm.lib; core.lib; geom.lib; gfx.lib; mesh.lib; maxutil.lib; maxscrpt.lib; manipsys.lib; paramblk2.lib;;%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>Lux_Mtl.def</ModuleDefinitionFile>
     </Link>
@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h" />
-    <ClInclude Include="Lux_Mtl.h" />
+    <ClInclude Include="Lux_Materal.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

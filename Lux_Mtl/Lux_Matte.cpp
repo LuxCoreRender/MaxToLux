@@ -16,8 +16,8 @@
  * limitations under the License.                                          *
  ***************************************************************************/
 
-#include <string>
-#include "Lux_Mtl.h"
+//#include <string>
+#include "Lux_Materal.h"
 //#include <maxscript\maxscript.h>
 
 #define LUX_MATTE_CLASS_ID	Class_ID(0x31b54e60, 0x1de956e4)
@@ -119,7 +119,10 @@ private:
 	//Interval	  mapValid;
 };
 
-class Lux_MatteClassDesc : public ClassDesc2 
+class Lux_MatteClassDesc : public ClassDesc2
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	, public IMaterialBrowserEntryInfo
+#endif
 {
 public:
 	virtual int IsPublic() 							{ return TRUE; }
@@ -127,7 +130,20 @@ public:
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_MATTE); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_MATTE_CLASS_ID; }
-	virtual const TCHAR* Category() 				{ return _T("Materials\\lux");/*GetString(IDS_CATEGORY);*/ }
+	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
+
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	FPInterface* GetInterface(Interface_ID id) {
+		if (IMATERIAL_BROWSER_ENTRY_INFO_INTERFACE == id) {
+			return static_cast<IMaterialBrowserEntryInfo*>(this);
+		}
+		return ClassDesc2::GetInterface(id);
+	}
+
+	const MCHAR* GetEntryName() const { return NULL; }
+	const MCHAR* GetEntryCategory() const { return _T("Materials\\lux"); }
+	Bitmap* GetEntryThumbnail() const { return NULL; }
+#endif
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Matte"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle
@@ -430,9 +446,9 @@ Interval Lux_Matte::Validity(TimeValue t)
 
 RefTargetHandle Lux_Matte::GetReference(int i)
 {
-	std::string a = std::to_string(i);
+	/*std::string a = std::to_string(i);
 	a = "\Get Reference : " + a + "\n";
-	OutputDebugStringA(a.c_str());
+	OutputDebugStringA(a.c_str());*/
 	/*switch (i)
 	{
 		//case 0: return pblock; break;
@@ -450,9 +466,9 @@ RefTargetHandle Lux_Matte::GetReference(int i)
 
 void Lux_Matte::SetReference(int i, RefTargetHandle rtarg)
 {
-	std::string a = std::to_string(i);
+	/*std::string a = std::to_string(i);
 	a = "\Set Reference : " + a + "\n";
-	OutputDebugStringA(a.c_str());
+	OutputDebugStringA(a.c_str());*/
 	//mprintf(_T("\n SetReference Nubmer is ------->>>>: %i \n"), i);
 	/*switch (i)
 	{
@@ -477,9 +493,9 @@ TSTR Lux_Matte::SubAnimName(int i)
 
 Animatable* Lux_Matte::SubAnim(int i)
 {
-	std::string a = std::to_string(i);
+	/*std::string a = std::to_string(i);
 	a = "\sub anim : " + a + "\n";
-	OutputDebugStringA(a.c_str());
+	OutputDebugStringA(a.c_str());*/
 	/*switch (i)
 	{
 		//case 0: return pblock;

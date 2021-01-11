@@ -16,7 +16,7 @@
  * limitations under the License.                                          *
  ***************************************************************************/
 
-#include "Lux_Mtl.h"
+#include "Lux_Materal.h"
 
 extern ClassDesc2* GetLux_MatteDesc();
 extern ClassDesc2* GetLux_MixDesc();

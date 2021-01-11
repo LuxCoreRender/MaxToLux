@@ -17,8 +17,8 @@
  ***************************************************************************/
 
 #include <string>
-#include "Lux_Mtl.h"
-#include "maxscript\maxscript.h"
+#include "Lux_Materal.h"
+//#include "maxscript\maxscript.h"
 
 #define LUX_LIGHT_CLASS_ID	Class_ID(0x5d2f7ac1, 0x7dd93354)
 
@@ -118,6 +118,9 @@ private:
 
 
 class Lux_LightClassDesc : public ClassDesc2 
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	, public IMaterialBrowserEntryInfo
+#endif
 {
 public:
 	virtual int IsPublic() 							{ return TRUE; }
@@ -126,6 +129,19 @@ public:
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_LIGHT_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
+
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 13900
+	FPInterface* GetInterface(Interface_ID id) {
+		if (IMATERIAL_BROWSER_ENTRY_INFO_INTERFACE == id) {
+			return static_cast<IMaterialBrowserEntryInfo*>(this);
+		}
+		return ClassDesc2::GetInterface(id);
+	}
+
+	const MCHAR* GetEntryName() const { return NULL; }
+	const MCHAR* GetEntryCategory() const { return _T("Materials\\lux"); }
+	Bitmap* GetEntryThumbnail() const { return NULL; }
+#endif
 
 	virtual const TCHAR* InternalName() 			{ return _T("Lux_Light"); }	// returns fixed parsable name (scripter-visible name)
 	virtual HINSTANCE HInstance() 					{ return hInstance; }					// returns owning module handle
