@@ -5,7 +5,7 @@ The original forum discussion about this topic can be found [here](https://forum
 
 MaxToLux is written in C++, and it's integrated into the interface like most other renderer plugins and natively utilizes the LuxCore interface. 
 
-Download binary build [here](https://github.com/LuxCoreRender/MaxToLux/releases)
+Download binary build and plugin installer [here](https://github.com/LuxCoreRender/MaxToLux/releases)
 
 ![alt text](https://3dfine.com/content/LuxCore-MaxToLux.jpg)
 
