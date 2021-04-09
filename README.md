@@ -9,7 +9,6 @@ Download binary build and plugin installer [here](https://github.com/LuxCoreRend
 
 ![alt text](https://3dfine.com/content/LuxCore-MaxToLux.jpg)
 
-How to Build from source code
 .
 .
 .
