@@ -243,6 +243,65 @@ BEGIN
     LTEXT           "Scale :",-1,13,33,42,11
 END
 
+IDD_VOLUME_COMMON_PANEL DIALOGEX 0, 0, 217, 126
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_VOLUME_IOR_MAP,"CustButton",WS_TABSTOP,103,14,98,13
+    LTEXT           "IOR :",-1,13,16,42,11
+    CONTROL         "",IDC_VOLUME_ABSORPTION_MAP,"CustButton",WS_TABSTOP,103,33,98,13
+    LTEXT           "Absorption :",-1,13,35,42,11
+    CONTROL         "",IDC_VOLUME_IOR,"CustEdit",WS_TABSTOP,63,15,24,11
+    CONTROL         "",IDC_VOLUME_IOR_SPIN,"SpinnerControl",0x0,87,15,9,11
+    CONTROL         "",IDC_VOLUME_ABSORPTION_DEPTH,"CustEdit",WS_TABSTOP,159,52,32,11
+    CONTROL         "",IDC_VOLUME_ABSORPTION_DEPTH_SPIN,"SpinnerControl",0x0,191,52,9,11
+    LTEXT           "Priority :",-1,14,89,37,11
+    CONTROL         "",IDC_VOLUME_PRIORITY,"CustEdit",WS_TABSTOP,160,87,32,11
+    CONTROL         "",IDC_VOLUME_PRIORITY_SPIN,"SpinnerControl",0x0,192,87,9,11
+    CONTROL         "",IDC_VOLUME_EMISSION_MAP,"CustButton",WS_TABSTOP,103,68,98,13
+    LTEXT           "Absorption Depth :",-1,13,52,65,11
+    LTEXT           "Emission :",-1,13,69,38,11
+    LTEXT           "Id :",-1,14,105,37,11
+    CONTROL         "",IDC_VOLUME_ID,"CustEdit",WS_TABSTOP,160,103,32,11
+    CONTROL         "",IDC_VOLUME_ID_SPIN,"SpinnerControl",0x0,192,103,9,11
+    CONTROL         "",IDC_VOLUME_ABSORPTION_COLOR,"ColorSwatch",WS_TABSTOP,63,34,33,12
+    CONTROL         "",IDC_VOLUME_EMISSION_COLOR,"ColorSwatch",WS_TABSTOP,63,68,33,12
+END
+
+IDD_VOLUME_HOMOGENEOUS_PANEL DIALOGEX 0, 0, 217, 86
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_VOLUME_HOMO_SCATTERING_MAP,"CustButton",WS_TABSTOP,103,13,98,13
+    LTEXT           "Scattering :",-1,13,15,42,11
+    CONTROL         "",IDC_VOLUME_HOMO_SCATTERING_SCALE,"CustEdit",WS_TABSTOP,159,32,32,11
+    CONTROL         "",IDC_VOLUME_HOMO_SCATTERING_SCALE_SPIN,"SpinnerControl",0x0,191,32,9,11
+    CONTROL         "",IDC_VOLUME_HOMO_ASYMMETRY_MAP,"CustButton",WS_TABSTOP,103,48,98,13
+    LTEXT           "Scattering Scale :",-1,13,32,65,11
+    LTEXT           "Asymmetry :",-1,13,49,38,11
+    CONTROL         "",IDC_VOLUME_HOMO_SCATTERING_COLOR,"ColorSwatch",WS_TABSTOP,63,13,33,12
+    CONTROL         "",IDC_VOLUME_HOMO_ASYMMETRY_COLOR,"ColorSwatch",WS_TABSTOP,63,48,33,12
+    LTEXT           "Multiscattering :",-1,14,67,65,11
+    CONTROL         "",IDC_VOLUME_HOMO_MULTISCATTERING,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,192,67,10,10
+END
+
+IDD_VOLUME_HETEROGENEOUS_PANEL DIALOGEX 0, 0, 217, 83
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Priority :",-1,13,47,43,11
+    CONTROL         "",IDC_VOLUME_HETRO_STEPSIZE,"CustEdit",WS_TABSTOP,159,14,32,11
+    CONTROL         "",IDC_VOLUME_HETRO_STEPSIZE_SPIN,"SpinnerControl",0x0,191,14,9,11
+    LTEXT           "Step Size:",-1,13,14,65,11
+    LTEXT           "Max Steps:",-1,13,31,47,11
+    LTEXT           "Auto Step Settings :",-1,14,63,65,11
+    CONTROL         "",IDC_VOLUME_HETRO_AUTO_STEP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,192,63,10,10
+    CONTROL         "",IDC_VOLUME_HETRO_MAX_STEP,"CustEdit",WS_TABSTOP,159,31,32,11
+    CONTROL         "",IDC_VOLUME_HETRO_MAX_STEP_SPIN,"SpinnerControl",0x0,191,31,9,11
+    CONTROL         "",IDC_VOLUME_HETRO_PRIORITY,"CustEdit",WS_TABSTOP,159,47,32,11
+    CONTROL         "",IDC_VOLUME_HETRO_PRIORITY_SPIN,"SpinnerControl",0x0,191,47,9,11
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -379,6 +438,30 @@ BEGIN
         TOPMARGIN, 7
         BOTTOMMARGIN, 48
     END
+
+    IDD_VOLUME_COMMON_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 119
+    END
+
+    IDD_VOLUME_HOMOGENEOUS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 79
+    END
+
+    IDD_VOLUME_HETEROGENEOUS_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 208
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 76
+    END
 END
 #endif    // APSTUDIO_INVOKED
 
@@ -494,6 +577,21 @@ BEGIN
     0
 END
 
+IDD_VOLUME_COMMON_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_VOLUME_HOMOGENEOUS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_VOLUME_HETEROGENEOUS_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -522,6 +620,7 @@ END
 STRINGTABLE
 BEGIN
     IDS_CHECKER_TEXTURE1_COLOR2 "Checker texture 1 color"
+    IDS_CLASS_VOLUME_CLEAR  "Lux Volume Clear"
     IDS_CLASS_ADD           "Lux Add"
     IDS_CLASS_SUBTRACT      "Lux Subtract"
     IDS_ADD_PARAMS          "Add Parameters"
@@ -575,6 +674,7 @@ BEGIN
     IDS_SCALE_TEXTURE_2     "Scale texture 1"
     IDS_MIX_AMOUNT_TEXTURE  "Mix Amount Texture"
     IDS_ABS_VALUE           "Abs Value"
+    IDS_VOLUME_CLEAR_PARAM  "Volume Clear Parameters"
 END
 
 STRINGTABLE
@@ -582,8 +682,35 @@ BEGIN
     IDS_ABS_TEXTURE_MAP     "Abs Texture Map"
     IDS_NORMAL_VALUE        "Normal Value"
     IDS_NORMAL_TEXTURE_MAP  "Normal Texture Map"
+    IDS_VOLUME_IOR          "Volume IOR"
     IDS_CLASS_NORMAL        "Lux Normal"
     IDS_NORMAL_PARAMS       "Normal Parameters"
+    IDS_VOLUME_IOR_MAP      "Volume IOR Map"
+    IDS_VOLUME_ABSORPTION_COLOR "Volume Absorption Color"
+    IDS_VOLUME_ABSORPTION_MAP "Volume Absorption Map"
+    IDS_VOLUME_ABSORPTION_DEPTH "Volume Absorption Depth"
+    IDS_VOLUME_EMISSION_COLOR "Volume Emission Color"
+    IDS_VOLUME_EMISSION_MAP "Volume Emission Map"
+    IDS_VOLUME_PRIORITY     "Volume Periority"
+    IDS_VOLUME_ID           "Volume ID"
+    IDS_VOLUME_HETRO_STEPSIZE "Volume Hetro Step Size"
+    IDS_VOLUME_HETRO_MAX_STEP "Volume Hetro Max Step"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_VOLUME_HETRO_PRIORITY "Volume Hetro Priority"
+    IDS_VOLUME_HETRO_AUTO_STEP "Volume Hetro Auto Step Settings"
+    IDS_VOLUME_HOMO_SCATTERING_COLOR "Volume Homo Scattering Color"
+    IDS_VOLUME_HOMO_SCATTERING_MAP "Volume Homo Scattering Map"
+    IDS_VOLUME_HOMO_SCATTERING_SCALE "Volume Homo Scattering Scale"
+    IDS_VOLUME_HOMO_ASYMMETRY_COLOR "Volume Homo Asymmetry Color"
+    IDS_VOLUME_HOMO_ASYMMETRY_MAP "Volume Homo Asymmetry Map"
+    IDS_VOLUME_HOMO_MULTISCATTERING "Volume Homo Multiscattering"
+    IDS_CLASS_VOLUME_HOMO   "Lux Volume Homogenwous"
+    IDS_CLASS_VOLUME_HETRO  "Lux Volume Hetrogeneous"
+    IDS_VOLUME_HOMO_PARAM   "Volume Homogenwous Parameters"
+    IDS_VOLUME_HETRO_PARAM  "Volume Hetrogenwous Parameters"
 END
 
 #endif    // English (United States) resources

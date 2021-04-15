@@ -64,14 +64,17 @@ public:
 	virtual int  NumSubMtls() { return 0; }
 	virtual Mtl* GetSubMtl(int i);
 	virtual void SetSubMtl(int i, Mtl *m);
-	virtual TSTR GetSubMtlSlotName(int i);
+	virtual TSTR GetSubMtlSlotName(int i, bool localized);
 	virtual TSTR GetSubMtlTVName(int i);
 
 	// SubTexmap access methods
 	virtual int     NumSubTexmaps() { return NUM_SUBTEXTURES; }
 	virtual Texmap* GetSubTexmap(int i);
 	virtual void    SetSubTexmap(int i, Texmap *m);
-	virtual TSTR    GetSubTexmapSlotName(int i);
+#if GET_MAX_RELEASE(VERSION_3DSMAX) < 23900
+	virtual TSTR	GetSubTexmapSlotName(int i) { return GetSubTexmapSlotName(i, false); }
+#endif
+	virtual TSTR	GetSubTexmapSlotName(int i, bool localized);
 	virtual TSTR    GetSubTexmapTVName(int i);
 
 	virtual BOOL SetDlgThing(ParamDlg* dlg);
@@ -83,14 +86,14 @@ public:
 	// From Animatable
 	virtual Class_ID ClassID() {return LUX_LIGHT_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_LIGHT);}
+	virtual void GetClassName(TSTR& s, bool localized) {s = GetString(IDS_CLASS_LIGHT);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
 	virtual int NumSubs() { return 1+NUM_SUBMATERIALS; }
 	virtual Animatable* SubAnim(int i);
-	virtual TSTR SubAnimName(int i);
+	virtual TSTR SubAnimName(int i, bool localized);
 
 	// TODO: Maintain the number or references here
 	virtual int NumRefs() { return 1 + NUM_REF; }
@@ -126,6 +129,7 @@ public:
 	virtual int IsPublic() 							{ return TRUE; }
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Light(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_LIGHT); }
+	virtual const TCHAR*  NonLocalizedClassName()	{ return GetString(IDS_CLASS_LIGHT); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_LIGHT_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
@@ -397,7 +401,7 @@ void Lux_Light::SetReference(int i, RefTargetHandle rtarg)
 		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
-TSTR Lux_Light::SubAnimName(int i)
+TSTR Lux_Light::SubAnimName(int i, bool localized)
 {
 	if ((i >= 0) && (i < NUM_SUBMATERIALS))
 		return GetSubTexmapTVName(i);
@@ -501,7 +505,7 @@ void Lux_Light::SetSubMtl(int i, Mtl* m)
 	}
 }
 
-TSTR Lux_Light::GetSubMtlSlotName(int i)
+TSTR Lux_Light::GetSubMtlSlotName(int i, bool localized)
 {
 	// Return i'th sub-material name
 	return submtl[i]->GetName();
@@ -510,7 +514,7 @@ TSTR Lux_Light::GetSubMtlSlotName(int i)
 
 TSTR Lux_Light::GetSubMtlTVName(int i)
 {
-	return GetSubMtlSlotName(i);
+	return GetSubMtlSlotName(i, false);
 }
 
 /*===========================================================================*\
@@ -546,7 +550,7 @@ void Lux_Light::SetSubTexmap(int i, Texmap* m)
 	}
 }
 
-TSTR Lux_Light::GetSubTexmapSlotName(int i)
+TSTR Lux_Light::GetSubTexmapSlotName(int i, bool localized)
 {
 	switch (i)
 	{
@@ -564,7 +568,7 @@ TSTR Lux_Light::GetSubTexmapSlotName(int i)
 TSTR Lux_Light::GetSubTexmapTVName(int i)
 {
 	// Return i'th sub-texture name
-	return GetSubTexmapSlotName(i);
+	return GetSubTexmapSlotName(i, false);
 }
 
 

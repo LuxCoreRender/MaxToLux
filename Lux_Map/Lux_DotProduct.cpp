@@ -66,7 +66,10 @@ public:
 	//TODO: Return the pointer to the 'i-th' sub-texmap
 	virtual Texmap* GetSubTexmap(int i) { return subtex[i]; }
 	virtual void SetSubTexmap(int i, Texmap *m);
-	virtual TSTR GetSubTexmapSlotName(int i);
+#if GET_MAX_RELEASE(VERSION_3DSMAX) < 23900
+	virtual TSTR GetSubTexmapSlotName(int i) { return GetSubTexmapSlotName(i, false); }
+#endif
+	virtual TSTR GetSubTexmapSlotName(int i, bool localized);
 
 	//From Texmap
 	virtual RGBA   EvalColor(ShadeContext& sc);
@@ -94,7 +97,7 @@ public:
 	//From Animatable
 	virtual Class_ID  ClassID() { return LUX_DOTPRODUCT_CLASS_ID; }
 	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) { s = GetString(IDS_CLASS_DOTPRODUCT); }
+	virtual void GetClassName(TSTR& s, bool localized) { s = GetString(IDS_CLASS_DOTPRODUCT); }
 
 	virtual RefTargetHandle Clone(RemapDir &remap);
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
@@ -102,7 +105,7 @@ public:
 
 	virtual int NumSubs() { return 1 + NSUBTEX; }
 	virtual Animatable* SubAnim(int i);
-	virtual TSTR SubAnimName(int i);
+	virtual TSTR SubAnimName(int i, bool localized);
 
 	// TODO: Maintain the number or references here
 	virtual int NumRefs() { return 2 + NSUBTEX; }
@@ -138,6 +141,7 @@ public:
 	virtual int IsPublic() { return TRUE; }
 	virtual void* Create(BOOL /*loading = FALSE*/) { return new Lux_DotProduct(); }
 	virtual const TCHAR *	ClassName() { return GetString(IDS_CLASS_DOTPRODUCT); }
+	const TCHAR*  NonLocalizedClassName() { return GetString(IDS_CLASS_DOTPRODUCT); }
 	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
 	virtual Class_ID ClassID() { return LUX_DOTPRODUCT_CLASS_ID; }
 	virtual const TCHAR* Category() { return GetString(IDS_CATEGORY); }
@@ -185,26 +189,28 @@ static ParamBlockDesc2 Lux_DotProduct_param_blk(Lux_DotProduct_params, _T("param
 	//rollout
 	IDD_DOTPRODUCT_PANEL, IDS_DOTPRODUCT_PARAMS, 0, 0, NULL,
 	// params
-	value1, _T("add value 1"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE1_COLOR,
-	p_default, Color(0.5f, 0.5f, 0.5f),
-	p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE1_COLOR,
+	value1, _T("dotproduct value 1"), TYPE_FLOAT, P_ANIMATABLE, IDS_MIX_VALUE_1,
+	p_default, 1.0f,
+	p_range, 0.001f, 1.0f,
+	p_ui, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_DOTPRODUCT_VALUE_1, IDC_DOTPRODUCT_VALUE_1_SPIN, 0.001f,
 	p_end,
 
-	texture1_map, _T("add texture 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE1_MAP,
+	texture1_map, _T("dotproduct texture 1 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE1_MAP,
 	p_refno, TEXTURE1_REF,
 	p_subtexno, 0,
-	p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE1_MAP,
+	p_ui, TYPE_TEXMAPBUTTON, IDC_DOTPRODUCT_TEXTURE1_MAP,
 	p_end,
 
-	value2, _T("add value 2"), TYPE_RGBA, P_ANIMATABLE, IDS_CHECKER_TEXTURE2_COLOR,
-	p_default, Color(0.5f, 0.5f, 0.5f),
-	p_ui, TYPE_COLORSWATCH, IDC_CHECKER_TEXTURE2_COLOR,
+	value2, _T("dotproduct value 2"), TYPE_FLOAT, P_ANIMATABLE, IDS_MIX_VALUE_1,
+	p_default, 1.0f,
+	p_range, 0.001f, 1.0f,
+	p_ui, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_DOTPRODUCT_VALUE_2, IDC_DOTPRODUCT_VALUE_2_SPIN, 0.001f,
 	p_end,
 
-	texture2_map, _T("add texture 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE2_MAP,
+	texture2_map, _T("dotproduct texture 2 map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_CHECKER_TEXTURE2_MAP,
 	p_refno, TEXTURE2_REF,
 	p_subtexno, 1,
-	p_ui, TYPE_TEXMAPBUTTON, IDC_CHECKER_TEXTURE2_MAP,
+	p_ui, TYPE_TEXMAPBUTTON, IDC_DOTPRODUCT_TEXTURE2_MAP,
 	p_end,
 
 	pb_coords, _T("coords"), TYPE_REFTARG, P_OWNERS_REF, IDS_COORDS,
@@ -279,7 +285,7 @@ void Lux_DotProduct::SetSubTexmap(int i, Texmap* m)
 	//TODO Store the 'i-th' sub-texmap managed by the texture
 }
 
-TSTR Lux_DotProduct::GetSubTexmapSlotName(int i)
+TSTR Lux_DotProduct::GetSubTexmapSlotName(int i, bool localized)
 {
 	//TODO: Return the slot name of the 'i-th' sub-texmap
 	switch (i)
@@ -373,7 +379,7 @@ Animatable* Lux_DotProduct::SubAnim(int i)
 	}
 }
 
-TSTR Lux_DotProduct::SubAnimName(int i)
+TSTR Lux_DotProduct::SubAnimName(int i, bool localized)
 {
 	//TODO: Return the sub-anim names
 	switch (i)

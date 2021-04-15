@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Hybrid|Win32">
+      <Configuration>Hybrid</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Hybrid|x64">
+      <Configuration>Hybrid</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6054DB90-A973-4DC0-BB14-911ACA9B4AA0}</ProjectGuid>
+    <MaxSDK>$(ADSK_3DSMAX_SDK_2021)</MaxSDK>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ProjectName>MaxToLux</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(ADSK_3DSMAX_SDK_2021)\ProjectSettings\propertySheets\3dsmax.general.project.settings.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(ADSK_3DSMAX_SDK_2021)\ProjectSettings\propertySheets\3dsmax.cpp.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.10586.0</_ProjectFileVersion>
+    <OutDir>$(ADSK_3DSMAX_X64_2022)plugins</OutDir>
+    <TargetName>MaxToLux2022</TargetName>
+    <TargetExt>.dlr</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LibraryPath>$(ADSK_3DSMAX_SDK_2021)\lib\x64\Release;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\..\LuxCore\include\luxcore;..\..\LuxCore\include\luxrays;..\..\WindowsCompile\Build_CMake\LuxCore\lib\Release;..\..\WindowsCompile\Build_CMake\LuxCore\generated\include;..\..\WindowsCompileDeps\include\Boost;$(ADSK_3DSMAX_SDK_2022)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\deps\x64;$(LibraryPath)</LibraryPath>
+    <PostBuildEventUseInBuild>false</PostBuildEventUseInBuild>
+    <IntDir>$(ProjectDir)obj$(MaxPlatform)$(MaxConfiguration)</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <EmbedManifest>false</EmbedManifest>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
+    <EmbedManifest>false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(ADSK_3DSMAX_SDK_2022)\include;%(AdditionalIncludeDirectories);..\..\WindowsCompileDeps\include\Boost;..\..\LuxCore\include;..\..\LuxCore\include\luxcore;..\..\WindowsCompileDeps\include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>main.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_MSC_VER;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>blosc.lib;luxcore.lib;IGame.lib;gfx.lib;bmm.lib;embree3.lib;paramblk2.lib;FreeImage.lib;Half.lib;Iex.lib;IlmImf.lib;IlmThread.lib;Imath.lib;jpeg.lib;libboost_bzip2-vc141-mt-x64-1_72.lib;libboost_chrono-vc141-mt-x64-1_72.lib;libboost_date_time-vc141-mt-x64-1_72.lib;libboost_filesystem-vc141-mt-x64-1_72.lib;libboost_iostreams-vc141-mt-x64-1_72.lib;libboost_locale-vc141-mt-x64-1_72.lib;libboost_numpy27-vc141-mt-x64-1_72.lib;libboost_numpy35-vc141-mt-x64-1_72.lib;libboost_numpy36-vc141-mt-x64-1_72.lib;libboost_numpy37-vc141-mt-x64-1_72.lib;libboost_program_options-vc141-mt-x64-1_72.lib;libboost_python27-vc141-mt-x64-1_72.lib;libboost_python35-vc141-mt-x64-1_72.lib;libboost_python36-vc141-mt-x64-1_72.lib;libboost_python37-vc141-mt-x64-1_72.lib;libboost_regex-vc141-mt-x64-1_72.lib;libboost_serialization-vc141-mt-x64-1_72.lib;libboost_system-vc141-mt-x64-1_72.lib;libboost_thread-vc141-mt-x64-1_72.lib;libboost_wserialization-vc141-mt-x64-1_72.lib;libboost_zlib-vc141-mt-x64-1_72.lib;libpng.lib;libtiff.lib;OpenImageDenoise.lib;OpenImageIO_LuxCore.lib;openjpeg.lib;python27.lib;python35.lib;python36.lib;python37.lib;Qt5Core.lib;Qt5Gui.lib;qtmain.lib;Qt5Network.lib;tbb.lib;tbbmalloc.lib;zlib1.lib;maxscrpt.lib;comctl32.lib;core.lib;geom.lib;maxutil.lib;mesh.lib;slg-core.lib;slg-film.lib;slg-kernels.lib;luxrays.lib;glfw3.lib;openvdb.lib;bcd.lib;pyluxcore.lib;Bcrypt.lib;OpenCL.lib;OpenGL32.Lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2022)\lib\x64\Release;..\..\LuxCore\include\luxcore;..\..\WindowsCompileDeps\include;..\..\WindowsCompileDeps\include\Boost\;..\..\WindowsCompileDeps\Qt5\lib;..\..\WindowsCompileDeps\x64\Release\lib;..\..\WindowsCompile\Build_CMake\LuxCore\lib\Release;C:\Program Files (x86)\AMD APP SDK\3.0-0-Beta\lib\x86_64;D:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64;D:\Windows Kits\10\Lib\10.0.17134.0\um\x64</AdditionalLibraryDirectories>
+      <ModuleDefinitionFile>.\MaxToLux.def</ModuleDefinitionFile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_ADESK_3DSMAX_WINDOWS_;WINVER=0x0502;_WIN32_WINNT=0x0502;_WIN32_WINDOWS=0x0502;_WIN32_IE=0x0800;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;ISOLATION_AWARE_ENABLED=1;MODULE_NAME=$(TargetFileName);_DEBUG;WIN32;_WINDLL;_UNICODE;UNICODE</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;LUX_DLL;NOMINMAX;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;ISOLATION_AWARE_ENABLED=1;MODULE_NAME=$(TargetFileName);NDEBUG;SECURE_SCL=0;WIN32;WIN64;_WINDLL;_UNICODE;UNICODE</PreprocessorDefinitions>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <TreatWarningAsError>$(MAXBUILD_FAIL_ON_COMPILER_WARNINGS)</TreatWarningAsError>
+      <AdditionalOptions />
+      <WarningLevel>Level4</WarningLevel>
+      <BrowseInformation>true</BrowseInformation>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+    </Link>
+    <Bscmake>
+      <PreserveSbr>false</PreserveSbr>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Classes.cpp" />
+    <ClCompile Include="LuxCamera.cpp" />
+    <ClCompile Include="LuxMaps.cpp" />
+    <ClCompile Include="LuxMtls.cpp" />
+    <ClCompile Include="LuxMtl_Null.cpp" />
+    <ClCompile Include="MaxToLux.cpp" />
+    <ClCompile Include="main.cpp">
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ExceptionHandling>Async</ExceptionHandling>
+      <BasicRuntimeChecks Condition="'$(Configuration)'=='Debug'">EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck Condition="'$(Configuration)'=='Debug'">true</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet Condition="'$(Platform)'=='Win32'">StreamingSIMDExtensions</EnableEnhancedInstructionSet>
+      <PrecompiledHeader>Create</PrecompiledHeader>
+      <UseFullPaths>true</UseFullPaths>
+      <BasicRuntimeChecks Condition="'$(Configuration)'=='Hybrid'">EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck Condition="'$(Configuration)'=='Hybrid'">true</BufferSecurityCheck>
+      <Optimization Condition="'$(Configuration)'=='Release'">MaxSpeed</Optimization>
+      <InlineFunctionExpansion Condition="'$(Configuration)'=='Release'">AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions Condition="'$(Configuration)'=='Release'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)'=='Release'">Speed</FavorSizeOrSpeed>
+      <OmitFramePointers Condition="'$(Configuration)'=='Release'">false</OmitFramePointers>
+      <EnableFiberSafeOptimizations Condition="'$(Configuration)'=='Release'">true</EnableFiberSafeOptimizations>
+      <BasicRuntimeChecks Condition="'$(Configuration)'=='Release'">Default</BasicRuntimeChecks>
+      <BufferSecurityCheck Condition="'$(Configuration)'=='Release'">false</BufferSecurityCheck>
+    </ClCompile>
+    <ClCompile Include="Luxdlg.cpp" />
+    <ClCompile Include="LuxLights.cpp" />
+    <ClCompile Include="LuxMaterials.cpp" />
+    <ClCompile Include="LuxMesh.cpp" />
+    <ClCompile Include="LuxUtils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MaxToLux.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MaxToLux.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes.h" />
+    <ClInclude Include="luxlight.h" />
+    <ClInclude Include="LuxCamera.h" />
+    <ClInclude Include="LuxMaps.h" />
+    <ClInclude Include="LuxMtls.h" />
+    <ClInclude Include="MaxToLux.h" />
+    <ClInclude Include="LuxLights.h" />
+    <ClInclude Include="LuxMaterials.h" />
+    <ClInclude Include="LuxMesh.h" />
+    <ClInclude Include="LuxUtils.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WindowsCompile\Build_CMake\LuxCore\src\luxcore\luxcore.vcxproj">
+      <Project>{00817FFA-BDED-436D-B015-13403A5C3926}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

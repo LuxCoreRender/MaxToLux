@@ -40,7 +40,7 @@
     <_ProjectFileVersion>10.0.17134.0</_ProjectFileVersion>
     <OutDir Condition="'$(Platform)'=='x64'">$(ADSK_3DSMAX_X64_2021)plugins\</OutDir>
     <IntDir>$(ProjectDir)obj$(MaxPlatform)$(MaxConfiguration)</IntDir>
-    <TargetName>LuxMap</TargetName>
+    <TargetName>LuxMap2021</TargetName>
     <TargetExt>.dlt</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -82,6 +82,9 @@
     <ClCompile Include="Lux_Round.cpp" />
     <ClCompile Include="Lux_Scale.cpp" />
     <ClCompile Include="Lux_Subtract.cpp" />
+    <ClCompile Include="Lux_Volume_Clear.cpp" />
+    <ClCompile Include="Lux_Volume_Hetrogeneous.cpp" />
+    <ClCompile Include="Lux_Volume_Homogeneous.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lux_Map.def" />

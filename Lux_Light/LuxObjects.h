@@ -14,20 +14,15 @@
 // AUTHOR: 
 //***************************************************************************/
 
-#include "3dsmaxsdk_preinclude.h"
+#include "Max.h"
 #include "resource.h"
-#include <istdplug.h>
+#include "resourceOverride.h"
 #include <iparamb2.h>
-#include <iparamm2.h>
-#include <maxtypes.h>
 #include "macrorec.h"
 #include <Graphics/Utilities/MeshEdgeRenderItem.h>
 #include <Graphics/Utilities/SplineRenderItem.h>
 #include <IViewportShadingMgr.h>
 #include "MouseCursors.h"
-#include "notify.h"
-#include "Max.h"
-//SIMPLE TYPE
 
 extern TCHAR *GetString(int id);
 

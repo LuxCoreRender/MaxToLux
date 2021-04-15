@@ -66,6 +66,15 @@
     <ClCompile Include="Lux_Normal.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Lux_Volume_Clear.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lux_Volume_Homogeneous.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lux_Volume_Hetrogeneous.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h">

@@ -26,7 +26,7 @@
 // 
 #define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 // number of sub-materials supported by this plug-in
-#define NUM_SUBTEXTURES 13 // number of sub-textures supported by this plug-in
+#define NUM_SUBTEXTURES 14 // number of sub-textures supported by this plug-in
 #define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 4400 + 3400;
@@ -69,14 +69,17 @@ public:
 	virtual int  NumSubMtls() { return 0; }
 	virtual Mtl* GetSubMtl(int i);
 	virtual void SetSubMtl(int i, Mtl *m);
-	virtual TSTR GetSubMtlSlotName(int i);
+	virtual TSTR GetSubMtlSlotName(int i, bool localized);
 	virtual TSTR GetSubMtlTVName(int i);
 
 	// SubTexmap access methods
 	virtual int     NumSubTexmaps() { return NUM_SUBTEXTURES; }
 	virtual Texmap* GetSubTexmap(int i);
 	virtual void    SetSubTexmap(int i, Texmap *tx);
-	virtual TSTR    GetSubTexmapSlotName(int i);
+#if GET_MAX_RELEASE(VERSION_3DSMAX) < 23900
+	virtual TSTR	GetSubTexmapSlotName(int i) { return GetSubTexmapSlotName(i, false); }
+#endif
+	virtual TSTR	GetSubTexmapSlotName(int i, bool localized);
 	virtual TSTR    GetSubTexmapTVName(int i);
 
 	virtual BOOL SetDlgThing(ParamDlg* dlg);
@@ -88,14 +91,14 @@ public:
 	// From Animatable
 	virtual Class_ID ClassID() {return LUX_GlOSSY2_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_GLOSSY);}
+	virtual void GetClassName(TSTR& s, bool localized) {s = GetString(IDS_CLASS_GLOSSY);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
 	virtual int NumSubs() { return 1 + NUM_SUBTEXTURES; }
 	virtual Animatable* SubAnim(int i);
-	virtual TSTR SubAnimName(int i);
+	virtual TSTR SubAnimName(int i, bool localized);
 
 	// TODO: Maintain the number or references here
 	virtual int NumRefs() { return 1 + NUM_REF; }
@@ -131,6 +134,7 @@ public:
 	virtual int IsPublic() 							{ return TRUE; }
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Glossy2(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_GLOSSY); }
+	virtual const TCHAR*  NonLocalizedClassName()	{ return GetString(IDS_CLASS_GLOSSY); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_GlOSSY2_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
@@ -211,6 +215,8 @@ enum
 	emission_id,
 	enableemission,
 	/*light emission params end*/
+
+	transparency_map,
 };
 
 
@@ -318,15 +324,27 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
-	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
+	transparency, _T("Transparency"), TYPE_FLOAT, P_ANIMATABLE, IDS_TRANSPARENCY,
+		p_default, 1.0f,
+		p_range, 0.01f, 1.0f,
+		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_TRANSPARENCY_EDIT, IDC_TRANSPARENCY_SPIN, 0.01f,
+		p_end,
+
+	transparency_map, _T("Transparency map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_TRANSPARENCY,
 		p_refno, 10,
 		p_subtexno, 8,
+		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_TRANSPARENCY_MAP,
+		p_end,
+
+	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
+		p_refno, 11,
+		p_subtexno, 9,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 11,
-		p_subtexno, 9,
+		p_refno, 12,
+		p_subtexno, 10,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
 
@@ -342,12 +360,6 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_INT, IDC_ID_EDIT, IDC_ID_SPIN, 1,
 		p_end,
 
-	transparency, _T("Transparency"), TYPE_FLOAT, P_ANIMATABLE, IDS_TRANSPARENCY,
-		p_default, 1.0f,
-		p_range, 0.01f, 1.0f,
-		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_TRANSPARENCY_EDIT, IDC_TRANSPARENCY_SPIN, 0.01f,
-		p_end,
-
 	/*Light emmission begin*/
 	emission, _T("emission_color"), TYPE_RGBA, P_ANIMATABLE, IDS_EMISSION,
 		p_default, Color(0.5f, 0.5f, 0.5f),
@@ -355,8 +367,8 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 12,
-		p_subtexno, 10,
+		p_refno, 13,
+		p_subtexno, 11,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
 
@@ -373,8 +385,8 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 13,
-		p_subtexno, 11,
+		p_refno, 14,
+		p_subtexno, 12,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
 
@@ -385,8 +397,8 @@ static ParamBlockDesc2 Lux_Glossy2_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 14,
-		p_subtexno, 12,
+		p_refno, 15,
+		p_subtexno, 13,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
 
@@ -571,7 +583,7 @@ void Lux_Glossy2::SetReference(int i, RefTargetHandle rtarg)
 		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
-TSTR Lux_Glossy2::SubAnimName(int i)
+TSTR Lux_Glossy2::SubAnimName(int i, bool localized)
 {
 	if ((i >= 0) && (i < NUM_SUBTEXTURES))
 		return GetSubTexmapTVName(i);
@@ -716,7 +728,7 @@ void Lux_Glossy2::SetSubMtl(int i, Mtl* m)
 	}
 }
 
-TSTR Lux_Glossy2::GetSubMtlSlotName(int i)
+TSTR Lux_Glossy2::GetSubMtlSlotName(int i, bool localized)
 {
 	// Return i'th sub-material name
 	return submtl[i]->GetName();
@@ -725,7 +737,7 @@ TSTR Lux_Glossy2::GetSubMtlSlotName(int i)
 
 TSTR Lux_Glossy2::GetSubMtlTVName(int i)
 {
-	return GetSubMtlSlotName(i);
+	return GetSubMtlSlotName(i, false);
 }
 
 /*===========================================================================*\
@@ -802,7 +814,7 @@ void Lux_Glossy2::SetSubTexmap(int i, Texmap* tx)
 	}*/
 }
 
-TSTR Lux_Glossy2::GetSubTexmapSlotName(int i)
+TSTR Lux_Glossy2::GetSubTexmapSlotName(int i, bool localized)
 {
 	switch (i)
 	{
@@ -823,14 +835,16 @@ TSTR Lux_Glossy2::GetSubTexmapSlotName(int i)
 		case 7:
 			return _T("Normal map");
 		case 8:
-			return _T("Interior map");
+			return _T("Transparent map");
 		case 9:
-			return _T("Exterior map");
+			return _T("Interior map");
 		case 10:
-			return _T("emission_map");
+			return _T("Exterior map");
 		case 11:
-			return _T("emission_mapfile");
+			return _T("emission_map");
 		case 12:
+			return _T("emission_mapfile");
+		case 13:
 			return _T("emission_iesfile");
 		default:
 			return _T("");
@@ -840,7 +854,7 @@ TSTR Lux_Glossy2::GetSubTexmapSlotName(int i)
 TSTR Lux_Glossy2::GetSubTexmapTVName(int i)
 {
 	// Return i'th sub-texture name
-	return GetSubTexmapSlotName(i);
+	return GetSubTexmapSlotName(i, false);
 }
 
 

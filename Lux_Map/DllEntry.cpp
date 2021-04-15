@@ -34,11 +34,14 @@ extern ClassDesc2* GetLux_ClampDesc();
 extern ClassDesc2* GetLux_RoundDesc();
 extern ClassDesc2* GetLux_ModuloDesc();
 extern ClassDesc2* GetLux_NormalDesc();
+extern ClassDesc2* GetLux_Volume_ClearDesc();
+extern ClassDesc2* GetLux_Volume_HomoDesc();
+extern ClassDesc2* GetLux_Volume_HetroDesc();
 
 HINSTANCE hInstance;
 int controlsInit = FALSE;
 
-#define MAX_MAP   16
+#define MAX_MAP   19
 ClassDesc *classDescArray[MAX_MAP];
 int classDescCount = 0;
 
@@ -62,6 +65,9 @@ static BOOL InitMtlDLL(void)
 		classDescArray[classDescCount++] = GetLux_RoundDesc();
 		classDescArray[classDescCount++] = GetLux_ModuloDesc();
 		classDescArray[classDescCount++] = GetLux_NormalDesc();
+		classDescArray[classDescCount++] = GetLux_Volume_ClearDesc();
+		classDescArray[classDescCount++] = GetLux_Volume_HomoDesc();
+		classDescArray[classDescCount++] = GetLux_Volume_HetroDesc();
 		//RegisterObjectAppDataReader(&patchReader);
 		//RegisterObjectAppDataReader(&splineReader);
 	}

@@ -40,7 +40,7 @@
     <_ProjectFileVersion>10.0.17134.0</_ProjectFileVersion>
     <OutDir Condition="'$(Platform)'=='x64'">$(ADSK_3DSMAX_X64_2019)\plugins\</OutDir>
     <IntDir>$(ProjectDir)\obj\$(MaxPlatform)\$(MaxConfiguration)\</IntDir>
-    <TargetName>LuxMap</TargetName>
+    <TargetName>LuxMap2019</TargetName>
     <TargetExt>.dlt</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -49,6 +49,7 @@
       <PreprocessorDefinitions>_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ADSK_3DSMAX_SDK_2019)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
+      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Disabled</Optimization>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2019)\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -74,6 +75,9 @@
     <ClCompile Include="Lux_Round.cpp" />
     <ClCompile Include="Lux_Scale.cpp" />
     <ClCompile Include="Lux_Subtract.cpp" />
+    <ClCompile Include="Lux_Volume_Clear.cpp" />
+    <ClCompile Include="Lux_Volume_Hetrogeneous.cpp" />
+    <ClCompile Include="Lux_Volume_Homogeneous.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lux_Map.def" />

@@ -8,6 +8,19 @@
     <ClCompile Include="Lux_Mix.cpp" />
     <ClCompile Include="Lux_Scale.cpp" />
     <ClCompile Include="Lux_Subtract.cpp" />
+    <ClCompile Include="Lux_Abs.cpp" />
+    <ClCompile Include="Lux_Clamp.cpp" />
+    <ClCompile Include="Lux_Divide.cpp" />
+    <ClCompile Include="Lux_DotProduct.cpp" />
+    <ClCompile Include="Lux_GreaterThan.cpp" />
+    <ClCompile Include="Lux_LessThan.cpp" />
+    <ClCompile Include="Lux_Modulo.cpp" />
+    <ClCompile Include="Lux_Normal.cpp" />
+    <ClCompile Include="Lux_Power.cpp" />
+    <ClCompile Include="Lux_Round.cpp" />
+    <ClCompile Include="Lux_Volume_Clear.cpp" />
+    <ClCompile Include="Lux_Volume_Hetrogeneous.cpp" />
+    <ClCompile Include="Lux_Volume_Homogeneous.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h" />

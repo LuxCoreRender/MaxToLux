@@ -42,7 +42,7 @@ class TargetObject: public GeomObject{
 		CreateMouseCallBack* GetCreateMouseCallBack();
 		void BeginEditParams( IObjParam *ip, ULONG flags,Animatable *prev);
 		void EndEditParams( IObjParam *ip, ULONG flags,Animatable *next);
-		const TCHAR *GetObjectName() { return GetString(IDS_TARGET); }
+		const TCHAR *GetObjectName(bool localized) { return GetString(IDS_TARGET); }
 
 		// From Object
 		ObjectState Eval(TimeValue time);
@@ -63,7 +63,7 @@ class TargetObject: public GeomObject{
 			 delete this; 
 			 }
 		Class_ID ClassID() { return Class_ID(TARGET_CLASS_ID,0); }  
-		void GetClassName(TSTR& s) { s = GetString(IDS_TARGET_CLASS); }
+		void GetClassName(TSTR& s, bool localized) { s = GetString(IDS_TARGET_CLASS); }
 		int IsKeyable(){ return 1;}
 		LRESULT CALLBACK TrackViewWinProc( HWND hwnd,  UINT message, 
 	            WPARAM wParam,   LPARAM lParam ){return(0);}

@@ -19,7 +19,7 @@
     <ProjectGuid>{65275FB9-9C9D-4F78-B309-89AEA5887ACD}</ProjectGuid>
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <MaxSDK>$(ADSK_3DSMAX_SDK_2021)</MaxSDK>
-    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
@@ -40,7 +40,7 @@
     <_ProjectFileVersion>10.0.17134.0</_ProjectFileVersion>
     <OutDir Condition="'$(Platform)'=='x64'">$(ADSK_3DSMAX_X64_2021)plugins</OutDir>
     <IntDir>$(ProjectDir)obj$(MaxPlatform)$(MaxConfiguration)</IntDir>
-    <TargetName>LuxMaterial</TargetName>
+    <TargetName>LuxMaterial2021</TargetName>
     <TargetExt>.dlt</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>

@@ -23,7 +23,7 @@
 
 #define PBLOCK_REF 1
 #define NUM_SUBMATERIALS 1 //was 16 TODO: number of sub-materials supported by this plug-in
-#define NUM_SUBTEXTURES 8
+#define NUM_SUBTEXTURES 9
 #define NUM_REF NUM_SUBTEXTURES + NUM_SUBMATERIALS + PBLOCK_REF // number of refrences supported by this plug-in
 
 static int seed = rand() % 5400 + 6400;
@@ -66,14 +66,17 @@ public:
 	virtual int  NumSubMtls() { return 0; }
 	virtual Mtl* GetSubMtl(int i);
 	virtual void SetSubMtl(int i, Mtl *m);
-	virtual TSTR GetSubMtlSlotName(int i);
+	virtual TSTR GetSubMtlSlotName(int i, bool localized);
 	virtual TSTR GetSubMtlTVName(int i);
 
 	// SubTexmap access methods
 	virtual int     NumSubTexmaps() { return NUM_SUBTEXTURES; }
 	virtual Texmap* GetSubTexmap(int i);
 	virtual void    SetSubTexmap(int i, Texmap *tx);
-	virtual TSTR    GetSubTexmapSlotName(int i);
+#if GET_MAX_RELEASE(VERSION_3DSMAX) < 23900
+	virtual TSTR	GetSubTexmapSlotName(int i) { return GetSubTexmapSlotName(i, false); }
+#endif
+	virtual TSTR	GetSubTexmapSlotName(int i, bool localized);
 	virtual TSTR    GetSubTexmapTVName(int i);
 
 	virtual BOOL SetDlgThing(ParamDlg* dlg);
@@ -85,14 +88,14 @@ public:
 	// From Animatable
 	virtual Class_ID ClassID() {return LUX_MIRROR_CLASS_ID;}
 	virtual SClass_ID SuperClassID() { return MATERIAL_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) {s = GetString(IDS_CLASS_MIRROR);}
+	virtual void GetClassName(TSTR& s, bool localized) {s = GetString(IDS_CLASS_MIRROR);}
 
 	virtual RefTargetHandle Clone( RemapDir &remap );
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
 
 	virtual int NumSubs() { return 1+NUM_SUBMATERIALS; }
 	virtual Animatable* SubAnim(int i);
-	virtual TSTR SubAnimName(int i);
+	virtual TSTR SubAnimName(int i, bool localized);
 
 	// TODO: Maintain the number or references here
 	virtual int NumRefs() { return 1 + NUM_REF; }
@@ -129,6 +132,7 @@ public:
 	virtual int IsPublic() 							{ return TRUE; }
 	virtual void* Create(BOOL loading = FALSE) 		{ return new Lux_Mirror(loading); }
 	virtual const TCHAR *	ClassName() 			{ return GetString(IDS_CLASS_MIRROR); }
+	virtual const TCHAR*  NonLocalizedClassName()	{ return GetString(IDS_CLASS_MIRROR); }
 	virtual SClass_ID SuperClassID() 				{ return MATERIAL_CLASS_ID; }
 	virtual Class_ID ClassID() 						{ return LUX_MIRROR_CLASS_ID; }
 	virtual const TCHAR* Category() 				{ return GetString(IDS_CATEGORY); }
@@ -198,6 +202,8 @@ enum
 	emission_id,
 	enableemission,
 	/*light emission params end*/
+
+	transparency_map,
 };
 
 
@@ -232,15 +238,27 @@ static ParamBlockDesc2 Lux_Mirror_param_blk (
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_NORMAL_MAP,
 		p_end,
 
-	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
+	transparency, _T("Transparency"), TYPE_FLOAT, P_ANIMATABLE, IDS_TRANSPARENCY,
+		p_default, 1.0f,
+		p_range, 0.01f, 1.0f,
+		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_TRANSPARENCY_EDIT, IDC_TRANSPARENCY_SPIN, 0.01f,
+		p_end,
+
+	transparency_map, _T("Transparency map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_TRANSPARENCY,
 		p_refno, 5,
 		p_subtexno, 3,
+		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_TRANSPARENCY_MAP,
+		p_end,
+
+	interior_map, _T("Interior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_INTERIOR_MAP,
+		p_refno, 6,
+		p_subtexno, 4,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_INTERIOR_MAP,
 		p_end,
 
 	exterior_map, _T("Exterior Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EXTERIOR_MAP,
-		p_refno, 6,
-		p_subtexno, 4,
+		p_refno, 7,
+		p_subtexno, 5,
 		p_ui, Common_Param, TYPE_TEXMAPBUTTON, IDC_EXTERIOR_MAP,
 		p_end,
 
@@ -256,12 +274,6 @@ static ParamBlockDesc2 Lux_Mirror_param_blk (
 		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_INT, IDC_ID_EDIT, IDC_ID_SPIN, 1,
 		p_end,
 
-	transparency, _T("Transparency"), TYPE_FLOAT, P_ANIMATABLE, IDS_TRANSPARENCY,
-		p_default, 1.0f,
-		p_range, 0.01f, 1.0f,
-		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_TRANSPARENCY_EDIT, IDC_TRANSPARENCY_SPIN, 0.01f,
-		p_end,
-
 	// Light
 	emission, _T("emission_color"), TYPE_RGBA, P_ANIMATABLE, IDS_EMISSION,
 		p_default, Color(0.5f, 0.5f, 0.5f),
@@ -269,8 +281,8 @@ static ParamBlockDesc2 Lux_Mirror_param_blk (
 		p_end,
 
 	emission_map, _T("emission_map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAP,
-		p_refno, 7,
-		p_subtexno, 5,
+		p_refno, 8,
+		p_subtexno, 6,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAP,
 		p_end,
 
@@ -287,8 +299,8 @@ static ParamBlockDesc2 Lux_Mirror_param_blk (
 		p_end,
 
 	emission_mapfile, _T("emission_mapfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_MAPFILE,
-		p_refno, 8,
-		p_subtexno, 6,
+		p_refno, 9,
+		p_subtexno, 7,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_MAPFILE,
 		p_end,
 
@@ -299,8 +311,8 @@ static ParamBlockDesc2 Lux_Mirror_param_blk (
 		p_end,
 
 	emission_iesfile, _T("emission_iesfile"), TYPE_TEXMAP, P_OWNERS_REF, IDS_EMISSION_IESFILE,
-		p_refno, 9,
-		p_subtexno, 7,
+		p_refno, 10,
+		p_subtexno, 8,
 		p_ui, Light_emission, TYPE_TEXMAPBUTTON, IDC_EMISSION_IESFILE,
 		p_end,
 
@@ -483,7 +495,7 @@ void Lux_Mirror::SetReference(int i, RefTargetHandle rtarg)
 		subtexture[i - 2] = (Texmap *)rtarg;
 }
 
-TSTR Lux_Mirror::SubAnimName(int i)
+TSTR Lux_Mirror::SubAnimName(int i, bool localized)
 {
 	if ((i >= 0) && (i < NUM_SUBTEXTURES))
 		return GetSubTexmapTVName(i);
@@ -578,7 +590,7 @@ void Lux_Mirror::SetSubMtl(int i, Mtl* m)
 	}
 }
 
-TSTR Lux_Mirror::GetSubMtlSlotName(int i)
+TSTR Lux_Mirror::GetSubMtlSlotName(int i, bool localized)
 {
 	// Return i'th sub-material name
 	return submtl[i]->GetName();
@@ -587,7 +599,7 @@ TSTR Lux_Mirror::GetSubMtlSlotName(int i)
 
 TSTR Lux_Mirror::GetSubMtlTVName(int i)
 {
-	return GetSubMtlSlotName(i);
+	return GetSubMtlSlotName(i, false);
 }
 
 /*===========================================================================*\
@@ -644,7 +656,7 @@ void Lux_Mirror::SetSubTexmap(int i, Texmap* tx)
 	}
 }
 
-TSTR Lux_Mirror::GetSubTexmapSlotName(int i)
+TSTR Lux_Mirror::GetSubTexmapSlotName(int i, bool localized)
 {
 	switch (i)
 	{
@@ -655,14 +667,16 @@ TSTR Lux_Mirror::GetSubTexmapSlotName(int i)
 		case 2:
 			return _T("Normal map");
 		case 3:
-			return _T("Interior map");
+			return _T("Transparent map");
 		case 4:
-			return _T("Exterior map");
+			return _T("Interior map");
 		case 5:
-			return _T("emission_map");
+			return _T("Exterior map");
 		case 6:
-			return _T("emission_mapfile");
+			return _T("emission_map");
 		case 7:
+			return _T("emission_mapfile");
+		case 8:
 			return _T("emission_iesfile");
 		default: return _T("");
 	}
@@ -671,7 +685,7 @@ TSTR Lux_Mirror::GetSubTexmapSlotName(int i)
 TSTR Lux_Mirror::GetSubTexmapTVName(int i)
 {
 	// Return i'th sub-texture name
-	return GetSubTexmapSlotName(i);
+	return GetSubTexmapSlotName(i, false);
 }
 
 

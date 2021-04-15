@@ -40,7 +40,7 @@
     <_ProjectFileVersion>10.0.17134.0</_ProjectFileVersion>
     <OutDir Condition="'$(Platform)'=='x64'">$(ADSK_3DSMAX_X64_2020)\plugins\</OutDir>
     <IntDir>$(ProjectDir)\obj\$(MaxPlatform)\$(MaxConfiguration)\</IntDir>
-    <TargetName>LuxMaterial</TargetName>
+    <TargetName>LuxMaterial2020</TargetName>
     <TargetExt>.dlt</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>

@@ -66,7 +66,10 @@ public:
 	//TODO: Return the pointer to the 'i-th' sub-texmap
 	virtual Texmap* GetSubTexmap(int i) { return subtex[i]; }
 	virtual void SetSubTexmap(int i, Texmap *m);
-	virtual TSTR GetSubTexmapSlotName(int i);
+#if GET_MAX_RELEASE(VERSION_3DSMAX) < 23900
+	virtual TSTR GetSubTexmapSlotName(int i) { return GetSubTexmapSlotName(i, false); }
+#endif
+	virtual TSTR GetSubTexmapSlotName(int i, bool localized);
 
 	//From Texmap
 	virtual RGBA   EvalColor(ShadeContext& sc);
@@ -94,7 +97,7 @@ public:
 	//From Animatable
 	virtual Class_ID  ClassID() { return LUX_SCALE_CLASS_ID; }
 	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
-	virtual void GetClassName(TSTR& s) { s = GetString(IDS_CLASS_SCALE); }
+	virtual void GetClassName(TSTR& s, bool localized) { s = GetString(IDS_CLASS_SCALE); }
 
 	virtual RefTargetHandle Clone(RemapDir &remap);
 	virtual RefResult NotifyRefChanged(const Interval& changeInt, RefTargetHandle hTarget, PartID& partID, RefMessage message, BOOL propagate);
@@ -102,7 +105,7 @@ public:
 
 	virtual int NumSubs() { return 1 + NSUBTEX; }
 	virtual Animatable* SubAnim(int i);
-	virtual TSTR SubAnimName(int i);
+	virtual TSTR SubAnimName(int i, bool localized);
 
 	// TODO: Maintain the number or references here
 	virtual int NumRefs() { return 2 + NSUBTEX; }
@@ -138,6 +141,7 @@ public:
 	virtual int IsPublic() { return TRUE; }
 	virtual void* Create(BOOL /*loading = FALSE*/) { return new Lux_Scale(); }
 	virtual const TCHAR *	ClassName() { return GetString(IDS_CLASS_SCALE); }
+	const TCHAR*  NonLocalizedClassName() { return GetString(IDS_CLASS_SCALE); }
 	virtual SClass_ID SuperClassID() { return TEXMAP_CLASS_ID; }
 	virtual Class_ID ClassID() { return LUX_SCALE_CLASS_ID; }
 	virtual const TCHAR* Category() { return NULL; }//GetString(IDS_CATEGORY); }
@@ -230,6 +234,7 @@ Lux_Scale::Lux_Scale()
 	Reset();
 }
 
+
 Lux_Scale::~Lux_Scale()
 {
 
@@ -281,7 +286,7 @@ void Lux_Scale::SetSubTexmap(int i, Texmap* m)
 	//TODO Store the 'i-th' sub-texmap managed by the texture
 }
 
-TSTR Lux_Scale::GetSubTexmapSlotName(int i)
+TSTR Lux_Scale::GetSubTexmapSlotName(int i, bool localized)
 {
 	//TODO: Return the slot name of the 'i-th' sub-texmap
 	switch (i)
@@ -375,7 +380,7 @@ Animatable* Lux_Scale::SubAnim(int i)
 	}
 }
 
-TSTR Lux_Scale::SubAnimName(int i)
+TSTR Lux_Scale::SubAnimName(int i, bool localized)
 {
 	//TODO: Return the sub-anim names
 	switch (i)

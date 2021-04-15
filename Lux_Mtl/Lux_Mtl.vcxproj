@@ -40,7 +40,7 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <OutDir Condition="'$(Platform)'=='x64'">$(ADSK_3DSMAX_X64_2019)\plugins\</OutDir>
     <IntDir>$(ProjectDir)\obj\$(MaxPlatform)\$(MaxConfiguration)\</IntDir>
-    <TargetName>LuxMaterial</TargetName>
+    <TargetName>LuxMaterial2019</TargetName>
     <TargetExt>.dlt</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup>
@@ -85,7 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3dsmaxsdk_preinclude.h" />
-    <ClInclude Include="Lux_Mtl.h" />
+    <ClInclude Include="Lux_Materal.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

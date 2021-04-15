@@ -42,8 +42,8 @@ IDD_COMMON_PANEL DIALOGEX 0, 0, 212, 173
 STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    CONTROL         "",IDC_SAMPLE_EDIT,"CustEdit",WS_TABSTOP,168,87,21,10
-    CONTROL         "",IDC_SAMPLE_SPIN,"SpinnerControl",0x0,190,87,7,10
+    CONTROL         "",IDC_SAMPLE_EDIT,"CustEdit",WS_TABSTOP,168,105,21,10
+    CONTROL         "",IDC_SAMPLE_SPIN,"SpinnerControl",0x0,190,105,7,10
     LTEXT           "Visiable in diffuse :",IDC_STATIC,12,137,59,8
     CONTROL         "",IDC_BUMP_MAP,"CustButton",WS_TABSTOP,108,9,90,13
     LTEXT           "Bump map :",IDC_STATIC,13,11,38,8
@@ -53,20 +53,21 @@ BEGIN
     CONTROL         "",IDC_ENABLEEMISSION2,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,79,154,10,10
     LTEXT           "Visiable in specular :",IDC_STATIC,118,137,65,8
     CONTROL         "",IDC_ENABLEEMISSION3,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,189,137,10,10
-    LTEXT           "Bump/Normal sample :",IDC_STATIC,12,88,72,8
-    LTEXT           "Interior volumetric map :",IDC_STATIC,12,50,76,8
-    LTEXT           "Exterior volumetric map :",IDC_STATIC,12,69,78,8
-    LTEXT           "Material id :",IDC_STATIC,12,104,37,8
-    LTEXT           "Transparency :",IDC_STATIC,12,119,48,8
+    LTEXT           "Bump/Normal sample :",IDC_STATIC,12,106,72,8
+    LTEXT           "Interior volumetric map :",IDC_STATIC,12,69,76,8
+    LTEXT           "Exterior volumetric map :",IDC_STATIC,12,88,78,8
+    LTEXT           "Material id :",IDC_STATIC,12,122,37,8
+    LTEXT           "Transparency :",IDC_STATIC,12,50,48,8
     LTEXT           "Catch Shadow :",IDC_STATIC,118,155,52,8
     CONTROL         "",IDC_ENABLEEMISSION4,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,189,154,10,10
     CONTROL         "",IDC_NORMAL_MAP,"CustButton",WS_TABSTOP,108,28,90,13
-    CONTROL         "",IDC_TRANSPARENCY_EDIT,"CustEdit",WS_TABSTOP,168,119,21,10
-    CONTROL         "",IDC_TRANSPARENCY_SPIN,"SpinnerControl",0x0,190,119,7,10
-    CONTROL         "",IDC_ID_EDIT,"CustEdit",WS_TABSTOP,168,103,21,10
-    CONTROL         "",IDC_ID_SPIN,"SpinnerControl",0x0,190,103,7,10
-    CONTROL         "",IDC_INTERIOR_MAP,"CustButton",WS_TABSTOP,108,47,90,13
-    CONTROL         "",IDC_EXTERIOR_MAP,"CustButton",WS_TABSTOP,108,66,90,13
+    CONTROL         "",IDC_TRANSPARENCY_EDIT,"CustEdit",WS_TABSTOP,70,50,21,10
+    CONTROL         "",IDC_TRANSPARENCY_SPIN,"SpinnerControl",0x0,92,50,7,10
+    CONTROL         "",IDC_ID_EDIT,"CustEdit",WS_TABSTOP,168,121,21,10
+    CONTROL         "",IDC_ID_SPIN,"SpinnerControl",0x0,190,121,7,10
+    CONTROL         "",IDC_INTERIOR_MAP,"CustButton",WS_TABSTOP,108,66,90,13
+    CONTROL         "",IDC_EXTERIOR_MAP,"CustButton",WS_TABSTOP,108,85,90,13
+    CONTROL         "",IDC_TRANSPARENCY_MAP,"CustButton",WS_TABSTOP,108,47,90,13
 END
 
 IDD_LIGHT_PANEL DIALOGEX 0, 0, 218, 184
@@ -212,15 +213,15 @@ FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     CONTROL         "",IDC_MERAL_FRENCEL_COLOR,"ColorSwatch",WS_TABSTOP,78,32,35,12
     CONTROL         "",IDC_METAL_FRENCEL_MAP,"CustButton",WS_TABSTOP,120,32,78,13
-    LTEXT           "Frensel :",IDC_STATIC,11,34,48,8
+    LTEXT           "Frensel Map :",IDC_STATIC,11,34,48,8
     CONTROL         "",IDC_METAL_UROUGHNESS_MAP,"CustButton",WS_TABSTOP,120,50,78,13
     LTEXT           "Uroughness :",IDC_STATIC,11,52,48,8
     CONTROL         "",IDC_METAL_VROUGHNESS,"CustEdit",WS_TABSTOP,78,68,26,11
     CONTROL         "",IDC_METAL_VROUGHNESS_SPIN,"SpinnerControl",0x0,104,68,9,11
     CONTROL         "",IDC_METAL_IVROUGHNESS_MAP,"CustButton",WS_TABSTOP,120,68,78,13
     LTEXT           "Vroughness :",IDC_STATIC,11,70,48,8
-    COMBOBOX        IDC_METAL_COMBO_PRESETS,69,10,128,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Preset :",IDC_STATIC,11,12,25,8
+    COMBOBOX        IDC_METAL_COMBO_PRESETS,69,10,128,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Fresnel Preset :",IDC_STATIC,11,12,50,8
     CONTROL         "",IDC_METAL_UROUGHNESS,"CustEdit",WS_TABSTOP,78,50,26,11
     CONTROL         "",IDC_METAL_UROUGHNESS_SPIN,"SpinnerControl",0x0,104,50,9,11
 END
@@ -256,10 +257,10 @@ FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     CONTROL         "",IDC_ARCHGLASS_REFLECTION_COLOR,"ColorSwatch",WS_TABSTOP,78,11,35,12
     CONTROL         "",IDC_ARCHGLASS_REFLECTION_MAP,"CustButton",WS_TABSTOP,120,11,78,13
-    LTEXT           "Reflection :",IDC_STATIC,11,13,48,8
+    LTEXT           "Reflection Color :",IDC_STATIC,11,13,56,8
     CONTROL         "",IDC_ARCHGLASS_TRANSMIT_COLOR,"ColorSwatch",WS_TABSTOP,78,29,35,12
     CONTROL         "",IDC_ARCHGLASS_TRANSMIT_MAP,"CustButton",WS_TABSTOP,120,29,78,13
-    LTEXT           "Transmit :",IDC_STATIC,11,31,48,8
+    LTEXT           "Transmit Color :",IDC_STATIC,11,31,53,8
     CONTROL         "",IDC_ARCHGLASS_INTERIORIOR,"CustEdit",WS_TABSTOP,78,47,24,11
     CONTROL         "",IDC_ARCHGLASS_INTERIORIOR_SPIN,"SpinnerControl",0x0,102,47,9,11
     CONTROL         "",IDC_ARCHGLASS_INTERIORIOR_MAP,"CustButton",WS_TABSTOP,120,47,78,13
@@ -458,7 +459,7 @@ BEGIN
     LTEXT           "Roughness L 3 :",IDC_STATIC,11,228,56,8
     CONTROL         "",IDC_CARPAINT_DEPTH,"CustEdit",WS_TABSTOP,69,47,26,11
     CONTROL         "",IDC_CARPAINT_DEPTH_SPIN,"SpinnerControl",0x0,95,47,9,11
-    COMBOBOX        IDC_CARPAINT_COMBO_PRESETS,69,10,128,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CARPAINT_COMBO_PRESETS,69,10,128,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
     LTEXT           "Preset :",IDC_STATIC,11,12,25,8
 END
 
@@ -1069,12 +1070,13 @@ BEGIN
     IDS_CARPAINT_COMBOBOX_BLUE "blue"
     IDS_CARPAINT_COMBOBOX_BLUE_MATTE "blue matte"
     IDS_METAL_PRESET        "Meral Presets"
-    IDS_METAL_COMBOBOX_ALUMINIUM "aluminium"
-    IDS_METAL_COMBOBOX_SILVER "silver"
-    IDS_METAL_COMBOBOX_COPPER "copper"
-    IDS_METAL_COMBOBOX_GOLD "gold"
-    IDS_METAL_COMBOBOX_AMORPHOUS_CARBON "amorphous carbon"
+    IDS_METAL_COMBOBOX_ALUMINIUM "Aluminium"
+    IDS_METAL_COMBOBOX_SILVER "Silver"
+    IDS_METAL_COMBOBOX_COPPER "Copper"
+    IDS_METAL_COMBOBOX_GOLD "Gold"
+    IDS_METAL_COMBOBOX_AMORPHOUS_CARBON "Amorphous Carbon"
     IDS_METAL_COMBOBOX_INT  "Metal Preset"
+    IDS_METAL_COMBOBOX_NONE "None"
 END
 
 #endif    // English (United States) resources
