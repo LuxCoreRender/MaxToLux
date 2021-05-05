@@ -211,6 +211,9 @@ enum
 	/*light emission params end*/
 
 	transparency_map,
+	transparency_shadow,
+	bump_offset,
+	cauchyb,
 };
 
 
@@ -256,7 +259,6 @@ static ParamBlockDesc2 Lux_Glass_param_blk (
 		p_subtexno, 2,
 		p_ui, Glass_map, TYPE_TEXMAPBUTTON, IDC_GLASS_INTERIORIOR_MAP,
 		p_end,
-
 	
 	exteriorior, _T("exteriorior"), TYPE_FLOAT, P_ANIMATABLE, IDS_GLASS_EXTERIOR_SPIN,
 		p_default, 1.0f,
@@ -269,6 +271,12 @@ static ParamBlockDesc2 Lux_Glass_param_blk (
 		p_subtexno, 3,
 		p_ui, Glass_map, TYPE_TEXMAPBUTTON, IDC_GLASS_EXTERIORIOR_MAP,
 		p_end,
+
+	emission_power, _T("dispersion"), TYPE_FLOAT, P_ANIMATABLE, IDS_GLASS_DISPERSION,
+	p_default, 0.0f,
+	p_range, 0.0f, 1.0f,
+	p_ui, Glass_map, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_GLASS_CAUCHYB, IDC_GLASS_CAUCHYB_SPIN, 0.001f,
+	p_end,
 
 	// Common param
 	bump_map, _T("Bump Map"), TYPE_TEXMAP, P_OWNERS_REF, IDS_BUMP_MAP,
@@ -318,6 +326,37 @@ static ParamBlockDesc2 Lux_Glass_param_blk (
 		p_range, 1, 36000,
 		p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_INT, IDC_ID_EDIT, IDC_ID_SPIN, 1,
 		p_end,
+
+	transparency_shadow, _T("Transparent shadow"), TYPE_RGBA, P_ANIMATABLE, IDS_TRANSPARENCY_SHADOW,
+	p_default, Color(0.0f, 0.0f, 0.0f),
+	p_ui, Common_Param, TYPE_COLORSWATCH, IDC_TRANSPARENCY_SHADOW_COLOR,
+	p_end,
+
+	bump_offset, _T("Bump ofset"), TYPE_FLOAT, P_ANIMATABLE, IDS_BUMP_OFFSET,
+	p_default, 0.001f,
+	p_range, 0.0f, 1.0f,
+	p_ui, Common_Param, TYPE_SPINNER, EDITTYPE_FLOAT, IDC_BUMP_OFSET_SAMPLE, IDC_BUMP_OFSET_SAMPLE_SPIN, 0.001f,
+	p_end,
+
+	visiable_diff, _T("Visiable diffuse"), TYPE_BOOL, 0, IDS_VISIABLE_DIFFUSE,
+	p_default, TRUE,
+	p_ui, Common_Param, TYPE_SINGLECHEKBOX, IDC_DIFFUSE_VISIABLE_ENABLE,
+	p_end,
+
+	visiable_specular, _T("Visiable specular"), TYPE_BOOL, 0, IDS_VISIABLE_SPECULAR,
+	p_default, TRUE,
+	p_ui, Common_Param, TYPE_SINGLECHEKBOX, IDC_SPECULAR_VISIABLE_ENABLE,
+	p_end,
+
+	visiable_glossy, _T("Visiable glossy"), TYPE_BOOL, 0, IDS_VISIABLE_GLOSSY,
+	p_default, TRUE,
+	p_ui, Common_Param, TYPE_SINGLECHEKBOX, IDC_GLOSSY_VISIABLE_ENABLE,
+	p_end,
+
+	catch_shadow, _T("Shadow catcher"), TYPE_BOOL, 0, IDS_SHADOW_CATCHER,
+	p_default, FALSE,
+	p_ui, Common_Param, TYPE_SINGLECHEKBOX, IDC_SAHDOW_CATCHER_ENABLE,
+	p_end,
 
 	// Light
 	emission, _T("emission_color"), TYPE_RGBA, P_ANIMATABLE, IDS_EMISSION,
