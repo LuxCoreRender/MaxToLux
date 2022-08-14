@@ -7,7 +7,7 @@ MaxToLux is written in C++, and it's integrated into the interface like most oth
 
 Download binary build and plugin installer [here](https://github.com/LuxCoreRender/MaxToLux/releases)
 
-[alt text](https://3dfine.com/luxrender.org/LuxCore-MaxToLux.jpg)
+![alt text](https://luxrender.org/content/LuxCore-MaxToLux.jpg)
 
 .
 .
