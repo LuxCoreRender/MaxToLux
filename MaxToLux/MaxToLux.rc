@@ -1,0 +1,684 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_RENDER_PARAMS DIALOGEX 0, 0, 256, 255
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Render :",IDC_STATIC,12,120,29,8
+    GROUPBOX        "Render Engine",IDC_STATIC,6,104,245,82
+    LTEXT           "Render Time (sec):",IDC_STATIC,12,143,67,8
+    GROUPBOX        "CPU/GPU Devices",IDC_STATIC,6,4,245,92
+    CONTROL         "opencl cpu",IDC_CHECK_OPENCL_DEVICE1,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,13,18,149,10
+    CONTROL         "opencl gpu",IDC_CHECK_OPENCL_DEVICE2,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,13,34,146,10
+    COMBOBOX        IDC_COMBO_FILM_OUTPUT_TYPE,143,118,99,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Film type :",IDC_STATIC,110,120,32,8
+    GROUPBOX        "Light Settings",IDC_STATIC,7,197,244,51
+    CONTROL         "Auto Default Light",IDC_CHECK_DEFAULT_LIGHT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,12,210,73,10
+    CONTROL         "Override Materials",IDC_CHECK_OVERRIDE_MATTERIALS,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,175,188,73,10
+    LTEXT           "Refresh FrameBuffer (sec):",IDC_STATIC,11,165,92,8
+    LTEXT           "Light strategy",IDC_STATIC,12,228,46,8
+    COMBOBOX        IDC_COMBO_LIGHT_STRATEGY,60,228,183,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_RENDERTYPE_NEW,41,118,65,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Dective when any light available",IDC_CHECK_DEFUALT_LIGHT_DISABLE,
+                    "Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_DISABLED | WS_TABSTOP,130,210,118,10
+    LTEXT           "Render Pass :",IDC_STATIC,160,144,47,8
+    CTEXT           "To Render With GPU at least one device should be selected\n\nAvoide Using Intel GPU or CPU with openCL Render engine.",IDC_STATIC,179,20,68,64
+    CONTROL         "opencl gpu",IDC_CHECK_OPENCL_DEVICE3,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,13,50,149,10
+    LTEXT           "Noise Threshold :",IDC_STATIC,149,164,58,8
+    CONTROL         "",IDC_RENDER_TIME,"CustEdit",WS_TABSTOP,103,142,19,11
+    CONTROL         "",IDC_RENDER_TIME_SPIN,"SpinnerControl",0x0,122,142,9,11
+    CONTROL         "",IDC_RENDER_REFRESH,"CustEdit",WS_TABSTOP,103,164,19,11
+    CONTROL         "",IDC_RENDER_REFRESH_SPIN,"SpinnerControl",0x0,121,164,9,11
+    CONTROL         "",IDC_RENDER_PASS,"CustEdit",WS_TABSTOP,213,142,19,11
+    CONTROL         "",IDC_RENDER_PASS_SPIN,"SpinnerControl",0x0,231,142,9,11
+    CONTROL         "",IDC_RENDER_NOISE_THERESHOLD,"CustEdit",WS_TABSTOP,213,163,19,11
+    CONTROL         "",IDC_RENDER_NOISE_THERESHOLD_SPIN,"SpinnerControl",0x0,231,163,9,11
+    CONTROL         "opencl gpu",IDC_CHECK_OPENCL_DEVICE4,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,13,66,146,10
+    CONTROL         "opencl gpu",IDC_CHECK_OPENCL_DEVICE5,"Button",BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,13,82,149,10
+END
+
+IDD_RENDER_PROG DIALOGEX 0, 0, 222, 39
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "",IDC_STATIC,5,1,212,30
+    LTEXT           "File:",IDC_STATIC,18,14,14,8
+    LTEXT           "filename",IDC_FILENAME,37,14,164,8
+    CONTROL         "",IDC_STATIC,"Static",SS_BLACKFRAME,33,12,177,13
+END
+
+IDD_RENDER_FILE DIALOGEX 0, 0, 257, 48
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "Filename",IDC_FILENAME,91,16,152,11,SS_SUNKEN
+    GROUPBOX        "File saver output (for debugging):",IDC_STATIC,5,2,248,35
+    PUSHBUTTON      "Browse",IDC_BUTTON1,9,14,32,14
+    CONTROL         "Enable",IDC_OUTPUTSCENE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,45,17,38,10
+END
+
+IDD_RENDER_SAMPLER DIALOGEX 0, 0, 257, 58
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "",-1,5,0,248,51
+    LTEXT           "Sampler Type:",-1,9,15,51,8
+    COMBOBOX        IDC_SAMPLER_TYPE_COMBO,59,12,190,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Custom3",IDC_IMAGE_MUTATION_RATE_NEW,"CustEdit",WS_TABSTOP,223,35,16,10
+    CONTROL         "",IDC_METROPOLIS_LARGEST_EP_RATE_SPIN_NEW,
+                    "SpinnerControl",0x0,75,35,12,10
+    CONTROL         "",IDC_MAX_CONSECUTIVE_SPIN,"SpinnerControl",0x0,166,35,9,10
+    CONTROL         "Custom6",IDC_IMAGE_MUTATION_RATE_SPIN_NEW,
+                    "SpinnerControl",0x0,238,35,12,10
+    CONTROL         "",IDC_METROPOLIS_LARGEST_EP_RATE_NEW,"CustEdit",WS_TABSTOP,60,35,15,10
+    CONTROL         "",IDC_MAX_CONSECUTIVE,"CustEdit",WS_TABSTOP,147,35,20,10
+    LTEXT           "Largest ep rate",IDC_METROPOLIS_LABEL1,9,35,48,8
+    LTEXT           "Max consecutive",IDC_METROPOLIS_LABEL2,91,35,56,8
+    LTEXT           "Mutation rate",IDC_METROPOLIS_LABEL3,179,35,43,8
+END
+
+IDD_RENDER_FILTER DIALOGEX 0, 0, 256, 136
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "",IDC_STATIC,5,3,245,63
+    LTEXT           "Filter Type:",IDC_STATIC,13,15,54,8
+    COMBOBOX        IDC_FILTERS_TYPE_COMBO,84,12,156,30,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "",IDC_FILTERXWIDTH,"CustEdit",WS_TABSTOP,84,30,36,11
+    CONTROL         "",IDC_FILTERXWIDTH_SPIN,"SpinnerControl",0x0,120,30,6,11
+    CONTROL         "",IDC_FILTERYWIDTH,"CustEdit",WS_TABSTOP,84,48,36,11
+    CONTROL         "",IDC_FILTER_GUASSIAN_ALPHA,"CustEdit",WS_TABSTOP,84,78,36,11
+    CONTROL         "",IDC_FILTER_GUASSIAN_ALPHA_SPIN,"SpinnerControl",0x0,120,78,6,11
+    LTEXT           "Filter X width",IDC_STATIC_FILTER_X_WIDTH_LABEL,13,32,41,8
+    LTEXT           "Filter Y width",IDC_STATIC_FILTER_Y_WIDTH_LABEL,13,50,41,8
+    LTEXT           "Guassian filter alpha",IDC_STATIC_FILTER_GUASSIAN_FILTER_ALPHA,8,78,66,8
+    LTEXT           "Recommended range : 0.1 - 3.0 ",IDC_STATIC_FILTER_REC_RANGE1,138,30,103,8
+    LTEXT           "Recommended range : 0.1 - 3.0 ",IDC_STATIC_FILTER_REC_RANGE2,138,48,104,8
+    LTEXT           "Recommended range : 0.1 - 10.0 \nGaussian rate of falloff.\nLower values give blurrier images. ",IDC_STATIC_FILTER_REC_GUASSIAN_RANGE,137,78,111,47
+    GROUPBOX        "",IDC_STATIC_MITCHEL_FRAME,5,70,245,62
+    CONTROL         "",IDC_FILTER_MITCHEL_A_FLOAT,"CustEdit",WS_TABSTOP,84,96,36,11
+    CONTROL         "",IDC_FILTER_MITCHEL_A_FLOAT_SPIN,"SpinnerControl",0x0,120,96,6,11
+    LTEXT           "Mitchell A",IDC_STATIC_FILTER_MITCHELL_A_LABEL,8,98,41,8
+    LTEXT           "Recommended range : 0.0 - 1.0 ",IDC_STATIC_FILTER_MITCHELL_A_RANGE,138,96,109,8
+    CONTROL         "",IDC_FILTER_MITCHEL_B_FLOAT,"CustEdit",WS_TABSTOP,84,114,36,11
+    CONTROL         "",IDC_FILTER_MITCHEL_B_FLOAT_SPIN,"SpinnerControl",0x0,120,114,6,11
+    LTEXT           "Mitchell B",IDC_STATIC_FILTER_MITCHELL_B_LABEL,8,116,41,8
+    LTEXT           "Recommended range : 0.0 - 1.0 ",IDC_STATIC_FILTER_MITCHELL_B_RANGE,138,114,110,8
+    CONTROL         "Custom1",IDC_FILTERYWIDTH_SPIN,"SpinnerControl",WS_TABSTOP,120,48,6,11
+END
+
+IDD_DEPTH DIALOGEX 0, 0, 256, 40
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Depth Of Field",IDC_STATIC,5,3,245,32
+    LTEXT           "Lens radius :",IDC_STATIC,13,15,52,8
+    CONTROL         "",IDC_LENSRADIUS,"CustEdit",WS_TABSTOP,61,13,36,11
+    CONTROL         "",IDC_LENSRADIUS_SPIN,"SpinnerControl",0x0,97,13,9,11
+    LTEXT           "Camera Target is the focal point",IDC_STATIC,119,15,117,8
+END
+
+IDD_POSTPROCCESS DIALOGEX 0, 0, 256, 273
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Denoiser",IDC_STATIC,5,233,245,35
+    CONTROL         "Enable",IDC_DENOISER_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,248,38,10
+    GROUPBOX        "Gamma Correction",IDC_STATIC,5,193,245,34
+    CONTROL         "",IDC_GAMMA_VALUE,"CustEdit",WS_TABSTOP,139,206,21,11
+    CONTROL         "",IDC_GAMMA_VALUE_SPIN,"SpinnerControl",0x0,160,206,9,11
+    LTEXT           "Value :",IDC_STATIC,112,207,24,8
+    GROUPBOX        "Tonemap Auto Linear",IDC_STATIC,5,1,245,35
+    CONTROL         "Enable",IDC_AUTOLINEAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,17,38,10
+    LTEXT           "Works best with sun and low light scene",IDC_STATIC,118,18,129,8
+    CONTROL         "Enable",IDC_GAMMA_CORRECTION_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,206,38,10
+    GROUPBOX        "Tonemap Linear",IDC_STATIC,5,154,245,33
+    CONTROL         "Enable",IDC_LINEAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,170,38,10
+    LTEXT           "Scale :",IDC_STATIC,112,170,29,8
+    CONTROL         "",IDC_LINEAR_SCALE,"CustEdit",WS_TABSTOP,139,168,21,11
+    CONTROL         "",IDC_LINEAR_SCALE_SPIN,"SpinnerControl",0x0,160,168,9,11
+    CONTROL         "",IDC_GAMMA_TABLESIZE,"CustEdit",WS_TABSTOP,216,206,21,11
+    CONTROL         "",IDC_GAMMA_TABLESIZE_SPIN,"SpinnerControl",0x0,237,206,9,11
+    LTEXT           "Table Size :",IDC_STATIC,173,207,39,8
+    GROUPBOX        "Tonemap Reinhard",IDC_STATIC,5,98,245,49
+    CONTROL         "Enable",IDC_REINHARD_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,114,38,10
+    LTEXT           "Prescale :",IDC_STATIC,102,114,31,8
+    CONTROL         "",IDC_REINHARD_PRESCALE,"CustEdit",WS_TABSTOP,139,112,21,11
+    CONTROL         "",IDC_REINHARD_PRESCALE_SPIN,"SpinnerControl",0x0,160,112,9,11
+    CONTROL         "",IDC_REINHARD_POSTSCALE,"CustEdit",WS_TABSTOP,215,112,21,11
+    CONTROL         "",IDC_REINHARD_POSTSCALE_SPIN,"SpinnerControl",0x0,237,112,9,11
+    LTEXT           "Postscale :",IDC_STATIC,176,112,39,8
+    LTEXT           "Burn :",IDC_STATIC,116,130,23,8
+    CONTROL         "",IDC_REINHARD_BURN,"CustEdit",WS_TABSTOP,139,128,21,11
+    CONTROL         "",IDC_REINHARD_BURN_SPIN,"SpinnerControl",0x0,160,128,9,11
+    GROUPBOX        "Tonemap Lux Linear",IDC_STATIC,5,42,245,49
+    CONTROL         "Enable",IDC_LUXLINEAR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,58,38,10
+    LTEXT           "Sensitivity :",IDC_STATIC,99,58,36,8
+    CONTROL         "",IDC_LUXLINEAR_SENSIVITY,"CustEdit",WS_TABSTOP,139,57,21,11
+    CONTROL         "",IDC_LUXLINEAR_SENSIVITY_SPIN,"SpinnerControl",0x0,160,57,9,11
+    CONTROL         "",IDC_LUXLINEAR_EXPOSURE,"CustEdit",WS_TABSTOP,215,57,21,11
+    CONTROL         "",IDC_LUXLINEAR_EXPOSURE_SPIN,"SpinnerControl",0x0,237,57,9,11
+    LTEXT           "Exposure :",IDC_STATIC,178,58,34,8
+    LTEXT           "Fstop :",IDC_STATIC,113,74,22,8
+    CONTROL         "",IDC_LUXLINEAR_FSTOP,"CustEdit",WS_TABSTOP,139,73,21,11
+    CONTROL         "",IDC_LUXLINEAR_FSTOP_SPIN,"SpinnerControl",0x0,160,73,9,11
+    CONTROL         "Calculate in every single pass",IDC_DENOISER_SPP_CHECK,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,139,248,103,10
+END
+
+IDD_NULL_PANEL DIALOGEX 0, 0, 215, 69
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "This is empty, not visible material. It can be combined by using mix material with others. It is often used in combination with the alpha channel of an image map to render leafs, etc. ",IDC_STATIC,15,14,182,45
+END
+
+IDD_LIGHT_PANEL DIALOGEX 0, 0, 227, 184
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "Custom1",IDC_EMISSION_MAP,"CustButton",WS_TABSTOP,120,24,90,13
+    CONTROL         "",IDC_EMISSION_COLOR,"ColorSwatch",WS_TABSTOP,58,24,34,12
+    LTEXT           "Emission",IDC_STATIC,12,8,42,8
+    LTEXT           "Power",IDC_STATIC,12,43,30,8
+    CONTROL         "",IDC_EMISSION_POWER,"CustEdit",WS_TABSTOP,58,42,25,11
+    CONTROL         "",IDC_EMISSION_POWER_SPIN,"SpinnerControl",0x0,83,42,9,11
+    LTEXT           "Efficency",IDC_STATIC,121,43,41,8
+    CONTROL         "",IDC_EMISSION_EFFICENCY,"CustEdit",WS_TABSTOP,173,42,28,11
+    CONTROL         "",IDC_EMISSION_EFFICENCY_SPIN,"SpinnerControl",0x0,201,42,9,11
+    CONTROL         "Custom1",IDC_EMISSION_MAPFILE,"CustButton",WS_TABSTOP,121,126,89,13
+    LTEXT           "Emission Map",IDC_STATIC,12,126,60,8
+    LTEXT           "Gamma",IDC_STATIC,12,145,41,8
+    CONTROL         "",IDC_EMISSION_GAMMA,"CustEdit",WS_TABSTOP,58,145,25,11
+    CONTROL         "",IDC_EMISSION_GAMMA_SPIN,"SpinnerControl",0x0,83,145,9,11
+    CONTROL         "Custom1",IDC_EMISSION_IESFILE,"CustButton",WS_DISABLED | WS_TABSTOP,121,107,89,13
+    LTEXT           "IES Source",IDC_STATIC,12,107,59,8
+    LTEXT           "Flip Normals",IDC_STATIC,12,165,54,11
+    CONTROL         "",IDC_EMISSION_FLIPZ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,84,165,10,10
+    LTEXT           "Samples",IDC_STATIC,12,60,39,8
+    CONTROL         "",IDC_EMISSION_SAMPLES,"CustEdit",WS_TABSTOP,58,60,25,11
+    CONTROL         "",IDC_EMISSION_SAMPLES_SPIN,"SpinnerControl",0x0,83,60,9,11
+    LTEXT           "Map widht",IDC_STATIC,12,77,39,8
+    CONTROL         "",IDC_EMISSION_MAP_WIDTH,"CustEdit",WS_TABSTOP,58,77,25,11
+    CONTROL         "",IDC_EMISSION_MAP_WIDTH_SPIN,"SpinnerControl",0x0,83,77,9,11
+    LTEXT           "Map height",IDC_STATIC,122,77,41,8
+    CONTROL         "",IDC_EMISSION_MAP_HEIGHT,"CustEdit",WS_TABSTOP,173,77,28,11
+    CONTROL         "",IDC_EMISSION_MAP_HEIGHT_SPIN,"SpinnerControl",0x0,201,77,9,11
+    LTEXT           "Emission ID",IDC_STATIC,121,60,42,8
+    CONTROL         "",IDC_EMISSION_ID,"CustEdit",WS_TABSTOP,173,60,28,11
+    CONTROL         "",IDC_EMISSION_ID_SPIN,"SpinnerControl",0x0,201,60,9,11
+    CONTROL         "",IDC_ENABLEEMISSION,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,82,8,10,10
+    LTEXT           "Color",IDC_STATIC,12,25,42,8
+    LTEXT           "Diffuse map and color will be ignored",IDC_STATIC,100,8,116,8
+    LTEXT           "Use Flip N if you can't see any light",IDC_STATIC,104,165,113,8
+END
+
+IDD_POSTPROCCESS_EFFECTS DIALOGEX 0, 0, 256, 275
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Vignetting",IDC_STATIC,5,41,245,34
+    CONTROL         "",IDC_VIGNETTING_VALUE,"CustEdit",WS_TABSTOP,139,54,21,11
+    CONTROL         "",IDC_VIGNETTING_VALUE_SPIN,"SpinnerControl",0x0,160,54,9,11
+    LTEXT           "Value :",IDC_STATIC,112,55,24,8
+    CONTROL         "Enable",IDC_VIGNETTING_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,54,38,10
+    GROUPBOX        "Color Aberration",IDC_STATIC,5,116,245,33
+    CONTROL         "Enable",IDC_COLOR_ABERRATION_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,132,38,10
+    LTEXT           "Radius :",IDC_STATIC,109,133,27,8
+    CONTROL         "",IDC_COLOR_ABERRATION_RADIUS,"CustEdit",WS_TABSTOP,139,131,21,11
+    CONTROL         "",IDC_COLOR_ABERRATION_RADIUS_SPIN,"SpinnerControl",0x0,160,131,9,11
+    CONTROL         "",IDC_VIGNETTING_TABLE_SIZE,"CustEdit",WS_TABSTOP,216,54,21,11
+    CONTROL         "",IDC_VIGNETTING_TABLE_SIZE_SPIN,"SpinnerControl",0x0,236,54,9,11
+    LTEXT           "Table Size :",IDC_STATIC,173,55,39,8
+    GROUPBOX        "Mist",IDC_STATIC,5,154,245,63
+    CONTROL         "Enable",IDC_MIST_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,170,38,10
+    CONTROL         "",IDC_MIST_COLOR,"CustEdit",WS_TABSTOP,216,169,21,11
+    CONTROL         "",IDC_MIST_COLOR_SPIN,"SpinnerControl",0x0,236,169,9,11
+    LTEXT           "Color :",IDC_STATIC,191,170,20,8
+    LTEXT           "Start Distance :",IDC_STATIC,85,187,50,8
+    CONTROL         "",IDC_MIST_START,"CustEdit",WS_TABSTOP,139,185,21,11
+    CONTROL         "",IDC_MIST_START_SPIN,"SpinnerControl",0x0,160,185,9,11
+    GROUPBOX        "Bloom",IDC_STATIC,5,3,245,34
+    CONTROL         "Enable",IDC_BOOM_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,19,38,10
+    LTEXT           "Sensitivity :",IDC_STATIC,99,19,36,8
+    CONTROL         "",IDC_BLOOM_SENSITIVITY,"CustEdit",WS_TABSTOP,139,18,21,11
+    CONTROL         "",IDC_BLOOM_SENSITIVITY_SPIN,"SpinnerControl",0x0,160,18,9,11
+    CONTROL         "",IDC_BLOOM_EXPOSURE,"CustEdit",WS_TABSTOP,216,18,21,11
+    CONTROL         "",IDC_BLOOM_EXPOSURE_SPIN,"SpinnerControl",0x0,236,18,9,11
+    LTEXT           "Exposure :",IDC_STATIC,178,19,34,8
+    GROUPBOX        "Contour Lines",IDC_STATIC,5,221,245,49
+    CONTROL         "Enable",IDC_CONTOUR_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,237,38,10
+    LTEXT           "Range :",IDC_STATIC,108,237,29,8
+    CONTROL         "",IDC_CONTOUR_RANGE,"CustEdit",WS_TABSTOP,139,235,21,11
+    CONTROL         "",IDC_CONTOUR_RANGE_SPIN,"SpinnerControl",0x0,160,235,9,11
+    CONTROL         "",IDC_CONTOUR_SCALE,"CustEdit",WS_TABSTOP,216,235,21,11
+    CONTROL         "",IDC_CONTOUR_SCALE_SPIN,"SpinnerControl",0x0,236,235,9,11
+    LTEXT           "Scale :",IDC_STATIC,189,235,25,8
+    LTEXT           "Steps :",IDC_STATIC,112,253,23,8
+    CONTROL         "",IDC_CONTOUR_STEPS,"CustEdit",WS_TABSTOP,139,251,21,11
+    CONTROL         "",IDC_CONTOUR_STEPS_SPIN,"SpinnerControl",0x0,160,251,9,11
+    GROUPBOX        "Gaussian Filter 3x3",IDC_STATIC,5,79,245,33
+    CONTROL         "Enable",IDC_GAUSSIAN_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,95,38,10
+    LTEXT           "Scale :",IDC_STATIC,112,95,25,8
+    CONTROL         "",IDC_GAUSSIAN_SCALE,"CustEdit",WS_TABSTOP,139,93,21,11
+    CONTROL         "",IDC_GAUSSIAN_SCALE_SPIN,"SpinnerControl",0x0,160,93,9,11
+    CONTROL         "",IDC_COLOR_ABERRATION_WEIGHT,"CustEdit",WS_TABSTOP,216,131,21,11
+    CONTROL         "",IDC_COLOR_ABERRATION_WEIGHT_SPIN,"SpinnerControl",0x0,236,131,9,11
+    LTEXT           "Weight :",IDC_STATIC,184,132,28,8
+    LTEXT           "Amount :",IDC_STATIC,20,187,29,8
+    CONTROL         "",IDC_MIST_AMOUNT,"CustEdit",WS_TABSTOP,52,185,20,11
+    CONTROL         "",IDC_MIST_AMOUNT_SPIN,"SpinnerControl",0x0,70,185,9,11
+    CONTROL         "Exclude Background :",IDC_MIST_BG_CHECK,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,63,169,86,10
+    CONTROL         "",IDC_MIST_END,"CustEdit",WS_TABSTOP,216,186,21,11
+    CONTROL         "",IDC_MIST_END_SPIN,"SpinnerControl",0x0,236,186,9,11
+    LTEXT           "End Dist :",IDC_STATIC,180,187,31,8
+    CONTROL         "",IDC_CONTOUR_GRID_SIZE,"CustEdit",WS_TABSTOP,216,252,21,11
+    CONTROL         "",IDC_CONTOUR_GRID_SIZE_SPIN,"SpinnerControl",0x0,236,252,9,11
+    LTEXT           "Grid Size :",IDC_STATIC,179,252,34,8
+END
+
+IDD_ENVIRENMENT_PANEL DIALOGEX 0, 0, 256, 40
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Image based lighting (IBL) and HDR",-1,5,3,245,32
+    LTEXT           "Envirenment infinite Map :",-1,13,18,88,8
+    CONTROL         "None",IDC_ENVIRENMENT_MAP,"CustButton",WS_TABSTOP,123,16,119,11
+END
+
+IDD_LIGHT_PATHS DIALOGEX 0, 0, 256, 153
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Clamping",IDC_STATIC,5,112,245,33
+    CONTROL         "Enable",IDC_CLAMPING_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,125,38,10
+    GROUPBOX        "Light Tracing",IDC_STATIC,5,59,245,48
+    CONTROL         "Enable",IDC_LIGHT_TRACING_CHECK,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,11,73,38,10
+    CONTROL         "",IDC_PATH_RAYS,"CustEdit",WS_TABSTOP,216,71,21,11
+    CONTROL         "",IDC_PATH_RAYS_SPIN,"SpinnerControl",0x0,237,71,9,11
+    LTEXT           "Light Rays :",IDC_STATIC,174,73,40,8
+    GROUPBOX        "Max Bounces",IDC_STATIC,5,4,245,49
+    LTEXT           "Total Path Depth :",IDC_STATIC,76,17,59,8
+    CONTROL         "",IDC_PATH_DEPTH_DIFFUSE,"CustEdit",WS_TABSTOP,216,16,21,11
+    CONTROL         "",IDC_PATH_DEPTH_DIFFUSE_SPIN,"SpinnerControl",0x0,237,16,9,11
+    LTEXT           "Diffuse :",IDC_STATIC,185,17,27,8
+    LTEXT           "Glossy :",IDC_STATIC,109,33,26,8
+    CONTROL         "",IDC_PATH_DEPTH_GLOSSY,"CustEdit",WS_TABSTOP,139,32,21,11
+    CONTROL         "",IDC_PATH_DEPTH_GLOSSY_SPIN,"SpinnerControl",0x0,160,32,9,11
+    CONTROL         "",IDC_PATH_DEPTH,"CustEdit",WS_TABSTOP,139,16,21,11
+    CONTROL         "",IDC_PATH_DEPTH_SPIN,"SpinnerControl",0x0,160,16,9,11
+    LTEXT           "Specular :",IDC_STATIC,179,34,33,8
+    CONTROL         "",IDC_PATH_DEPTH_SPECULAR,"CustEdit",WS_TABSTOP,216,32,21,11
+    CONTROL         "",IDC_PATH_DEPTH_SPECULAR_SPIN,"SpinnerControl",0x0,237,32,9,11
+    CONTROL         "",IDC_PATH_GLOSSY_THRESHOLD,"CustEdit",WS_TABSTOP,215,87,21,11
+    CONTROL         "",IDC_PATH_GLOSSY_THRESHOLD_SPIN,"SpinnerControl",0x0,237,87,9,11
+    LTEXT           "Glossiness Threshold :",IDC_STATIC,140,89,73,8
+    CONTROL         "",IDC_PATH_CLAMP_MAX,"CustEdit",WS_TABSTOP,215,124,21,11
+    CONTROL         "",IDC_PATH_CLAMP_MAX_SPIN,"SpinnerControl",0x0,237,124,9,11
+    LTEXT           "Max Brightness :",IDC_STATIC,159,126,52,8
+END
+
+IDD_ABOUT DIALOGEX 0, 0, 256, 134
+STYLE DS_SETFONT | WS_CHILD | WS_VISIBLE
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "About LuxCoreRenderer",IDC_STATIC,5,63,245,62
+    CTEXT           "MaxToLux Version: 0.9457 beta - LuxCore Version: 2.5",IDC_STATIC,15,75,221,8
+    CONTROL         IDB_LUX_LOGO,IDC_STATIC,"Static",SS_BITMAP,10,5,233,52
+    CTEXT           "Copyright (C) 2021 LuxCoreRenderer",IDC_STATIC,15,88,221,8
+    CONTROL         "<a id=""doc"">Documentation</a> | <a id=""lux_site"">LuxCore Site</a> | <a id=""community"">Community</a> | <a id=""download"">Downloads</a>",IDC_SYSLINK1,
+                    "SysLink",LWS_USEVISUALSTYLE | WS_TABSTOP,28,103,210,14,WS_EX_TRANSPARENT
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "#include ""veroverrides.h""\r\n"
+    "#include ""maxversion.r""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_RENDER_PARAMS, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 248
+    END
+
+    IDD_RENDER_PROG, DIALOG
+    BEGIN
+    END
+
+    IDD_RENDER_FILE, DIALOG
+    BEGIN
+        RIGHTMARGIN, 256
+        BOTTOMMARGIN, 45
+    END
+
+    IDD_RENDER_SAMPLER, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_RENDER_FILTER, DIALOG
+    BEGIN
+    END
+
+    IDD_DEPTH, DIALOG
+    BEGIN
+    END
+
+    IDD_POSTPROCCESS, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 132
+        VERTGUIDE, 139
+        VERTGUIDE, 160
+        VERTGUIDE, 210
+        VERTGUIDE, 216
+        VERTGUIDE, 237
+        BOTTOMMARGIN, 268
+    END
+
+    IDD_NULL_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 205
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 62
+    END
+
+    IDD_LIGHT_PANEL, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 220
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 177
+    END
+
+    IDD_POSTPROCCESS_EFFECTS, DIALOG
+    BEGIN
+        VERTGUIDE, 132
+        VERTGUIDE, 139
+        VERTGUIDE, 160
+        VERTGUIDE, 210
+        VERTGUIDE, 216
+        VERTGUIDE, 237
+        BOTTOMMARGIN, 270
+    END
+
+    IDD_ENVIRENMENT_PANEL, DIALOG
+    BEGIN
+    END
+
+    IDD_LIGHT_PATHS, DIALOG
+    BEGIN
+        VERTGUIDE, 10
+        VERTGUIDE, 132
+        VERTGUIDE, 139
+        VERTGUIDE, 160
+        VERTGUIDE, 210
+        VERTGUIDE, 216
+        VERTGUIDE, 237
+        BOTTOMMARGIN, 148
+    END
+
+    IDD_ABOUT, DIALOG
+    BEGIN
+        BOTTOMMARGIN, 127
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_RENDER_PARAMS DLGINIT
+BEGIN
+    IDC_COMBO_FILM_OUTPUT_TYPE, 0x403, 16, 0
+0x4752, 0x4142, 0x545f, 0x4e4f, 0x4d45, 0x5041, 0x4550, 0x0044, 
+    IDC_COMBO_LIGHT_STRATEGY, 0x403, 6, 0
+0x4f50, 0x4557, 0x0052, 
+    0
+END
+
+IDD_RENDER_SAMPLER DLGINIT
+BEGIN
+    IDC_SAMPLER_TYPE_COMBO, 0x403, 6, 0
+0x6f53, 0x6f62, 0x006c, 
+    0
+END
+
+IDD_RENDER_FILTER DLGINIT
+BEGIN
+    IDC_FILTERS_TYPE_COMBO, 0x403, 6, 0
+0x6f53, 0x6f62, 0x006c, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_RENDER_PARAMS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_RENDER_FILE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_RENDER_SAMPLER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_DEPTH AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_RENDER_FILTER AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_RENDER_PROG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_POSTPROCCESS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_NULL_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_POSTPROCCESS_EFFECTS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ENVIRENMENT_PANEL AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_LIGHT_PATHS AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUT AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LUX_LOGO            BITMAP                  "E:\\luxcorerender\\Wix-Resource\\luxcorerender-logo_orange_grey.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_LIBDESCRIPTION      "MaxToLux Plugin"
+    IDS_VRENDTITLE          "LuxCore"
+    IDS_OPTIONS             "Render to file"
+    IDS_WRITE_FILE          "Select Image File to Write"
+    IDS_DENOISER            "Denoiser"
+    IDS_RENDER_TYPE_PATHCPU "PATHCPU"
+    IDS_RENDER_ERR          "Render Error"
+    IDS_CANT_OPEN           "Can't open file %s"
+    IDS_AUTOLINEAR          "Auto Linear"
+    IDS_FILE                "File"
+    IDS_FILE_ALREADY_EXISTS "File %s exists: do you want to overwrite it?"
+    IDS_POSTPROCCESS        "Post Proccess"
+    IDS_RENDER_TYPE         "Render Type"
+    IDS_SAMPLER             "Image Sampler"
+    IDS_FILTERS             "Image Filter"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_CLASS_LUXCORE       "Lr_Matte"
+    IDS_FILESAVER           "File Saver"
+    IDS_BASICS              "Renderer"
+    IDS_LIGHT_PARAMS        "Light Parameters"
+    IDS_GAMMA               "Gamma Correction"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_DEPTH               "Depth Of Field"
+    IDS_CLASS_NULL          "Lux Null"
+    IDS_EMISSION            "Emission"
+    IDS_EMISSION_MAP        "Emission map"
+    IDS_EMISSION_POWER      "Emission power"
+    IDS_EMISSION_EFFICENCY  "Emission efficency"
+    IDS_EMISSION_MAPFILE    "Emission mapfile"
+    IDS_EMISSION_GAMMA      "Emission gamma"
+    IDS_EMISSION_IESFILE    "Emission IES file"
+    IDS_EMISSION_FLIPZ      "Emission flip z"
+    IDS_EMISSION_SAMPLES    "Emission sample"
+    IDS_EMISSION_MAP_WIDTH  "Emission map width"
+    IDS_EMISSION_MAP_HEIGHT "Emission map height"
+    IDS_EMISSION_ID         "Emission id"
+    IDS_ENABLEEMISSION      "Emission enable"
+    IDS_POSTPROCCESS_EFFECTS "Post Proccess Effects"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_SHADERS_CATEGORY    "LuxCore Shaders"
+    IDS_NULL_PARAMS         "Null Parameters"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ENVIRENMENT_MAP     "Envirenment Light Map"
+    IDS_DB_NONE             "None"
+    IDS_BUMP_MAP            "Bump map"
+    IDS_AMOUNT_MAP          "Amount map"
+    IDS_NORMAL_MAP          "Normal map"
+    IDS_INTERIOR_MAP        "Interior map"
+    IDS_EXTERIOR_MAP        "Exterior map"
+    IDS_BUMP_SAMPLE         "Bump sample"
+    IDS_MATERIAL_ID         "Material ID"
+    IDS_TRANSPARENCY        "Transparency"
+    IDS_RENDER_TIMER        "RenderTimer"
+    IDS_LIGHT_PATHS         "Light Paths"
+    IDS_ABOUT_LUX           "About LuxCore"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#include "veroverrides.h"
+#include "maxversion.r"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
