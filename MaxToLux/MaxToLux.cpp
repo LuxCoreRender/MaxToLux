@@ -56,3 +56,24 @@
 
 #include <interactiverender.h>
 #include <mesh.h>
+
+#include <sstream>
+#include <iInstanceMgr.h>
+#include <unordered_map>
+
+MaxToLuxCamera lxmCamera;
+MaxToLuxLights lxmLights;
+MaxToLuxMaterials lxmMaterials;
+MaxToLuxUtils lxmUtils;
+MaxToLuxMesh lxmMesh;
+
+#pragma warning (push)
+#pragma warning( disable:4002)
+#pragma warning (pop)
+
+namespace luxcore
+{
+	#include <luxcore/luxcore.h>
+	#include <luxcoreimpl.h>
+	#include <luxcore.h>
+}
