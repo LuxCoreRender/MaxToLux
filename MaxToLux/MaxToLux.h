@@ -110,4 +110,16 @@ public:
 #if MAX_PRODUCT_YEAR_NUMBER >= 2015
 	BOOL AnyUpdatesPending() override;
 #endif
+
+public:
+	MaxToLux* luxRender = nullptr;
+
+	IIRenderMgr *pIIRenderMgr;
+
+	bool IsRunning() const
+	{
+		//if (mActiveShader)
+			//return mActiveShader->IsRunning();
+		return false;
+	}
 };
