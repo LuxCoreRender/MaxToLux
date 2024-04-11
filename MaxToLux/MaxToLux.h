@@ -38,3 +38,58 @@
 #else
 #define MAX2017_OVERRIDE
 #endif
+
+class MaxToLux;
+
+// Render parameters. Add whatever parameters you need here.
+// These are typically parameters that needs to be accessed during the
+// setup of the renderer and during the rendering.
+class LuxRenderParams : public RenderGlobalContext {
+public:
+	RendType	rendType;				// View, blowup, region etc.
+	int			nMinx;
+	int			nMiny;
+	int			nMaxx;
+	int			nMaxy;
+	int			nNumDefLights;			// The default lights passed into the renderer
+	int			nRegxmin;				// Coords for render blowup etc.
+	int			nRegxmax;				// Coords for render blowup etc.
+	int			nRegymin;				// Coords for render blowup etc.
+	int			nRegymax;				// Coords for render blowup etc.
+	//Point2		scrDUV;
+	//BitArray	gbufChan;				// The G buffer channels (bitflags)
+	//DefaultLight*	pDefaultLights;
+	//FrameRendParams*	pFrp;			// Frame specific members
+	//RendProgressCallback*	progCallback;	// Render progress callback
+
+	//GBufReader*	gbufReader;
+	//GBufWriter*	gbufWriter;
+
+	// Custom options
+	// These options are specific to the sample renderer
+	int			nMaxDepth;
+	int			lenser;
+	int			nAntiAliasLevel;
+	BOOL		bReflectEnv;
+
+	// Standard options
+	// These options are configurable for all plugin renderers
+	BOOL		bVideoColorCheck;
+	BOOL		bForce2Sided;
+	BOOL		bRenderHidden;
+	BOOL		bSuperBlack;
+	BOOL		bRenderFields;
+	BOOL		bNetRender;
+
+	// Render effects
+	//Effect*		effect;
+
+	LuxRenderParams();
+	void		SetDefaults();
+	//void		ComputeViewParams(const ViewParams&vp);
+	//Point3		RayDirection(float sx, float sy);
+
+	//int				NumRenderInstances();
+	//RenderInstance*	GetRenderInstance(int i);
+};
+//using namespace MaxSDK::RenderingAPI;
