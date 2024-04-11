@@ -53,16 +53,6 @@
 #include <IMaterialBrowserEntryInfo.h>
 #include <units.h>
 #include <mutex>
-#include <utilapi.h>
 
-#include <boost/filesystem/operations.hpp>
-#include <boost/foreach.hpp>
-#include <boost/assign.hpp>
-#include <boost/format.hpp>
-#include <boost/thread/thread.hpp>
-#include <thread>
-#include <windows.h>
-nclude <interactiverender.h>
-
+#include <interactiverender.h>
 #include <mesh.h>
-#include <locale>
