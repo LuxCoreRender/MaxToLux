@@ -93,3 +93,20 @@ int renderHeight = 0;
 bool renderingMaterialPreview = false;
 int vfbRefreshRateInt = 1;
 luxcore::Scene *materialPreviewScene;
+
+int filterIndex;
+
+class MaxToLuxClassDesc :public ClassDesc2 {
+public:
+	virtual int 			IsPublic() { return 1; }
+	virtual void *			Create(BOOL loading) { return new MaxToLux(loading); }
+	//virtual void *			Create(BOOL loading) override final;
+	virtual const TCHAR *	ClassName() { return GetString(IDS_VRENDTITLE); }
+#if GET_MAX_RELEASE(VERSION_3DSMAX) >= 23900
+	const TCHAR*  NonLocalizedClassName() override { return GetString(IDS_VRENDTITLE); }
+#endif
+	virtual SClass_ID		SuperClassID() { return RENDERER_CLASS_ID; }
+	virtual Class_ID 		ClassID() { return REND_CLASS_ID; }
+	virtual const TCHAR* 	Category() { return _T("LuxCoreRenderer"); }
+	virtual void			ResetClassParams(BOOL fileReset) { UNREFERENCED_PARAMETER(fileReset); }
+};
