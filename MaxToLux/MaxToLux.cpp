@@ -73,7 +73,5 @@ MaxToLuxMesh lxmMesh;
 
 namespace luxcore
 {
-	#include <luxcore/luxcore.h>
-	#include <luxcoreimpl.h>
 	#include <luxcore.h>
 }
