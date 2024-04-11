@@ -75,3 +75,15 @@ namespace luxcore
 {
 	#include <luxcore.h>
 }
+
+using namespace std;
+using namespace luxcore;
+using namespace luxrays;
+
+
+extern BOOL FileExists(const TCHAR *filename);
+float* pixels;
+//Scene *materialPreviewScene; //Scene *materialPreviewScene = NULL;
+bool defaultlightset = true;
+bool defaultlightchk = true;
+bool defaultlightauto = true;
