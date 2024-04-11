@@ -111,6 +111,14 @@ public:
 	BOOL AnyUpdatesPending() override;
 #endif
 
+	void OnNotify(NotifyInfo* info);
+
+	static void NotifyCallback(void *param, NotifyInfo *info)
+	{
+		auto self = static_cast<IMaxToLux*>(param);
+		self->OnNotify(info);
+	}
+
 public:
 	MaxToLux* luxRender = nullptr;
 
