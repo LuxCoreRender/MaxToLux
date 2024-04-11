@@ -111,3 +111,13 @@ public:
 	virtual const TCHAR* 	Category() { return _T("LuxCoreRenderer"); }
 	virtual void			ResetClassParams(BOOL fileReset) { UNREFERENCED_PARAMETER(fileReset); }
 };
+
+ClassDesc2* GetRendDesc() {
+	static MaxToLuxClassDesc srendCD;
+	return &srendCD;
+}
+
+MaxToLux::MaxToLux(BOOL loading)
+{
+	
+}
