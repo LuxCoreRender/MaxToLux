@@ -28,8 +28,6 @@
 #include <notify.h>
 #include <limits>
 #include "main.h"
-#include <gdiplus.h>
-#include "resource.h"
 #include "MaxToLux.h"
 #include "maxscript/maxscript.h"
 
