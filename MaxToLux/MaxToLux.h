@@ -107,4 +107,7 @@ public:
 	///
 	IMaxToLux(MaxToLux* luxRen);
 	~IMaxToLux();
+#if MAX_PRODUCT_YEAR_NUMBER >= 2015
+	BOOL AnyUpdatesPending() override;
+#endif
 };
