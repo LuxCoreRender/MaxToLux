@@ -83,7 +83,13 @@ using namespace luxrays;
 
 extern BOOL FileExists(const TCHAR *filename);
 float* pixels;
-Scene *materialPreviewScene; //Scene *materialPreviewScene = NULL;
 bool defaultlightset = true;
 bool defaultlightchk = true;
 bool defaultlightauto = true;
+bool deviceArray1 = true, deviceArray2, deviceArray3, deviceArray4, deviceArray5 = false;
+int rendertype = 4;
+int renderWidth = 0;
+int renderHeight = 0;
+bool renderingMaterialPreview = false;
+int vfbRefreshRateInt = 1;
+luxcore::Scene *materialPreviewScene;
