@@ -158,7 +158,8 @@ RefResult MaxToLux::NotifyRefChanged(const Interval &changeInt, RefTargetHandle 
 				ParamID changing_param = pblock->LastNotifyParamID();
 				DepthOfFieldblk.InvalidateUI(changing_param);
 			}
-		break;
+			break;
+		}
 	}
 	return REF_SUCCEED;
 }
