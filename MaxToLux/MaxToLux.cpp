@@ -95,6 +95,7 @@ int vfbRefreshRateInt = 1;
 luxcore::Scene *materialPreviewScene;
 
 int filterIndex;
+//bool enableFileSaverOutput;
 
 class MaxToLuxClassDesc :public ClassDesc2 {
 public:
