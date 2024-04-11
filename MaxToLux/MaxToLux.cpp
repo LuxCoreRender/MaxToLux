@@ -40,3 +40,21 @@
 
 #include <vector>
 #include <thread>
+
+//#include <Windows.h>
+
+//#include <maxscript\maxscript.h>
+#include <render.h>
+//#include <point3.h>
+#include <MeshNormalSpec.h>
+#include <Path.h>
+#include <bitmap.h>
+#include <GraphicsWindow.h>
+#include <IColorCorrectionMgr.h>
+#include <IGame\IGame.h>
+#include <VertexNormal.h>
+//#include <string>
+#include <iostream>
+#include <IMaterialBrowserEntryInfo.h>
+#include <units.h>
+#include <mutex>
