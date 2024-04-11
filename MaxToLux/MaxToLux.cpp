@@ -140,3 +140,25 @@ MaxToLux::MaxToLux(IRenderSessionContext& sessionContext, const bool is_interact
 	anyLights = FALSE;
 	nlts = nobs = 0;
 }
+
+RefResult MaxToLux::NotifyRefChanged(const Interval &changeInt, RefTargetHandle hTarget, PartID &partID,
+	RefMessage message, BOOL propagate)
+{
+	UNREFERENCED_PARAMETER(propagate);
+	UNREFERENCED_PARAMETER(message);
+	UNREFERENCED_PARAMETER(partID);
+	UNREFERENCED_PARAMETER(hTarget);
+	UNREFERENCED_PARAMETER(changeInt);
+	switch (message)
+	{
+		case REFMSG_CHANGE:
+		{
+			if (hTarget == pblock)
+			{
+				ParamID changing_param = pblock->LastNotifyParamID();
+				DepthOfFieldblk.InvalidateUI(changing_param);
+			}
+		break;
+	}
+	return REF_SUCCEED;
+}
