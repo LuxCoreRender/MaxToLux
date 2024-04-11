@@ -24,3 +24,21 @@
 #define CAMERA_TARGER_CLASSID	Class_ID(4128,0)
 #define MAX2016_PHYSICAL_CAMERA Class_ID(1181315608, 686293133)
 #define ENV_FOG_CLASS_ID		Class_ID(268435457, 0) 
+
+#include <notify.h>
+#include <limits>
+#include "main.h"
+#include <gdiplus.h>
+#include "resource.h"
+#include "MaxToLux.h"
+#include "maxscript/maxscript.h"
+
+#include "LuxCamera.h"
+#include "LuxUtils.h"
+#include "LuxMaterials.h"
+#include "LuxLights.h"
+#include "LuxMesh.h"
+#include "Classes.h"
+
+#include <vector>
+#include <thread>
