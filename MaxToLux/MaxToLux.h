@@ -134,3 +134,10 @@ public:
 		return false;
 	}
 };
+
+class MaxToLux : public Renderer, public ITabDialogObject {
+	public:
+
+		CRITICAL_SECTION csect;
+	};
+#endif
