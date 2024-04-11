@@ -93,3 +93,18 @@ public:
 	//RenderInstance*	GetRenderInstance(int i);
 };
 //using namespace MaxSDK::RenderingAPI;
+
+
+class IMaxToLux : public IInteractiveRender, ReferenceMaker, ActionCallback
+{
+public:
+	void AbortRender() MAX2017_OVERRIDE;
+
+private:
+	IParamBlock2* pblock;
+
+public:
+	///
+	IMaxToLux(MaxToLux* luxRen);
+	~IMaxToLux();
+};
