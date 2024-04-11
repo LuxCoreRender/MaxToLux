@@ -83,7 +83,7 @@ using namespace luxrays;
 
 extern BOOL FileExists(const TCHAR *filename);
 float* pixels;
-//Scene *materialPreviewScene; //Scene *materialPreviewScene = NULL;
+Scene *materialPreviewScene; //Scene *materialPreviewScene = NULL;
 bool defaultlightset = true;
 bool defaultlightchk = true;
 bool defaultlightauto = true;
