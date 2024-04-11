@@ -121,3 +121,22 @@ MaxToLux::MaxToLux(BOOL loading)
 {
 	
 }
+
+MaxToLux::MaxToLux(IRenderSessionContext& sessionContext, const bool is_interactive_session)
+	:m_rendering_logger(sessionContext.GetLogger()),
+	m_rendering_process(sessionContext.GetRenderingProcess()),
+	m_render_session_context(sessionContext)
+	m_is_interactive_renderer(sessionContext.GetNotificationClient() != nullptr)
+{
+	m_render_session_context.GetRenderSettings().RegisterChangeNotifier(*this);
+}
+
+MaxToLux::MaxToLux(IRenderSessionContext& sessionContext, const bool is_interactive_session)
+	: m_rendering_process(sessionContext.GetRenderingProcess())
+{
+	file = NULL;
+	sceneNode = NULL;
+	viewNode = NULL;
+	anyLights = FALSE;
+	nlts = nobs = 0;
+}
