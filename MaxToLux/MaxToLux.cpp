@@ -164,7 +164,7 @@ RefResult MaxToLux::NotifyRefChanged(const Interval &changeInt, RefTargetHandle 
 	return REF_SUCCEED;
 }
 
-::Matrix3 camPos;
+//::Matrix3 camPos;
 
 int MaxToLux::Open(INode *scene, INode *vnode, ViewParams *viewPar, RendParams &rp, HWND hwnd, DefaultLight* defaultLights, int numDefLights, RendProgressCallback* prog)
 {
@@ -173,19 +173,13 @@ int MaxToLux::Open(INode *scene, INode *vnode, ViewParams *viewPar, RendParams &
 	UNREFERENCED_PARAMETER(defaultLights);
 	UNREFERENCED_PARAMETER(hwnd);
 	
-	viewNode = vnode;
-	camPos = viewPar->affineTM;
-
 	if (rp.inMtlEdit)
 	{
 		
 		renderingMaterialPreview = true;
-		Scene* materialPreviewScene = NULL;// *= new Scene();
-		Scene *materialPreviewScene = Scene::Create();
 		materialPreviewScene = Scene::Create();
 
 		lxmMesh.createMesh(scene, *materialPreviewScene, GetCOREInterface()->GetTime(), renderingMaterialPreview);
-		lxmMesh.CreateBox(scene, materialPreviewScene, "dummybox", "dummyboxmesh", "mat_dummy", false, BBox(Point(-.001f, -.001f, .001f), Point(.05f, .05f, 0.07f)));
 	}
 	else
 	{
@@ -193,4 +187,26 @@ int MaxToLux::Open(INode *scene, INode *vnode, ViewParams *viewPar, RendParams &
 	}
 
 	return 1;
+}
+
+void IMaxToLux::BeginSession()
+{
+}
+
+void IMaxToLux::EndSession()
+{
+}
+
+void IMaxToLux::SetOwnerWnd(HWND hOwnerWnd)
+{
+}
+
+HWND IMaxToLux::GetOwnerWnd() const
+{
+	return HWND();
+}
+
+void IMaxToLux::SetIIRenderMgr(IIRenderMgr * pIIRenderMgr)
+{
+	this->pIIRenderMgr = pIIRenderMgr;
 }
