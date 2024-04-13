@@ -107,8 +107,18 @@ public:
 	///
 	IMaxToLux(MaxToLux* luxRen);
 	~IMaxToLux();
+	
 	void BeginSession() override;
 	void EndSession() override;
+	void SetOwnerWnd(HWND hOwnerWnd) override;
+	HWND GetOwnerWnd() const override;
+	void SetIIRenderMgr(IIRenderMgr *pIIRenderMgr)  override;
+	IIRenderMgr *GetIIRenderMgr(IIRenderMgr *pIIRenderMgr) const  override;
+	void SetBitmap(Bitmap *pDestBitmap)  override;
+	Bitmap *GetBitmap(Bitmap *pDestBitmap) const  override;
+	void SetSceneINode(INode *pSceneINode)  override;
+	INode *GetSceneINode() const  override;
+	void SetUseViewINode(bool bUseViewINode)  override;
 	BOOL IsRendering()  override;
 #if MAX_PRODUCT_YEAR_NUMBER >= 2015
 	BOOL AnyUpdatesPending() override;
@@ -133,12 +143,52 @@ public:
 			//return mActiveShader->IsRunning();
 		return false;
 	}
+
+	IParamBlock2* GetParamBlock(int i) override;
+
+	RefResult NotifyRefChanged(const Interval &, RefTargetHandle, PartID &, RefMessage, BOOL) override
+	{
+		return REF_DONTCARE;
+	}
 };
 
 class MaxToLux : public Renderer, public ITabDialogObject {
 	public:
 
 		CRITICAL_SECTION csect;
+
+		bool lightsTraceChk = false, clampingChk = false;
+		int totalPathDepth = 6, diffuseDepth = 4, glossyDepth = 4, specularDepth = 6;
+		float lightRays = 0.8f, glossynessThreshold = 0.05f, maxBrightness = 10.0f;
+		
+		bool gammaEnable, autoLinear, luxLinear, reinHard, linear, denoiser, denoiserAllSteps;
+		TSTR FileName;
+		int haltTime, haltSpp;
+		TSTR /*haltTime, haltSpp,*/ haltThreshhold, refereshTime, LensRadiusstr;
+		float gammaValue = 2.2f;
+		int gammaTableSize = 512;
+		float luxLinearSenssitivity = 100.0f, luxLinearExposure = 0.001f, luxLinearFstop = 2.8f;
+		float reinHardPrescale = 1.0f, reinHardPostscale = 1.2f, reinHardBurn = 3.75f;
+		float linearScale = 1.0f;
+
+		int nlts,nobs;
+		//LuxRenderParams LxRenderParams;
+		MaxToLux(BOOL loading);
+		//virtual ~MaxToLux();
+		
+		virtual RefResult NotifyRefChanged(const Interval &changeInt, RefTargetHandle hTarget, PartID &partID, RefMessage message, BOOL	propagate);
+		void MaxToLuxPlugin(const bool loading);
+
+		RendParamDlg *CreateParamDialog(IRendParams *ir,BOOL prog=FALSE) override;
+		void	AddTabToDialog(ITabbedDialog* dialog, ITabDialogPluginTab* tab) override;
+		int		AcceptTab(ITabDialogPluginTab* tab) override;
+		void ResetParams();
+
+	private:
+
+		// if true, we are anywhere in-between Open, Render and Close calls
+		bool mRendering;
+
 	};
 	public:
 		inline bool bool_cast(int x) { return (x ? true : false); }
