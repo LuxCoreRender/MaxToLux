@@ -232,6 +232,19 @@ int MaxToLux::Render(TimeValue t, Bitmap *tobm, FrameRendParams &frp, HWND hwnd,
 	}
 }
 
+std::mutex vectLock;
+void MaxToLux::parsObjectThread(unsigned int start, unsigned int end, const unsigned int objectNumber, TimeValue t, INode* maxscene, RendProgressCallback *prog, luxcore::Scene &scene)
+{
+	const wchar_t *renderProgTitle = NULL;
+	for (unsigned int x = start; x <= end; x++)
+	{
+
+		INode* currNode = maxscene->GetChildNode(x);
+
+		parseObjects(currNode, scene, t);
+	}
+}
+
 void IMaxToLux::BeginSession()
 {
 }
