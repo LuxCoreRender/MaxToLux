@@ -189,6 +189,49 @@ int MaxToLux::Open(INode *scene, INode *vnode, ViewParams *viewPar, RendParams &
 	return 1;
 }
 
+Mtl * matPrevNodesEnum(INode * inode)
+{
+	for (int c = 0; c < inode->NumberOfChildren(); c++)
+	{
+		Mtl * mat = matPrevNodesEnum(inode->GetChildNode(c));
+		if (mat)
+		{
+			lxmMaterials.setMaterial(mat, *materialPreviewScene);
+			return mat;
+		}
+	}
+
+	return NULL;
+}
+
+int MaxToLux::Render(TimeValue t, Bitmap *tobm, FrameRendParams &frp, HWND hwnd, RendProgressCallback *prog, ViewParams *vp)
+{
+
+	defaultlightset = true;
+
+	// Check if we're rendering a material preview
+	if (renderingMaterialPreview)
+	{
+		renderPreview(tobm, prog);
+		return true;
+	}
+	else
+	{
+		// Create a new scene
+		Scene *scene = Scene::Create();
+		// Try to export the camera to the scene
+		if (!lxmCamera.exportCamera((float)atof(LensRadiusstr.ToCStr()), *scene, t))
+		{
+			// return on error
+			return false;
+		}
+
+		// Render the final scene
+		renderFinal(*scene, t, tobm,frp, hwnd, prog, vp);
+		return true;
+	}
+}
+
 void IMaxToLux::BeginSession()
 {
 }
