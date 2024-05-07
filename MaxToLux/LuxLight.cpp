@@ -76,3 +76,16 @@ std::string MaxToLuxLights::exportSkyLight(INode* SkyLight)
 
     return objString;
 }
+
+void MaxToLuxLights::setDefaultSkyLight(luxcore::Scene &scene)
+{
+	renderOptions::lightStatics Options;
+	scene.Parse(
+		luxrays::Property(Options.sceneLight + "sunl.type")(Options.lightTypes[Options.Sun]) <<
+		luxrays::Property(Options.sceneLight + "sunl.dir")(0.166974f, -0.59908f, 0.783085f) <<
+		luxrays::Property(Options.sceneLight + "sunl.turbidity")(2.2f) <<
+		luxrays::Property(Options.sceneLight + "sunl.relsize")(2.0f) <<
+		luxrays::Property(Options.sceneLight + "sunl.gain")(1.0f, 1.0f, 1.0f)
+	);
+
+}
