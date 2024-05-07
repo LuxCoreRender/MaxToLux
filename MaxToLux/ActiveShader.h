@@ -67,3 +67,10 @@ public:
 	void SetLimitType(int type);
 	void ResetInteractiveTermination();
 };
+
+protected:
+	ParsedView ParseView();
+
+	void CustomCPUSideSynch() override;
+	class ActiveShader *mActiveShader;
+};
