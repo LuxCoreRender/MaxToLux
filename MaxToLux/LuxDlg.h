@@ -58,4 +58,8 @@ public:
 	ISpinnerControl *reinHardPrescaleSpin, *reinHardPostscaleSpin, *reinHardBurnSpin;
 	ISpinnerControl *linearScaleSpin;
 
+    Texmap 			*projMap;   		// a reference
+	ICustButton		*envirenmentMapBT;
+	Texmap 			*envirenmentMap;   	// a reference
+
 };
