@@ -23,3 +23,7 @@
 #define SPOTLIGHT_CLASSID			Class_ID(4114,0)
 #define DIRLIGHT_CLASSID			Class_ID(4115, 0)
 #define SKYLIGHT_CLASSID			Class_ID(2079724664, 1378764549)
+
+float RGBc(float color) {
+	return (color / 255) * 100;
+}
