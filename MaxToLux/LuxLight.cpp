@@ -30,7 +30,7 @@ float RGBc(float color) {
 
 std::string MaxToLuxLights::exportOmni(INode* Omni)
 {
-    
+
 	::Point3 trans = Omni->GetNodeTM(GetCOREInterface11()->GetTime()).GetTrans();
 	::Point3 color;
 
@@ -57,4 +57,20 @@ std::string MaxToLuxLights::exportOmni(INode* Omni)
 
 
 	return objString;
+}
+
+std::string MaxToLuxLights::exportSkyLight(INode* SkyLight)
+{
+	luxrays::Properties props;
+	std::string objString;
+	renderOptions::lightStatics Options;
+	::Point3 trans = SkyLight->GetNodeTM(GetCOREInterface11()->GetTime()).GetTrans();
+	::Point3 color;
+
+	ObjectState os = SkyLight->EvalWorldState(GetCOREInterface()->GetTime());
+	LightObject *light = (LightObject*)os.obj;
+
+	color = light->GetRGBColor(GetCOREInterface()->GetTime(), FOREVER);
+	float ColorIntensValue = 0.0f;
+	ColorIntensValue = light->GetIntensity(GetCOREInterface()->GetTime(), FOREVER);
 }
