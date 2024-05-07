@@ -47,4 +47,15 @@ public:
 	TSTR rendertypeWstr;
 	//TSTR Gpu1;
 
+    short 	type;
+
+	ISpinnerControl *totalPathDepthSpin, *diffuseDepthSpin, *glossyDepthSpin, *specularDepthSpin;
+	ISpinnerControl *lightRaysSpin, *glossynessThresholdSpin, *maxBrightnessSpin;
+
+	ISpinnerControl *renderTimeSpin, *renderPassSpin, *renderRefreshSpin;
+	ISpinnerControl *gammaValueSpin, *gammaTableSizeSpin;
+	ISpinnerControl *luxLinearSenssitivitySpin, *luxLinearExposureSpin, *luxLinearFstopSpin;
+	ISpinnerControl *reinHardPrescaleSpin, *reinHardPostscaleSpin, *reinHardBurnSpin;
+	ISpinnerControl *linearScaleSpin;
+
 };
