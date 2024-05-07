@@ -62,4 +62,18 @@ public:
 	ICustButton		*envirenmentMapBT;
 	Texmap 			*envirenmentMap;   	// a reference
 
+    void	InitParamDialog(HWND hWnd);
+	void	InitProgDialog(HWND hWnd);
+	void	InitLightTracingDialog(HWND hWnd);
+	void	InitEnvirenmentDialog(HWND hWnd);
+	void	InitPostProccesDialog(HWND hWnd);
+	void	InitPostFilterDialog(HWND hWnd);
+	void	InitDepthDialog(HWND hWnd);
+	void	InitFilterDialog(HWND hWnd);
+	void	InitSamplerDialog(HWND hWnd);
+	void	ReleaseControls() {}
+	BOOL	FileBrowse();
+	void 	BrowseProjectorMap(HWND hWnd);
+	void 	AssignProjectorMap(Texmap *m, BOOL newmat, ICustButton *envirenmentMapBT);
+
 };
