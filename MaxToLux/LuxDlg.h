@@ -39,5 +39,12 @@ public:
 	int haltTime, refereshTime, haltSpp;
 	float haltThreshold, gammaValue;
 	int gammaTableSize;
-    
+
+    //float LensRadius;
+	TSTR LensRadiusWstr = L"33";
+	float LensRadiusFloatTmp = 0.0f;
+	int  rendertype, samplerIndex, lightStrategyIndex, filterIndex;
+	TSTR rendertypeWstr;
+	//TSTR Gpu1;
+
 };
