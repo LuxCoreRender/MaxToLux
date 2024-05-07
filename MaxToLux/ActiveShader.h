@@ -19,3 +19,21 @@
 * See the License for the specific language governing permissions and     *
 * limitations under the License.                                          *
 ***************************************************************************/
+
+#pragma once
+
+#include "parser/Synchronizer.h"
+#include "ParamBlock.h"
+#include <iparamb2.h>
+#include <interactiverender.h>
+#include <atomic>
+
+
+class ActiveShadeRenderCore;
+class ActiveShader;
+class ActiveShadeBitmapWriter;
+
+class ActiveShadeSynchronizerBridge : public SynchronizerBridge
+{
+private:
+	class ActiveShader *mActiveShader;
