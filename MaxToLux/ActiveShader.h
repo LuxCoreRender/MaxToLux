@@ -19,3 +19,36 @@
 * See the License for the specific language governing permissions and     *
 * limitations under the License.                                          *
 ***************************************************************************/
+
+#include "frWrap.h"
+
+#include "FireRenderer.h"
+#include "Common.h"
+#include "ClassDescs.h"
+#include "utils\Thread.h"
+#include "utils/Utils.h"
+#include "ParamDlg.h"
+#include <ITabDialog.h>
+#include <Notify.h>
+#include <toneop.h>
+#include <RadeonProRender.h>
+#include <RprLoadStore.h>
+#if MAX_PRODUCT_YEAR_NUMBER >= 2016
+#   include <scene/IPhysicalCamera.h>
+#endif
+
+#pragma warning(push, 3)
+#pragma warning(disable:4198)
+#include <Math/mathutils.h>
+#pragma warning(pop)
+#include "ParamBlock.h"
+#include "imenuman.h"
+#include <memory>
+#include <shlobj.h>
+#include <stack>
+#include <WinUser.h>
+#include <resource.h>
+#include <bitmap.h>
+#include <notify.h>
+#include <gamma.h> // gamma export for FRS files
+#include <IPathConfigMgr.h>  // for IPathConfigMgr
