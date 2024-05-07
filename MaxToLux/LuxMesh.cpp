@@ -1,5 +1,5 @@
 /**************************************************************************
-* Copyright (c) 2015-2022 Luxrender.                                      *
+* Copyright (c) 2015-2024 Luxrender.                                      *
 * All rights reserved.                                                    *
 *                                                                         *
 * DESCRIPTION: Contains the Dll Entry stuff                               *
