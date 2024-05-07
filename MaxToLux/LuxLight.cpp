@@ -73,4 +73,6 @@ std::string MaxToLuxLights::exportSkyLight(INode* SkyLight)
 	color = light->GetRGBColor(GetCOREInterface()->GetTime(), FOREVER);
 	float ColorIntensValue = 0.0f;
 	ColorIntensValue = light->GetIntensity(GetCOREInterface()->GetTime(), FOREVER);
+
+    return objString;
 }
