@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <max.h>
 #include <luxcore.h>
-#include <luxrays\luxrays.h>
+// #include <luxrays\luxrays.h>
 #include "Classes.h"
 
 class MaxToLuxMesh
