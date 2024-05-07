@@ -27,3 +27,34 @@
 float RGBc(float color) {
 	return (color / 255) * 100;
 }
+
+std::string MaxToLuxLights::exportOmni(INode* Omni)
+{
+    
+	::Point3 trans = Omni->GetNodeTM(GetCOREInterface11()->GetTime()).GetTrans();
+	::Point3 color;
+
+	luxrays::Properties props;
+	std::string objString;
+
+	renderOptions::lightStatics Options;
+
+	ObjectState ostate = Omni->EvalWorldState(GetCOREInterface()->GetTime());
+	LightObject *light = (LightObject*)ostate.obj;
+	color = light->GetRGBColor(GetCOREInterface()->GetTime(), FOREVER);
+	float intensityval = light->GetIntensity(GetCOREInterface()->GetTime(), FOREVER);
+	
+	objString.append(Options.sceneLight);
+	objString.append(lxmUtil.removeUnwatedChars(lmutil.ToNarrow(Omni->GetName())));
+	objString.append(Options.lightType + Options.lightTypes[Options.Point]);
+	objString.append("\n");
+
+	objString.append(Options.sceneLight);
+	objString.append(lxmUtil.removeUnwatedChars(lmutil.ToNarrow(Omni->GetName())));
+	objString.append(Options.lightPosition);
+	objString.append(std::to_string(trans.x) + " " + std::to_string(trans.y) + " " + std::to_string(trans.z));
+	objString.append("\n");
+
+
+	return objString;
+}
