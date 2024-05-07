@@ -1,5 +1,5 @@
 //**************************************************************************/
-// Copyright (c) 2015-2024 Luxrender.
+// Copyright (c) 2015-2021 Luxrender.
 // All rights reserved.
 // 
 //**************************************************************************/
@@ -40,14 +40,38 @@ public:
 	float haltThreshold, gammaValue;
 	int gammaTableSize;
 
-    //float LensRadius;
+	bool lightsTraceChk, clampingChk;
+	int totalPathDepth, diffuseDepth, glossyDepth, specularDepth;
+	float lightRays, glossynessThreshold, maxBrightness;
+
+	float luxLinearSenssitivity, luxLinearExposure, luxLinearFstop;
+	float reinHardPrescale, reinHardPostscale, reinHardBurn;
+	float linearScale;
+
+	bool bloom, vignetting, gaussianFilter, colorAberration, mist, mistBackground, contourLine;
+	float bloomSensitivity, bloomExposure;
+	float vignettingValue, vignettingTableSize;
+	float gaussianScale;
+	float colorAberRadius, colorAberWeight;
+	float mistColor, mistAmount, mistStartDistance, mistEndDistance;
+	float contourRange, contourScale, contourSteps, contourGridSize;
+
+	//float LensRadius;
 	TSTR LensRadiusWstr = L"33";
 	float LensRadiusFloatTmp = 0.0f;
 	int  rendertype, samplerIndex, lightStrategyIndex, filterIndex;
 	TSTR rendertypeWstr;
 	//TSTR Gpu1;
 
-    short 	type;
+	float filterXvalue, filterYvalue;
+	float filterGuassianAlphavaluem, filterMitchellAvalue, filterGuassianAlphavalue, filterMitchellBvalue;
+	float MetropolisLargestEpRatevalue, MetrolpolisImageMutationRatevalue;
+	int MetropolisMaxConsecutiveRejectvalue;
+	bool defaultlightchk;
+	bool defaultlightauto;
+	bool enableFileSaverOutput = false;
+
+	short 	type;
 
 	ISpinnerControl *totalPathDepthSpin, *diffuseDepthSpin, *glossyDepthSpin, *specularDepthSpin;
 	ISpinnerControl *lightRaysSpin, *glossynessThresholdSpin, *maxBrightnessSpin;
@@ -58,11 +82,36 @@ public:
 	ISpinnerControl *reinHardPrescaleSpin, *reinHardPostscaleSpin, *reinHardBurnSpin;
 	ISpinnerControl *linearScaleSpin;
 
-    Texmap 			*projMap;   		// a reference
+	ISpinnerControl *bloomSensitivitySpin, *bloomExposureSpin;
+	ISpinnerControl *vignettingValueSpin, *vignettingTableSizeSpin;
+	ISpinnerControl *gaussianScaleSpin;
+	ISpinnerControl *colorAberRadiusSpin, *colorAberWeightSpin;
+	ISpinnerControl *mistColorSpin, *mistAmountSpin, *mistStartDistanceSpin, *mistEndDistanceSpin;
+	ISpinnerControl *contourRangeSpin, *contourScaleSpin, *contourStepsSpin, *contourGridSizeSpin;
+
+	ISpinnerControl *renderNoiseThresholdSpin;
+	ISpinnerControl *depthSpinner;
+	ISpinnerControl *filterXSpinner;
+	ISpinnerControl *filterYSpinner;
+	ISpinnerControl *filterGuassianAlphaSpinner;
+	ISpinnerControl *filterMitchellASpinner;
+	ISpinnerControl *filterMitchellBSpinner;
+	ISpinnerControl* metropolisLargestEpRateSpinner;
+	ISpinnerControl* metropolisMaxConsecutiveSpin;
+	ISpinnerControl* metropolisImageMutationRateSpinner;
+
+	Texmap 			*projMap;   		// a reference
 	ICustButton		*envirenmentMapBT;
 	Texmap 			*envirenmentMap;   	// a reference
 
-    void	InitParamDialog(HWND hWnd);
+	ICustButton *projMapName;
+
+	MaxToLuxParamDlg(IRendParams *i, BOOL prog, MaxToLux *renderer);
+	~MaxToLuxParamDlg();
+	void	AcceptParams();
+	RefResult NotifyRefChanged(const Interval & changeInt, RefTargetHandle hTarget, PartID & partID, RefMessage message, BOOL propagate);
+	void	DeleteThis() { delete this; }
+	void	InitParamDialog(HWND hWnd);
 	void	InitProgDialog(HWND hWnd);
 	void	InitLightTracingDialog(HWND hWnd);
 	void	InitEnvirenmentDialog(HWND hWnd);
@@ -76,4 +125,5 @@ public:
 	void 	BrowseProjectorMap(HWND hWnd);
 	void 	AssignProjectorMap(Texmap *m, BOOL newmat, ICustButton *envirenmentMapBT);
 
+	INT_PTR WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 };
