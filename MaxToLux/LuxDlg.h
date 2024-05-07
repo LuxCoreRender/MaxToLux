@@ -18,3 +18,26 @@
 
 #undef min
 #undef max
+
+class MaxToLuxParamDlg : public RendParamDlg, public ReferenceMaker {
+public:
+	MaxToLux *rend;
+	IRendParams *ir;
+	HWND hPanel;
+	HWND MaxToLuxParamDlg::hAdvEff = NULL;
+	//HWND hDlg;
+	BOOL prog;
+	HFONT hFont;
+
+	static IObjParam *iObjParams;
+
+	std::vector<int> renderSelectdDevice;
+	bool deviceArray1 = true, deviceArray2, deviceArray3, deviceArray4, deviceArray5 = false;
+
+	TSTR workFileName;
+	bool gammaEnable, autoLinear, luxLinear, reinHard, linear, denoiser, denoiserAllSteps;
+	int haltTime, refereshTime, haltSpp;
+	float haltThreshold, gammaValue;
+	int gammaTableSize;
+    
+};
