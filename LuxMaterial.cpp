@@ -549,7 +549,6 @@ Point3 MaxToLuxMaterials::getMaterialDiffuseColor(::Mtl* mat)
 	return diffcolor;
 }
 
-
 void MaxToLuxMaterials::exportMaterial(Mtl* mat, luxcore::Scene &scene)
 {
 	const wchar_t *matName = L"";
@@ -2065,5 +2064,78 @@ void MaxToLuxMaterials::exportMaterial(Mtl* mat, luxcore::Scene &scene)
 			luxrays::Property("")("")
 			);
 		tmpMatStr = "";
+	}
+}
+
+bool MaxToLuxMaterials::isSupportedMaterial(::Mtl* mat)
+{
+	if (mat->GetName() == L"")
+	{
+		OutputDebugStringW(L"MaxToLuxMaterials.cpp -> IsSupportedMaterial: False - Material has no name.");
+		return false;
+	}
+	if (mat->ClassID() == LR_INTERNAL_MATTE_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == STANDARDMATERIAL_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == ARCHITECTURAL_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_INTERNAL_MATTELIGHT_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LUXCORE_CHEKER_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_INTERNAL_MAT_TEMPLATE_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_MATTE_TRANSLUCENT_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_ROUGH_MATTE_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_GLOSSY2_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_ROUGHGLASS_CLASSID)
+	{
+		return true;
+	}
+	else if(mat->ClassID() == LR_VELVET_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_GLOSSYTRANSLUCENT_CLASSID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_Archglass_CLASS_ID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_Cloth_CLASS_ID)
+	{
+		return true;
+	}
+	else if (mat->ClassID() == LR_Carpaint_CLASS_ID)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
