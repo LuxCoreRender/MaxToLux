@@ -1,0 +1,129 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "#include ""veroverrides.h""\r\n"
+    "#include ""maxversion.r""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_ENVIRONMENT_CONTAINER_PARAM_ENVCOLOR "Environment Color"
+    IDS_ENVIRONMENT_CONTAINER_PARAM_ENVMODE "Environment Mode"
+    IDS_RENDERER_PLUGIN_CATEGORY "Renderer"
+    IDS_PROGRESS_INITIAL_TITLE "Initializing Renderer"
+    IDS_LOG_SCENE_TRANSLATION_TIME "Scene translated in %.3fs"
+    IDS_ERROR_RENDER_SESSION_CREATION 
+                            "Internal error: Failed to create render session."
+    IDS_LOG_RENDER_TIME     "Rendered in %.3fs"
+    IDS_LOG_FIRST_BITMAP_UPDATE_TIME "Time to first image update: %.3fs"
+    IDS_LOG_TRANSLATING     "Translating scene..."
+    IDS_LOG_RENDERING       "Rendering..."
+    IDS_RENDERING_FAILED    "Error while rendering."
+    IDS_TRANSLATION_FAILED  "Failed to initialize renderer. Aborting."
+    IDS_ENVIRONMENT_CONTAINER_CLASSNAME "Environment Container"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_LOG_RENDERER_PAUSED "Rendering paused."
+    IDS_LOG_RENDERER_UNPAUSED "Rendering resumed."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ERROR_CREATION_INTERACTIVE_SESSION 
+                            "Renderer plugin failed to create interactive render session. Cannot render."
+    IDS_ERROR_UPDATING_SCENE "Error while updating scene. Aborting render."
+    IDS_PROCESSING_RENDER_ELEMENTS "Processing render elements"
+    IDS_RENDER_ELEMENTS_PROCESSED "Render elements processed in %.1fs"
+    IDS_ERROR_RENDER_ELEMENTS "Error while processing render elements."
+    IDS_TIMING_TABLE_HEADER "Timing Statistics Report:"
+    IDS_TIMING_MISC_TRANSLATION "Translation Misc."
+    IDS_TIMING_TOTAL_TRANSLATION "Translation - Total"
+    IDS_TIMING_TRANSLATION_PREFIX "Translation - "
+    IDS_TIMING_CAMERA       "Camera"
+    IDS_TIMING_ENVIRONMENT  "Environment"
+    IDS_TIMING_MTLBASE      "Materials & Textures"
+    IDS_SESSION_CREATION    "Session Creation"
+    IDS_SESSION_DESTRUCTION "Session Destruction"
+    IDS_ENVIRONMENT_CONTAINER_PARAM_BACKGROUNDCOLOR "Background Color"
+    IDS_ENVIRONMENT_CONTAINER_PARAM_BACKGROUNDTEXTURE "Background Texture"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ENVIRONMENT_CONTAINER_PB_NAME "Parameters"
+    IDS_ENVIRONMENT_CONTAINER_PARAM_BACKGROUNDMODE "Background Mode"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ENVIRONMENT_CONTAINER_PARAM_ENVTEXTURE "Environment Texture"
+    IDS_ERROR_ACQUIREWHILEKEYFRAME 
+                            "Rendering API usage error: AcquireChildTranslator() was called within TranslateKeyframe(), which is strictly not allowed - see documentation for Translator::TranslateKeyframe()."
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#include "veroverrides.h"
+#include "maxversion.r"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
