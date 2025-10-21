@@ -94,3 +94,25 @@ MaxToLuxUtils * lmutil;
 /*MaxToLuxMaterials::~MaxToLuxMaterials()
 {
 }*/
+std::string MaxToLuxMaterials::getFloatFromParamBlockID(int paramID, ::Mtl* mat, ::Texmap* tex)
+{
+	std::string stringValue = "";
+	float value = 0.0f;
+	IParamBlock2 *pBlock = NULL;
+
+	if (mat != NULL)
+	{
+		pBlock = mat->GetParamBlock(0);
+	}
+	else
+	{
+		pBlock = tex->GetParamBlock(0);
+	}
+
+	if (pBlock != NULL)
+	{
+		value = pBlock->GetFloat(paramID, GetCOREInterface()->GetTime());
+		stringValue = lmutil->floatToString(value);
+	}
+	return stringValue;
+}
