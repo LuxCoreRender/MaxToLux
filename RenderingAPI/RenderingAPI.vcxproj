@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Hybrid|x64">
+      <Configuration>Hybrid</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\ICameraContainer.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IEnvironmentContainer.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IFrameBufferProcessor.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IInteractiveRenderSession.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IOfflineRenderSession.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderingLogger.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderingProcess.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSession.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSessionContext.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSettingsContainer.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSettingsContainer.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\ISceneContainer.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\MotionBlurSettings.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\MotionBlurSettings.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\UnifiedRenderer.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\RenderingAPI.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Camera.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Environment.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_INode.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Mtl.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_MtlBase.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Object.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_ReferenceTarget.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Texmap.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\GenericTranslatorKeys.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\GenericTranslatorKeys.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\IMeshCollector.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\IMeshFlattener.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\INodeInstancingPool.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationManager.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationManager.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationProgress.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslatorOutput.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslationResult.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslationResult.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Translator.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Translator.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorKey.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorKey.inline.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorStatistics.h" />
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorStatistics.inline.h" />
+    <ClInclude Include="Renderer\CameraContainer_Base.h" />
+    <ClInclude Include="Renderer\CameraContainer_Interactive.h" />
+    <ClInclude Include="Renderer\CameraContainer_Offline.h" />
+    <ClInclude Include="Renderer\EnvironmentContainer.h" />
+    <ClInclude Include="Renderer\FrameBufferProcessor.h" />
+    <ClInclude Include="Renderer\InteractiveRenderer.h" />
+    <ClInclude Include="Renderer\OfflineRenderer.h" />
+    <ClInclude Include="Renderer\RenderingAPI_RGC.h" />
+    <ClInclude Include="Renderer\RenderingLogger.h" />
+    <ClInclude Include="Renderer\RenderingProgress.h" />
+    <ClInclude Include="Renderer\RenderSessionContext_Base.h" />
+    <ClInclude Include="Renderer\RenderSessionContext_Interactive.h" />
+    <ClInclude Include="Renderer\RenderSessionContext_Offline.h" />
+    <ClInclude Include="Renderer\RenderSettingsContainer_Base.h" />
+    <ClInclude Include="Renderer\RenderSettingsContainer_Interactive.h" />
+    <ClInclude Include="Renderer\RenderSettingsContainer_Offline.h" />
+    <ClInclude Include="Renderer\SceneContainer_Base.h" />
+    <ClInclude Include="Renderer\SceneContainer_Interactive.h" />
+    <ClInclude Include="Renderer\SceneContainer_Offline.h" />
+    <ClInclude Include="Renderer\Utils.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Translator\Helpers\MeshCollector.h" />
+    <ClInclude Include="Translator\Helpers\MeshFlattener.h" />
+    <ClInclude Include="Translator\Helpers\NodeInstancingPool.h" />
+    <ClInclude Include="Translator\ITranslationManager_Internal.h" />
+    <ClInclude Include="Translator\TranslationManager.h" />
+    <ClInclude Include="Translator\TranslatorGraphNode.h" />
+    <ClInclude Include="Translator\TranslatorGraphNode.inline.h" />
+    <ClInclude Include="Translator\TranslatorGraphRootNode.h" />
+    <ClInclude Include="Translator\TranslatorGraphRootNode.inline.h" />
+    <ClInclude Include="veroverrides.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllEntry.cpp" />
+    <ClCompile Include="MaxScriptExports.cpp" />
+    <ClCompile Include="Renderer\CameraContainer_Base.cpp" />
+    <ClCompile Include="Renderer\CameraContainer_Interactive.cpp" />
+    <ClCompile Include="Renderer\CameraContainer_Offline.cpp" />
+    <ClCompile Include="Renderer\EnvironmentContainer.cpp" />
+    <ClCompile Include="Renderer\FrameBufferProcessor.cpp" />
+    <ClCompile Include="Renderer\InteractiveRenderer.cpp" />
+    <ClCompile Include="Renderer\OfflineRenderer.cpp" />
+    <ClCompile Include="Renderer\RenderingAPI_RGC.cpp" />
+    <ClCompile Include="Renderer\RenderingLogger.cpp" />
+    <ClCompile Include="Renderer\RenderingProgress.cpp" />
+    <ClCompile Include="Renderer\RenderSessionContext_Base.cpp" />
+    <ClCompile Include="Renderer\RenderSessionContext_Interactive.cpp" />
+    <ClCompile Include="Renderer\RenderSessionContext_Offline.cpp" />
+    <ClCompile Include="Renderer\RenderSettingsContainer_Base.cpp" />
+    <ClCompile Include="Renderer\RenderSettingsContainer_Interactive.cpp" />
+    <ClCompile Include="Renderer\RenderSettingsContainer_Offline.cpp" />
+    <ClCompile Include="Renderer\SceneContainer_Base.cpp" />
+    <ClCompile Include="Renderer\SceneContainer_Interactive.cpp" />
+    <ClCompile Include="Renderer\SceneContainer_Offline.cpp" />
+    <ClCompile Include="Renderer\Utils.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Camera.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Environment.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_INode.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Mtl.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_MtlBase.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Object.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_ReferenceTarget.cpp" />
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Texmap.cpp" />
+    <ClCompile Include="Translator\Helpers\MeshCollector.cpp" />
+    <ClCompile Include="Translator\Helpers\MeshFlattener.cpp" />
+    <ClCompile Include="Translator\Helpers\NodeInstancingPool.cpp" />
+    <ClCompile Include="Translator\TranslationManager.cpp" />
+    <ClCompile Include="Translator\Translator.cpp" />
+    <ClCompile Include="Translator\TranslatorGraphNode.cpp" />
+    <ClCompile Include="Translator\TranslatorGraphRootNode.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RenderingAPI.rc" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D60F0D33-64D8-4F74-90E4-9130DE944079}</ProjectGuid>
+    <RootNamespace>RenderingAPI</RootNamespace>
+    <MaxSDK>../../..</MaxSDK>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(MaxSDK)\ProjectSettings\PropertySheets\3dsmax.general.project.settings.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(MaxSDK)\ProjectSettings\PropertySheets\3dsmax.cpp.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir>$(MaxBuild)</OutDir>
+    <TargetName>RenderingAPI</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AdditionalIncludeDirectories>$(ADSK_3DSMAX_SDK_2019);$(ADSK_3DSMAX_SDK_2019)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <DisableSpecificWarnings>4589</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MaxSdkInc);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>maxscrpt.lib;bmm.lib;core.lib;geom.lib;mesh.lib;maxutil.lib;paramblk2.lib;Notificationsystem.lib;CommonRendererUI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ADSK_3DSMAX_SDK_2019)\lib\x64\Release;..\..\LuxCore\include\luxcore;..\..\WindowsCompileDeps\include;..\..\WindowsCompileDeps\include\Boost;..\..\WindowsCompileDeps\Qt5\lib;..\..\WindowsCompileDeps\x64\Release\lib;..\..\WindowsCompile\Build_CMake\LuxCore\lib\Release;C:\Program Files (x86)\AMD APP SDK\3.0-0-Beta\lib\x86_64;D:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\lib\x64;D:\Windows Kits\10\Lib\10.0.17134.0\um\x64</AdditionalLibraryDirectories>
+      <ImportLibrary>$(MaxSdkLib)\$(TargetName).lib</ImportLibrary>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_SECURE_SCL=0;_USRDLL;RENDERING_API_MODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Hybrid|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_SECURE_SCL=0;_USRDLL;RENDERING_API_MODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_USRDLL;RENDERING_API_MODULE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

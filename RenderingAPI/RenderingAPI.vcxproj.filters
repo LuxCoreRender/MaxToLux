@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="DllEntry.cpp" />
+    <ClCompile Include="Translator\TranslatorGraphNode.cpp">
+      <Filter>Translator</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\TranslatorGraphRootNode.cpp">
+      <Filter>Translator</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\TranslationManager.cpp">
+      <Filter>Translator</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\InteractiveRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\OfflineRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderingLogger.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderingProgress.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\Helpers\NodeInstancingPool.cpp">
+      <Filter>Translator\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\Helpers\MeshFlattener.cpp">
+      <Filter>Translator\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderingAPI_RGC.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_INode.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Object.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Mtl.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Texmap.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Environment.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_Camera.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_ReferenceTarget.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CameraContainer_Base.cpp">
+      <Filter>Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CameraContainer_Interactive.cpp">
+      <Filter>Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\CameraContainer_Offline.cpp">
+      <Filter>Renderer\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSettingsContainer_Base.cpp">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSettingsContainer_Interactive.cpp">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSettingsContainer_Offline.cpp">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SceneContainer_Base.cpp">
+      <Filter>Renderer\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SceneContainer_Interactive.cpp">
+      <Filter>Renderer\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SceneContainer_Offline.cpp">
+      <Filter>Renderer\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSessionContext_Base.cpp">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSessionContext_Interactive.cpp">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RenderSessionContext_Offline.cpp">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\BaseTranslators\BaseTranslator_MtlBase.cpp">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClCompile>
+    <ClCompile Include="MaxScriptExports.cpp" />
+    <ClCompile Include="Translator\Translator.cpp">
+      <Filter>Translator</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\FrameBufferProcessor.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Utils.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\EnvironmentContainer.cpp">
+      <Filter>Renderer\Environment</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator\Helpers\MeshCollector.cpp">
+      <Filter>Translator\Helpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Translator\TranslationManager.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\TranslatorGraphNode.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\TranslatorGraphNode.inline.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\TranslatorGraphRootNode.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\TranslatorGraphRootNode.inline.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\ITranslationManager_Internal.h">
+      <Filter>Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\InteractiveRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\OfflineRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderingLogger.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderingProgress.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\Helpers\NodeInstancingPool.h">
+      <Filter>Translator\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\Helpers\MeshFlattener.h">
+      <Filter>Translator\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderingAPI_RGC.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="veroverrides.h" />
+    <ClInclude Include="Renderer\CameraContainer_Base.h">
+      <Filter>Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\CameraContainer_Interactive.h">
+      <Filter>Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\CameraContainer_Offline.h">
+      <Filter>Renderer\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSettingsContainer_Base.h">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSettingsContainer_Interactive.h">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSettingsContainer_Offline.h">
+      <Filter>Renderer\RenderSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\SceneContainer_Base.h">
+      <Filter>Renderer\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\SceneContainer_Interactive.h">
+      <Filter>Renderer\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\SceneContainer_Offline.h">
+      <Filter>Renderer\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSessionContext_Base.h">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSessionContext_Interactive.h">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RenderSessionContext_Offline.h">
+      <Filter>Renderer\RenderSessionContext</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\FrameBufferProcessor.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Utils.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\EnvironmentContainer.h">
+      <Filter>Renderer\Environment</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Camera.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Environment.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_INode.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Mtl.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_MtlBase.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Object.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_ReferenceTarget.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\BaseTranslators\BaseTranslator_Texmap.h">
+      <Filter>Translator\BaseTranslators</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\GenericTranslatorKeys.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\GenericTranslatorKeys.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\ICameraContainer.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IEnvironmentContainer.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IFrameBufferProcessor.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IInteractiveRenderSession.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\IMeshFlattener.h">
+      <Filter>SDK\Translator\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\INodeInstancingPool.h">
+      <Filter>SDK\Translator\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IOfflineRenderSession.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderingLogger.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderingProcess.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSession.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSessionContext.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSettingsContainer.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\IRenderSettingsContainer.inline.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\ISceneContainer.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationManager.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationManager.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslationProgress.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\ITranslatorOutput.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslationResult.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslationResult.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Translator.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Translator.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorStatistics.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorKey.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorKey.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\TranslatorStatistics.inline.h">
+      <Filter>SDK\Translator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\UnifiedRenderer.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\MotionBlurSettings.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Renderer\MotionBlurSettings.inline.h">
+      <Filter>SDK\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\RenderingAPI.h">
+      <Filter>SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="Translator\Helpers\MeshCollector.h">
+      <Filter>Translator\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\RenderingAPI\Translator\Helpers\IMeshCollector.h">
+      <Filter>SDK\Translator\Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="RenderingAPI.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Translator">
+      <UniqueIdentifier>{da2f5a4f-26ad-4ede-9257-61ee035a65d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{1e9180cf-1761-40fe-a73d-ff1e98cdb9a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Translator\Helpers">
+      <UniqueIdentifier>{10658a19-1d31-4369-a8c5-7df32a708227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Translator\BaseTranslators">
+      <UniqueIdentifier>{eadbf74d-604e-4b8f-b7c9-f40ff8a0aa30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Camera">
+      <UniqueIdentifier>{5736aacc-25dd-41a7-af40-2de105df353d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Scene">
+      <UniqueIdentifier>{632d13c6-9f40-4f39-a2a0-8f0fb7cf5017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderSessionContext">
+      <UniqueIdentifier>{40348ca5-1501-495d-b8da-d214c5dd627e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderSettings">
+      <UniqueIdentifier>{bf562b2d-c6aa-4259-84ba-c331240469ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK">
+      <UniqueIdentifier>{f947d96a-9ab1-4ab9-86c8-09e1f34788cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Renderer">
+      <UniqueIdentifier>{776eee84-f2cc-4821-a951-13b6256cac36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Translator">
+      <UniqueIdentifier>{2a808175-29e1-4cca-b305-fc67574ca1ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDK\Translator\Helpers">
+      <UniqueIdentifier>{ddcfef00-dbed-471a-81cb-f13801f65210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Environment">
+      <UniqueIdentifier>{1191c523-311a-410d-af13-866302d7399b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
