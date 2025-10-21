@@ -1490,3 +1490,580 @@ void MaxToLuxMaterials::exportMaterial(Mtl* mat, luxcore::Scene &scene)
 			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".index = " + index_map);
 			tmpmat.append("\n");
 		}
+		
+		if (getTexturePathFromParamBlockID(27, mat) == "")
+		{
+			::Point3 index_bf;
+			index_bf = getMaterialColor(26, mat);
+			tmpmat.append(currmat + ".index = " + std::to_string(index_bf.x) + " " + std::to_string(index_bf.y) + " " + std::to_string(index_bf.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string index_bf_map = getTextureName(27, mat);
+			tmpmat.append(Options.sceneTexture + index_bf_map + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + index_bf_map + Options.textureFile + "\"" + getTexturePathFromParamBlockID(27, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".index_bf = " + index_bf_map);
+			tmpmat.append("\n");
+		}
+
+		if (getIntFromParamBlockID(28, mat) == "0")
+		{
+			std::string temp = getIntFromParamBlockID(28, mat);
+
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".multibounce = 0");
+			tmpmat.append("\n");
+		}
+		else
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".multibounce = 1");
+			tmpmat.append("\n");
+		}
+
+
+		if (getIntFromParamBlockID(29, mat) == "0")
+		{
+			std::string temp = getIntFromParamBlockID(28, mat);
+
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".multibounce_bf = 0");
+			tmpmat.append("\n");
+		}
+		else
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".multibounce_bf = 1");
+			tmpmat.append("\n");
+		}
+
+		prop.SetFromString(tmpmat);
+		scene.Parse(prop);
+	}
+	else if (mat->ClassID() == LR_Archglass_CLASS_ID)
+	{
+		OutputDebugStringW(_T("\nCreating archglass material.\n"));
+		luxrays::Properties prop;
+
+		
+
+		std::string tmpmat;
+		tmpmat.append(currmat + ".type = archglass");
+		tmpmat.append("\n");
+
+		if (getTexturePathFromParamBlockID(1, mat) == "")
+		{
+			Point3 kr;
+			kr = getMaterialColor(0, mat);
+			tmpmat.append(currmat + Options.materialKr + std::to_string(kr.x) + " " + std::to_string(kr.y) + " " + std::to_string(kr.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string krTexName = getTextureName(1, mat);
+			tmpmat.append(Options.sceneTexture + krTexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + krTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(1, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialKr + krTexName);
+			tmpmat.append("\n");
+		}
+
+		if (getTexturePathFromParamBlockID(3, mat) == "")
+		{
+			Point3 kt;
+			kt = getMaterialColor(2, mat);
+			tmpmat.append(currmat + ".kt = " + std::to_string(kt.x) + " " + std::to_string(kt.y) + " " + std::to_string(kt.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string ktTexName = getTextureName(3, mat);
+			tmpmat.append(Options.sceneTexture + ktTexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + ktTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(3, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".kt = " + ktTexName);
+			tmpmat.append("\n");
+		}
+
+
+		if (getTexturePathFromParamBlockID(5, mat) == "")
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialInteriorior + getFloatFromParamBlockID(4, mat));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string interioriorTexName = getTextureName(5, mat);
+			tmpmat.append(Options.sceneTexture + interioriorTexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + interioriorTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(5, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialInteriorior + interioriorTexName);
+			tmpmat.append("\n");
+		}
+
+		if (getTexturePathFromParamBlockID(7, mat) == "")
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialExteriorior + getFloatFromParamBlockID(6, mat));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string exterioriorTexName = getTextureName(7, mat);
+			tmpmat.append(Options.sceneTexture + exterioriorTexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + exterioriorTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(7, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialExteriorior + exterioriorTexName);
+			tmpmat.append("\n");
+		}
+
+		prop.SetFromString(tmpmat);
+		scene.Parse(prop);
+	}
+	else if (mat->ClassID() == LR_Cloth_CLASS_ID)
+	{
+		OutputDebugStringW(_T("\nCreating cloth material.\n"));
+		luxrays::Properties prop;
+		std::string tmpmat;
+		tmpmat.append(currmat + ".type = cloth");
+		tmpmat.append("\n");
+
+		int presetIndex = mat->GetParamBlock(0)->GetInt(1, GetCOREInterface()->GetTime());;
+		/*string a = to_string(presetIndex);
+		OutputDebugStringA(a.c_str());*/
+
+		switch (presetIndex)
+		{
+			case 1:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = cotton_twill");
+				tmpmat.append("\n");
+				break;
+			case 2:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = denim");
+				tmpmat.append("\n");
+				break;
+			case 3:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = polyester_lining_clot");
+				tmpmat.append("\n");
+				break;
+			case 4:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = silk_charmeuse");
+				tmpmat.append("\n");
+				break;
+			case 5:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = silk_shantung");
+				tmpmat.append("\n");
+				break;
+			case 6:
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = wool_garbardine");
+				tmpmat.append("\n");
+				break;
+			default:
+				break;
+		}
+		
+
+		if (getTexturePathFromParamBlockID(3, mat) == "")
+		{
+			Point3 kd;
+			kd = getMaterialColor(2, mat);
+			tmpmat.append(currmat + ".weft_kd = " + std::to_string(kd.x) + " " + std::to_string(kd.y) + " " + std::to_string(kd.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string weft_kd_TexName = getTextureName(3, mat);
+			tmpmat.append(Options.sceneTexture + weft_kd_TexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + weft_kd_TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(2, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".weft_kd = " + weft_kd_TexName);
+			tmpmat.append("\n");
+		}
+
+		if (getTexturePathFromParamBlockID(5, mat) == "")
+		{
+			Point3 ks;
+			ks = getMaterialColor(4, mat);
+			tmpmat.append(currmat + ".weft_ks = " + std::to_string(ks.x) + " " + std::to_string(ks.y) + " " + std::to_string(ks.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string weft_ks_TexName = getTextureName(5, mat);
+			tmpmat.append(Options.sceneTexture + weft_ks_TexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + weft_ks_TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(4, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".weft_ks = " + weft_ks_TexName);
+			tmpmat.append("\n");
+		}
+
+		if (getTexturePathFromParamBlockID(7, mat) == "")
+		{
+			Point3 kd;
+			kd = getMaterialColor(6, mat);
+			tmpmat.append(currmat + ".warp_kd = " + std::to_string(kd.x) + " " + std::to_string(kd.y) + " " + std::to_string(kd.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string warp_kd_TexName = getTextureName(7, mat);
+			tmpmat.append(Options.sceneTexture + warp_kd_TexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + warp_kd_TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(6, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".warp_kd = " + warp_kd_TexName);
+			tmpmat.append("\n");
+		}
+
+		if (getTexturePathFromParamBlockID(9, mat) == "")
+		{
+			Point3 ks;
+			ks = getMaterialColor(8, mat);
+			tmpmat.append(currmat + ".warp_ks = " + std::to_string(ks.x) + " " + std::to_string(ks.y) + " " + std::to_string(ks.z));
+			tmpmat.append("\n");
+		}
+		else
+		{
+			std::string warp_ks_TexName = getTextureName(9, mat);
+			tmpmat.append(Options.sceneTexture + warp_ks_TexName + ".type = imagemap");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneTexture + warp_ks_TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(8, mat) + "\"");
+			tmpmat.append("\n");
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".warp_ks = " + warp_ks_TexName);
+			tmpmat.append("\n");
+		}
+
+		tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".repeat_u = " + getFloatFromParamBlockID(9, mat));
+		tmpmat.append("\n");
+		tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".repeat_v = " + getFloatFromParamBlockID(10, mat));
+		tmpmat.append("\n");
+
+		prop.SetFromString(tmpmat);
+		scene.Parse(prop);
+	}
+
+	else if (mat->ClassID() == LR_Carpaint_CLASS_ID)
+	{
+		OutputDebugStringW(_T("\nCreating carpaint material.\n"));
+		luxrays::Properties prop;
+		std::string tmpmat;
+		tmpmat.append(currmat + ".type = carpaint");
+		tmpmat.append("\n");
+
+		int presetIndex = mat->GetParamBlock(0)->GetInt(0, GetCOREInterface()->GetTime());;
+
+		if (presetIndex == 1)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = \"ford f8\"");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 2)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = \"polaris silber\"");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 3)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = \"opel titan\"");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 4)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = bmw339");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 5)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = \"2k acrylack\"");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 6)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = white");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 7)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = blue");
+			tmpmat.append("\n");
+		}
+		if (presetIndex == 8)
+		{
+			tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".preset = \"blue matte\"");
+			tmpmat.append("\n");
+		}
+
+
+		if (presetIndex == 0)
+		{
+			if (getTexturePathFromParamBlockID(2, mat) == "")
+			{
+				Point3 ka;
+				ka = getMaterialColor(1, mat);
+				tmpmat.append(currmat + Options.materialKa + std::to_string(ka.x) + " " + std::to_string(ka.y) + " " + std::to_string(ka.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string kaTexName = getTextureName(2, mat);
+				tmpmat.append(Options.sceneTexture + kaTexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + kaTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(2, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialKa + kaTexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(4, mat) == "")
+			{
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".d = " + getFloatFromParamBlockID(3, mat));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string dTexName = getTextureName(4, mat);
+				tmpmat.append(Options.sceneTexture + dTexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + dTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(4, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".d = " + dTexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(6, mat) == "")
+			{
+				Point3 kd;
+				kd = getMaterialColor(5, mat);
+				tmpmat.append(currmat + Options.materialKd + std::to_string(kd.x) + " " + std::to_string(kd.y) + " " + std::to_string(kd.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string kdTexName = getTextureName(6, mat);
+				tmpmat.append(Options.sceneTexture + kdTexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + kdTexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(6, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + Options.materialKd + kdTexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(8, mat) == "")
+			{
+				Point3 ks1;
+				ks1 = getMaterialColor(7, mat);
+				tmpmat.append(currmat + ".ks1 = " + std::to_string(ks1.x) + " " + std::to_string(ks1.y) + " " + std::to_string(ks1.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string ks1TexName = getTextureName(8, mat);
+				tmpmat.append(Options.sceneTexture + ks1TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + ks1TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(8, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".ks1 = " + ks1TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(10, mat) == "")
+			{
+				Point3 ks2;
+				ks2 = getMaterialColor(9, mat);
+				tmpmat.append(currmat + ".ks2 = " + std::to_string(ks2.x) + " " + std::to_string(ks2.y) + " " + std::to_string(ks2.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string ks2TexName = getTextureName(10, mat);
+				tmpmat.append(Options.sceneTexture + ks2TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + ks2TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(10, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".ks2 = " + ks2TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(12, mat) == "")
+			{
+				Point3 ks3;
+				ks3 = getMaterialColor(11, mat);
+				tmpmat.append(currmat + ".ks3 = " + std::to_string(ks3.x) + " " + std::to_string(ks3.y) + " " + std::to_string(ks3.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string ks3TexName = getTextureName(12, mat);
+				tmpmat.append(Options.sceneTexture + ks3TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + ks3TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(12, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".ks3 = " + ks3TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(14, mat) == "")
+			{
+				Point3 r1;
+				r1 = getMaterialColor(13, mat);
+				tmpmat.append(currmat + ".r1 = " + std::to_string(r1.x) + " " + std::to_string(r1.y) + " " + std::to_string(r1.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string r1TexName = getTextureName(14, mat);
+				tmpmat.append(Options.sceneTexture + r1TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + r1TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(14, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".r1 = " + r1TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(16, mat) == "")
+			{
+				Point3 r2;
+				r2 = getMaterialColor(15, mat);
+				tmpmat.append(currmat + ".r2 = " + std::to_string(r2.x) + " " + std::to_string(r2.y) + " " + std::to_string(r2.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string r2TexName = getTextureName(16, mat);
+				tmpmat.append(Options.sceneTexture + r2TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + r2TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(16, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".r2 = " + r2TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(18, mat) == "")
+			{
+				Point3 r3;
+				r3 = getMaterialColor(17, mat);
+				tmpmat.append(currmat + ".r3 = " + std::to_string(r3.x) + " " + std::to_string(r3.y) + " " + std::to_string(r3.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string r3TexName = getTextureName(18, mat);
+				tmpmat.append(Options.sceneTexture + r3TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + r3TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(18, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".r3 = " + r3TexName);
+				tmpmat.append("\n");
+			}
+
+
+			if (getTexturePathFromParamBlockID(20, mat) == "")
+			{
+				Point3 m1;
+				m1 = getMaterialColor(19, mat);
+				tmpmat.append(currmat + ".m1 = " + std::to_string(m1.x) + " " + std::to_string(m1.y) + " " + std::to_string(m1.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string m1TexName = getTextureName(20, mat);
+				tmpmat.append(Options.sceneTexture + m1TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + m1TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(20, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".m1 = " + m1TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(22, mat) == "")
+			{
+				Point3 m2;
+				m2 = getMaterialColor(21, mat);
+				tmpmat.append(currmat + ".m2 = " + std::to_string(m2.x) + " " + std::to_string(m2.y) + " " + std::to_string(m2.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string m2TexName = getTextureName(22, mat);
+				tmpmat.append(Options.sceneTexture + m2TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + m2TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(22, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".m2 = " + m2TexName);
+				tmpmat.append("\n");
+			}
+
+			if (getTexturePathFromParamBlockID(24, mat) == "")
+			{
+				Point3 m3;
+				m3 = getMaterialColor(23, mat);
+				tmpmat.append(currmat + ".m3 = " + std::to_string(m3.x) + " " + std::to_string(m3.y) + " " + std::to_string(m3.z));
+				tmpmat.append("\n");
+			}
+			else
+			{
+				std::string m3TexName = getTextureName(24, mat);
+				tmpmat.append(Options.sceneTexture + m3TexName + ".type = imagemap");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneTexture + m3TexName + Options.textureFile + "\"" + getTexturePathFromParamBlockID(24, mat) + "\"");
+				tmpmat.append("\n");
+				tmpmat.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".m3 = " + m3TexName);
+				tmpmat.append("\n");
+			}
+		 }
+
+		prop.SetFromString(tmpmat);
+		scene.Parse(prop);
+	}
+	else if (mat->ClassID() == LR_Cloud_CLASS_ID)
+	{
+		OutputDebugStringW(_T("\nMaxLux Clouds\n"));
+		scene.Parse(
+			luxrays::Property(objString)("matte") <<
+			luxrays::Property("")("")
+		);
+
+		::Point3 diffcol;
+		//diffcol = getMaterialDiffuseColor(mat);
+		diffcol.x = 0.5;
+		diffcol.y = 0.5;
+		diffcol.z = 0.5;
+
+		::std::string tmpMatStr;
+		tmpMatStr.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".kd");
+
+		scene.Parse(
+			luxrays::Property(tmpMatStr)(float(diffcol.x), float(diffcol.y), float(diffcol.z)) <<
+			luxrays::Property("")("")
+		);
+		tmpMatStr = "";
+	}
+
+	else	//Parse as matte material.
+	{
+		OutputDebugStringW(_T("\nCreating fallback material.\n"));
+		scene.Parse(
+			luxrays::Property(objString)("matte") <<
+			luxrays::Property("")("")
+			);
+
+		::Point3 diffcol;
+		//diffcol = getMaterialDiffuseColor(mat);
+		diffcol.x = 0.5;
+		diffcol.y = 0.5;
+		diffcol.z = 0.5;
+
+		::std::string tmpMatStr;
+		tmpMatStr.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".kd");
+
+		scene.Parse(	
+			luxrays::Property(tmpMatStr)(float(diffcol.x), float(diffcol.y), float(diffcol.z)) <<
+			luxrays::Property("")("")
+			);
+		tmpMatStr = "";
+	}
+}
