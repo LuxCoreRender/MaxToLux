@@ -220,6 +220,133 @@ std::string MaxToLuxMaterials::getLightEmission(::Mtl* mat)
 			}
 		}
 	}
+
+	for (int i = 0, count = mat->NumParamBlocks(); i < count; ++i)
+	{
+		IParamBlock2 *pBlock = mat->GetParamBlockByID(i);
+		Interval      ivalid;
+		renderOptions::materialStatics Options;
+	
+
+		if (enableEmission)
+		{ 
+			
+			const wchar_t *matName = L"";
+			matName = mat->GetName();
+			std::string tmpMatName = lmutil->ToNarrow(matName);
+
+			if (tmpMatName == "")
+			{
+				tmpMatName = "undefinedMaterial";
+				matName = L"undefinedMaterial";
+			}
+
+			lmutil->removeUnwatedChars(tmpMatName);
+			std::wstring replacedMaterialName = std::wstring(tmpMatName.begin(), tmpMatName.end());
+			matName = replacedMaterialName.c_str();
+
+			for (int j = 0, count = pBlock->NumParams(); j < count; ++j)
+			{
+				OutputDebugStringW(L"\nMatte params\n");
+				OutputDebugStringW(pBlock->GetLocalName(j));
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission") == 0)
+				{
+					Point3 color;
+				
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), color, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission = " + to_string(color.x) + " " + to_string(color.y)  + " " + to_string(color.z));
+					stringValue.append("\n");
+
+				}
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_power") == 0)
+				{
+					float spectrum;
+				
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), spectrum, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission.power = " + to_string(spectrum));
+					stringValue.append("\n");
+				}
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_efficency") == 0)
+				{
+					float efficency;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), efficency, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission.efficency = " + to_string(efficency));
+					stringValue.append("\n");
+				}
+
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_map") == 0)
+				{
+					if (getTexturePathFromParamBlockID(j, mat) != "")
+					{
+						std::string emission_mapfile_name = getTextureName(j, mat);
+						stringValue.append(Options.sceneTexture + emission_mapfile_name + ".type = imagemap");
+						stringValue.append("\n");
+						stringValue.append(Options.sceneTexture + emission_mapfile_name + Options.textureFile + "\"" + getTexturePathFromParamBlockID(j, mat) + "\"");
+						stringValue.append("\n");
+						stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + "emission.mapfile = " + emission_mapfile_name);
+					}
+				}
+			
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_gamma") == 0)
+				{
+					float gamma;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), gamma, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission.gamma = " + to_string(gamma));
+					stringValue.append("\n");
+				}
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_samples") == 0)
+				{
+					int samples;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), samples, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission.samples = " + to_string(samples));
+					stringValue.append("\n");
+				}
+
+				//emission_map_width
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_map_width") == 0)
+				{
+					int map_width;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), map_width, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + "emission.map.width = " + to_string(map_width));
+					stringValue.append("\n");
+				}
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_map_height") == 0)
+				{
+					int map_height;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), map_height, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + "emission.map.height = " + to_string(map_height));
+					stringValue.append("\n");
+				}
+
+				if (::_stricmp(pBlock->GetLocalName(j).ToCStr(), "emission_id") == 0)
+				{
+					int emision_id;
+
+					pBlock->GetValue(j, GetCOREInterface()->GetTime(), emision_id, ivalid);
+					stringValue.append(Options.sceneMaterial + lmutil->ToNarrow(matName) + ".emission.id = " + to_string(emision_id));
+					stringValue.append("\n");
+				}
+
+				//TODO: create a bool function that checks if a texture is defined by param 'name'..
+				//use that to check, set texture or color based on that.
+
+			}
+		}
+	}
+
+
+	return stringValue;
 }
 
 std::string MaxToLuxMaterials::getIntFromParamBlockID(int paramID, ::Mtl* mat, ::Texmap* tex)
@@ -280,4 +407,144 @@ std::string MaxToLuxMaterials::getTexturePathFromParamBlockID(int paramID, ::Mtl
 		}
 	}
 	return path;
+}
+
+std::string MaxToLuxMaterials::getBumpTextureName(::Mtl* mat)
+{
+	if ((mat->ClassID() == LR_INTERNAL_MATTE_CLASSID))
+	{
+		std::string tmpBumpTexName = getTextureName(3, mat);
+		lmutil->removeUnwatedChars(tmpBumpTexName);
+
+		return tmpBumpTexName;
+	}
+	else
+	{
+		return "";
+	}
+}
+
+std::string MaxToLuxMaterials::getDiffuseTextureName(::Mtl* mat)
+{
+	if ((mat->ClassID() == LR_INTERNAL_MATTE_CLASSID) || (mat->ClassID() == LR_INTERNAL_MAT_TEMPLATE_CLASSID))
+	{
+		std::string tmpDiffTexName = getTextureName(1, mat);
+		lmutil->removeUnwatedChars(tmpDiffTexName);
+
+		return tmpDiffTexName;
+	}
+	else
+	{
+		return "";
+	}
+}
+
+std::string MaxToLuxMaterials::getTextureName(int paramID, ::Mtl* mat)
+{
+	Texmap *tex;
+	Interval      ivalid;
+	IParamBlock2 *pBlock = mat->GetParamBlock(0);
+	tex = pBlock->GetTexmap(paramID, GetCOREInterface()->GetTime(), 0);
+	if (tex != NULL)
+	{
+		BitmapTex *bmt = (BitmapTex*)tex;
+		BitmapInfo bi(bmt->GetMapName());
+
+		if (tex->GetName() != NULL)
+		{
+			std::string tmpTexName = tex->GetName().ToCStr();
+			lmutil->removeUnwatedChars(tmpTexName);
+			return tmpTexName;
+		}
+		else
+		{
+			return "";
+		}
+	}
+	else
+	{
+		return "";
+	}
+}
+
+std::string MaxToLuxMaterials::getMaterialBumpTexturePath(::Mtl* mat)
+{
+	if ((mat->ClassID() == LR_INTERNAL_MATTE_CLASSID))
+	{
+		// 4 is diffuse, 6 is bumpmap
+		return getTexturePathFromParamBlockID(3, mat);
+	}
+	else
+	{
+		return "";
+	}
+}
+
+std::string MaxToLuxMaterials::getMaterialDiffuseTexturePath(::Mtl* mat)
+{
+	if (mat->ClassID() == LR_INTERNAL_MAT_TEMPLATE_CLASSID)
+	{
+		return getTexturePathFromParamBlockID(2, mat);
+	}
+	if ((mat->ClassID() == LR_INTERNAL_MATTE_CLASSID))
+	{
+		// 4 is diffuse, 6 is bumpmap
+		return getTexturePathFromParamBlockID(1, mat);
+	}
+	if ((mat->ClassID() == LR_MATTE_TRANSLUCENT_CLASSID))
+	{
+		// 4 is diffuse, 6 is bumpmap
+		return getTexturePathFromParamBlockID(4, mat);
+	}
+	else
+	{
+		return "";
+	}
+}
+
+Point3 MaxToLuxMaterials::getMaterialColor(int pblockIndex ,::Mtl* mat)
+{
+	std::string objString;
+	::Point3 diffcolor;
+	Interval      ivalid;
+	IParamBlock2 *pBlock = mat->GetParamBlock(0);
+	pBlock->GetValue(pblockIndex, GetCOREInterface()->GetTime(), diffcolor, ivalid);
+
+	return diffcolor;
+}
+
+Point3 MaxToLuxMaterials::getMaterialDiffuseColor(::Mtl* mat)
+{
+	std::string objString;
+	::Point3 diffcolor;
+	Interval      ivalid;
+	diffcolor.x = 155;
+	diffcolor.y = 155;
+	diffcolor.z = 155;
+
+	if (mat->ClassID() == LR_INTERNAL_MATTE_CLASSID)
+	{
+		IParamBlock2 *pBlock = mat->GetParamBlock(0);
+		pBlock->GetValue(3, GetCOREInterface()->GetTime(), diffcolor, ivalid);
+	}
+	if (mat->ClassID() == LR_INTERNAL_MATTELIGHT_CLASSID)
+	{
+		IParamBlock2 *pBlock = mat->GetParamBlock(0);
+		pBlock->GetValue(3, GetCOREInterface()->GetTime(), diffcolor, ivalid);
+	}
+	if (mat->ClassID() == LR_INTERNAL_MAT_TEMPLATE_CLASSID)
+	{
+		IParamBlock2 *pBlock = mat->GetParamBlock(0);
+		pBlock->GetValue(3, GetCOREInterface()->GetTime(), diffcolor, ivalid);
+	}
+	if (mat->ClassID() == STANDARDMATERIAL_CLASSID || mat->ClassID() == ARCHITECTURAL_CLASSID)
+	{
+		diffcolor = mat->GetDiffuse(0);
+	}
+	if (mat->ClassID() == LR_MATTE_TRANSLUCENT_CLASSID)
+	{
+		diffcolor = mat->GetDiffuse(0);
+	}
+		 
+	return diffcolor;
 }
